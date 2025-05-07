@@ -30,9 +30,13 @@ jobs:
           sort -u domain-set/proxy-list.txt -o domain-set/proxy-list.txt
 
       - name: Commit and push changes if any
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
           git add domain-set/direct-list.txt domain-set/proxy-list.txt
-          git diff --cached --quiet || git commit -m "Update domain lists on $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Update domain lists on $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git push
