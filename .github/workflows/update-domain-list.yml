@@ -1,0 +1,38 @@
+name: Update domain lists for SmartDNS
+
+on:
+  schedule:
+    - cron: '0 3 * * *'   # 每天 11:00（北京时间）更新
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare domain-set directory
+        run: mkdir -p domain-set
+
+      - name: Download and process direct-list (国内域名)
+        run: |
+          curl -sSL "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/direct-list.txt"  >> domain-set/direct-list.txt
+          curl -sSL "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/apple-cn.txt"    >> domain-set/direct-list.txt
+          curl -sSL "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/google-cn.txt"   >> domain-set/direct-list.txt
+          sed -i '/^regexp:/d; s/full://g' domain-set/direct-list.txt
+          sort -u domain-set/direct-list.txt -o domain-set/direct-list.txt
+
+      - name: Download and process proxy-list (GFW 域名)
+        run: |
+          curl -sSL "https://cdn.jsdelivr.net/gh/ruijzhan/chnroute@master/gfwlist.txt" >> domain-set/proxy-list.txt
+          sed -i '/^regexp:/d; s/full://g' domain-set/proxy-list.txt
+          sort -u domain-set/proxy-list.txt -o domain-set/proxy-list.txt
+
+      - name: Commit and push changes if any
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add domain-set/direct-list.txt domain-set/proxy-list.txt
+          git diff --cached --quiet || git commit -m "Update domain lists on $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          git push
