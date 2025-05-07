@@ -1,1 +1,1 @@
-# smartdns-domain-list
+# smartdns-domain-lists
