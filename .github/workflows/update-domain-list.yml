@@ -41,7 +41,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add domain-set/direct-list.txt domain-set/proxy-list.txt
+          git add domain-set/direct-list.txt domain-set/proxy-list.txt domain-set/reject-list.txt
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "Update domain lists on $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
