@@ -2,7 +2,7 @@ name: Update domain lists for SmartDNS
 
 on:
   schedule:
-    - cron: '0 3 * * *'   # 每天 11:00（北京时间）更新
+    - cron: '0 3 * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,54 +15,41 @@ jobs:
       - name: Prepare domain-set directory
         run: mkdir -p domain-set
 
-      - name: Download and process direct-list (国内域名)
+      - name: Download and process domain lists
         run: |
-          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt"  >> domain-set/direct-list.txt
-          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt"    >> domain-set/direct-list.txt
-          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt"   >> domain-set/direct-list.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt  >> domain-set/direct-list.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt    >> domain-set/direct-list.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt   >> domain-set/direct-list.txt
           sed -i '/^regexp:/d; s/full://g' domain-set/direct-list.txt
           sort -u domain-set/direct-list.txt -o domain-set/direct-list.txt
 
-      - name: Download and process proxy-list (代理域名)
-        run: |
-          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt" >> domain-set/proxy-list.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt >> domain-set/proxy-list.txt
           sed -i '/^regexp:/d; s/full://g' domain-set/proxy-list.txt
           sort -u domain-set/proxy-list.txt -o domain-set/proxy-list.txt
 
-      - name: Download and process reject-list (广告域名)
-        run: |
-          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt" >> domain-set/reject-list.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt >> domain-set/reject-list.txt
           sed -i '/^regexp:/d; s/full://g' domain-set/reject-list.txt
           sort -u domain-set/reject-list.txt -o domain-set/reject-list.txt
 
-      - name: Commit and push changes if any
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add domain-set/direct-list.txt domain-set/proxy-list.txt domain-set/reject-list.txt
-          git diff --cached --quiet && echo "No changes to commit" && exit 0
-          git commit -m "Update domain lists on $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
-          git push
+      - name: Archive domain lists
+        run: zip -r smartdns-domain-lists.zip domain-set
 
-      - name: Create zip archive for release
-        run: |
-          zip -j smartdns-domain-lists.zip domain-set/*.txt
+      - name: Get current date
+        id: date
+        run: echo "date=$(date -u +'%Y%m%d')" >> $GITHUB_OUTPUT
 
-      - name: Create GitHub Release and upload zip
+      - name: Create Release and Upload Artifact
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: domain-lists-$(date -u +'%Y%m%d')
-          name: Domain Lists $(date -u +'%Y-%m-%d')
-          body: "自动更新域名清单，包含 direct / proxy / reject"
+          tag_name: domain-lists-${{ steps.date.outputs.date }}
+          name: Domain Lists ${{ steps.date.outputs.date }}
+          body: 自动更新域名清单，包含 direct / proxy / reject
           files: smartdns-domain-lists.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prune old releases (keep latest 7)
-        uses: dev-drprasad/delete-older-releases@v0.3.3
+      - name: Delete old Releases (保留最近 7 个)
+        uses: dev-drprasad/delete-older-releases@v0.2.1
         with:
           keep_latest: 7
           delete_tags: true
