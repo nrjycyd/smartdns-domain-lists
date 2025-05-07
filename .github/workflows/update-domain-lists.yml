@@ -53,7 +53,7 @@ jobs:
       - name: Create Release and Upload Artifact
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v-${{ steps.date.outputs.date }}
+          tag_name: V-${{ steps.date.outputs.date }}
           name: Released on ${{ steps.date.outputs.date }}
           body: 自动更新域名清单，包含 direct / proxy / reject
           files: smartdns-domain-lists.zip
