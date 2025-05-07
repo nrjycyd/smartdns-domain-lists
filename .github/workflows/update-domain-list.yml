@@ -17,17 +17,23 @@ jobs:
 
       - name: Download and process direct-list (国内域名)
         run: |
-          curl -sSL "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/direct-list.txt"  >> domain-set/direct-list.txt
-          curl -sSL "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/apple-cn.txt"    >> domain-set/direct-list.txt
-          curl -sSL "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/google-cn.txt"   >> domain-set/direct-list.txt
+          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt"  >> domain-set/direct-list.txt
+          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt"    >> domain-set/direct-list.txt
+          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt"   >> domain-set/direct-list.txt
           sed -i '/^regexp:/d; s/full://g' domain-set/direct-list.txt
           sort -u domain-set/direct-list.txt -o domain-set/direct-list.txt
 
-      - name: Download and process proxy-list (GFW 域名)
+      - name: Download and process proxy-list (代理域名)
         run: |
-          curl -sSL "https://cdn.jsdelivr.net/gh/ruijzhan/chnroute@master/gfwlist.txt" >> domain-set/proxy-list.txt
+          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt" >> domain-set/proxy-list.txt
           sed -i '/^regexp:/d; s/full://g' domain-set/proxy-list.txt
           sort -u domain-set/proxy-list.txt -o domain-set/proxy-list.txt
+
+      - name: Download and process reject-list (广告域名)
+        run: |
+          curl -sSL "https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt" >> domain-set/reject-list.txt
+          sed -i '/^regexp:/d; s/full://g' domain-set/reject-list.txt
+          sort -u domain-set/reject-list.txt -o domain-set/reject-list.txt
 
       - name: Commit and push changes if any
         env:
