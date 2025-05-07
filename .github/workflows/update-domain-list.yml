@@ -46,3 +46,25 @@ jobs:
           git commit -m "Update domain lists on $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git push
+
+      - name: Create zip archive for release
+        run: |
+          zip -j smartdns-domain-lists.zip domain-set/*.txt
+
+      - name: Create GitHub Release and upload zip
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: domain-lists-$(date -u +'%Y%m%d')
+          name: Domain Lists $(date -u +'%Y-%m-%d')
+          body: "自动更新域名清单，包含 direct / proxy / reject"
+          files: smartdns-domain-lists.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prune old releases (keep latest 7)
+        uses: dev-drprasad/delete-older-releases@v0.3.3
+        with:
+          keep_latest: 7
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
