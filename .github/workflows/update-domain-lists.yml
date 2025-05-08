@@ -1,9 +1,9 @@
 name: Update domain lists for SmartDNS
 
 on:
-  schedule:
-    - cron: '0 3 * * *'  # 每天 11:00（北京时间）
   workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'
 
 jobs:
   update:
