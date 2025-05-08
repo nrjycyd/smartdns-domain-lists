@@ -3,7 +3,7 @@ name: Update domain lists for SmartDNS
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: "0 3 * * *"
 
 jobs:
   update:
