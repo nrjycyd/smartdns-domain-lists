@@ -49,7 +49,6 @@ sudo ./update_smartdns.sh
 添加设置每日自动更新：
 
 ```
-# 添加cron任务
 0 3 * * * ./update_smartdns.sh
 ```
 
