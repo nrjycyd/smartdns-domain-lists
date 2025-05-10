@@ -31,6 +31,7 @@
 ### 二、自动获取域名列表
 
 本项目提供一个自动化脚本：[update_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/update_domain_lists.sh)
+
 可以自动从预设仓库获取最新域名列表（直连/代理/拒绝三类）
 
 添加脚本执行权限：
@@ -62,4 +63,3 @@ nameserver /domain-set:direct/direct
 ```
 
 具体配置方法请参考 SmartDNS [官方文档](https://pymumu.github.io/smartdns/config/domain-set/)。
-
