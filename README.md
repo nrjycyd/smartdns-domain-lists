@@ -63,9 +63,9 @@ sudo ./update_domain_lists.sh
 # direct 直连
 # proxy  代理
 # reject 拒绝
-a123,direct
-b123,proxy
-c123,reject
+a123.com,direct
+b123.com,proxy
+c123.com,reject
 ```
 
 脚本会自动整理本地三个域名分类文件 direct / proxy / reject ， `custom-list.txt` 文件指定的域名优先级最高，比如 `cdn.jsdelivr.net` 域名原本在 `proxy-list.txt`，设置 `cdn.jsdelivr.net,direct` 规则后，脚本会将域名添加到 `direct-list.txt` ，并同步删除在 `proxy-list.txt` 和 `reject-list.txt` 下的记录。
