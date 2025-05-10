@@ -37,19 +37,19 @@
 添加脚本执行权限：
 
 ```
-chmod +x update_smartdns.sh
+chmod +x ./update_domain_lists.sh
 ```
 
 运行脚本：
 
 ```
-sudo ./update_smartdns.sh
+sudo ./update_domain_lists.sh
 ```
 
 添加设置每日自动更新：
 
 ```
-0 3 * * * ./update_smartdns.sh
+0 3 * * * ./update_domain_lists.sh
 ```
 
 ### 配置 SmartDNS
