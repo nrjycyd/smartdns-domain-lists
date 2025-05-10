@@ -36,27 +36,47 @@
 
 添加脚本执行权限：
 
-```
+```bash
 chmod +x ./update_domain_lists.sh
 ```
 
 运行脚本：
 
-```
+```bash
 sudo ./update_domain_lists.sh
 ```
 
 添加设置每日自动更新：
 
-```
+```bash
 0 3 * * * ./update_domain_lists.sh
 ```
 
-### 配置 SmartDNS
+### 三、自定义本地域名分流规则（可选项）
+
+本项目提供一个自动化脚本：[update_custom_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/update_custom_lists.sh)
+
+在 `domain-set` 目录创建 `custom-list.txt` 文件，编辑分流模板
+
+```ini
+# 给域名自定义分流规则
+# direct 直连
+# proxy  代理
+# reject 拒绝
+a123,direct
+b123,proxy
+c123,reject
+```
+
+脚本会自动整理本地三个域名分类文件 direct / proxy / reject ， `custom-list.txt` 文件指定的域名优先级最高，比如 `cdn.jsdelivr.net` 域名原本在 `proxy-list.txt`，设置 `cdn.jsdelivr.net,direct` 规则后，脚本会将域名添加到 `direct-list.txt` ，并同步删除在 `proxy-list.txt` 和 `reject-list.txt` 下的记录。
+
+脚本获取权限、添加自动更新同上。
+
+## 配置 SmartDNS
 
 将下载的域名列表文件配置到 SmartDNS 的相应规则中，例如：
 
-```
+```ini
 domain-set -name direct -file /etc/smartdns/domain-set/direct-list.txt
 nameserver /domain-set:direct/direct
 ```
