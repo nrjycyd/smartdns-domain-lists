@@ -3237,6 +3237,7 @@ bbs.kimy.com.tw
 bbs.mikocon.com
 bbs.morbell.com
 bbs.mychat.to
+bbs.naixi.net
 bbs.netbig.com
 bbs.nyinfor.com
 bbs.qmzdd.com
@@ -16268,6 +16269,8 @@ lcuck.ac.uk
 lcwc.ac.uk
 ld.hao123img.com
 ldoc-cdt.ac.uk
+ldplayer.net
+ldplayer.tw
 le-direct.tv
 le-vpn.com
 le.ac.uk
