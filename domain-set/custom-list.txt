@@ -4,4 +4,5 @@
 # reject 拒绝
 cdn.jsdelivr.net,direct
 test-ipv6.com,direct
+get.acme.sh,proxy
 vuejs.press,proxy
