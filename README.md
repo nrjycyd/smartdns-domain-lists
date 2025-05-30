@@ -30,7 +30,7 @@
 
 ### 二、自动获取域名列表
 
-本项目提供一个自动化脚本：[update_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/update_custom_lists.sh)
+本项目提供一个自动化脚本：[fetch_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/fetch_domain_lists.sh)
 
 可以自动从预设仓库获取最新域名列表（直连/代理/拒绝三类）
 
@@ -54,7 +54,9 @@ sudo ./update_domain_lists.sh
 
 ### 三、自定义本地域名分流规则（可选项）
 
-本项目提供一个自动化脚本：[update_custom_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/update_custom_lists.sh)
+本项目提供一个自动化脚本：
+- [query_and_rules_custom.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/query_and_rules_custom.sh)
+- [process_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/process_domain_lists.sh)
 
 在 `domain-set` 目录创建 `custom-list.txt` 文件，编辑分流模板
 
