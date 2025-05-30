@@ -1,0 +1,17 @@
+# ------------ 自定义区域 ------------
+# 域名文件夹路径
+FILE_DIR="/etc/smartdns/domain-set"
+# 备份目录，留空则不备份
+BAK_DIR="/var/backups/smartdns/domain-set-bak"
+# 备份保留份数（0表示不限制）
+MAX_BACKUPS=3
+# 域名下载链接
+REPO_URL="https://raw.githubusercontent.com/nrjycyd/smartdns-domain-lists/main/domain-set"
+# 日志文件路径
+LOG_FILE="/var/log/smartdns_update.log"
+
+# ------------ 派生路径（不可修改）------------
+FILE_DIRECT="$FILE_DIR/direct-list.txt"
+FILE_PROXY="$FILE_DIR/proxy-list.txt"
+FILE_REJECT="$FILE_DIR/reject-list.txt"
+FILE_CUSTOM="$FILE_DIR/custom-list.txt"
