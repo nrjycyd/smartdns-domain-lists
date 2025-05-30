@@ -1,8 +1,10 @@
 #!/bin/bash
 
+# 获取脚本所在目录
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 CONFIG_FILE="$SCRIPT_DIR/config"
 
+# 加载配置文件
 if [ -f "$CONFIG_FILE" ]; then
     # shellcheck source=/dev/null
     . "$CONFIG_FILE"
@@ -20,18 +22,13 @@ cleanup() {
 }
 trap cleanup EXIT
 
-[ ! -f "$FILE_CUSTOM" ] && {
-    echo "提示: 未找到 $FILE_CUSTOM，已自动创建空文件"
-    touch "$FILE_CUSTOM"
-}
-
 declare -A custom_rules
 while IFS=',' read -r domain action _ || [ -n "$domain" ]; do
     [[ "$domain" =~ ^#|^$ ]] && continue
     domain=$(echo "$domain" | xargs)
     action=$(echo "$action" | xargs)
     custom_rules["$domain"]=$action
-done < <(sort -u "$FILE_CUSTOM")
+done < <(sort -u "$DOWNLOAD_CUSTOM")
 
 process_list() {
     local list_file=$1
@@ -69,6 +66,5 @@ fi
 echo "[$(date +'%Y-%m-%d %H:%M:%S')] 更新完成" >> "$LOG_FILE"
 echo "-------------------------------------" >> "$LOG_FILE"
 
-echo "SmartDNS域名列表更新完成!"
 [ -n "$BAK_DIR" ] && echo "备份已保存至: $BAK_DIR (保留${MAX_BACKUPS}份)"
 echo "详细日志: $LOG_FILE"
