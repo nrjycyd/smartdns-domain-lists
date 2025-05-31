@@ -77,7 +77,7 @@ sudo ./update_domain_lists.sh
 #### process_domain_lists.sh 脚本功能
 
 1. 读取 custom 文件并与下载的三个域名分类文件 direct / proxy / reject 合并整理， `custom-list.txt` 文件指定的域名优先级最高，比如 `cdn.jsdelivr.net` 域名原本在 `proxy-list.txt`，设置 `cdn.jsdelivr.net,direct` 规则后，脚本会将域名添加到 `direct-list.txt` ，并同步删除在 `proxy-list.txt` 和 `reject-list.txt` 下的记录；
-1. 整理完成后会自动将 direct / proxy / reject 文件配置到 SmartDNS 的 `domain-set` 文件夹。
+2. 整理完成后会自动将 direct / proxy / reject 文件配置到 SmartDNS 的 `domain-set` 文件夹。
 
 脚本获取权限、添加自动更新同上。
 
