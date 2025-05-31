@@ -58,7 +58,7 @@ sudo ./update_domain_lists.sh
 - [query_and_rules_custom.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/query_and_rules_custom.sh)
 - [process_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/process_domain_lists.sh)
 
-##### query_and_rules_custom.sh 脚本功能
+#### query_and_rules_custom.sh 脚本功能
 
 1. 会在 `/etc/smartdns/download/` 目录创建 `custom-list.txt` 文件，可手动分配规则；
 
@@ -74,7 +74,7 @@ sudo ./update_domain_lists.sh
 
 2. 读取 `/var/log/smartdns/smartdns.log` 文件，提取查询失败的域名，使用 `geoiplookup` 或 `ip-api.com` 查询域名的 IP 归属地，并根据归属地的不同分配分流规则，并将结果同步到 `custom-list.txt`，自动化分配规则；
 
-##### process_domain_lists.sh 脚本功能
+#### process_domain_lists.sh 脚本功能
 
 1. 读取 custom 文件并与下载的三个域名分类文件 direct / proxy / reject 合并整理， `custom-list.txt` 文件指定的域名优先级最高，比如 `cdn.jsdelivr.net` 域名原本在 `proxy-list.txt`，设置 `cdn.jsdelivr.net,direct` 规则后，脚本会将域名添加到 `direct-list.txt` ，并同步删除在 `proxy-list.txt` 和 `reject-list.txt` 下的记录；
 1. 整理完成后会自动将 direct / proxy / reject 文件配置到 SmartDNS 的 `domain-set` 文件夹。
