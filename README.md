@@ -28,7 +28,8 @@
 
 ### 二、自动获取域名列表
 
-本项目提供 1 个自动化脚本：[fetch_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/fetch_domain_lists.sh)
+本项目提供 1 个自动化脚本：
+- [fetch_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/fetch_domain_lists.sh)
 
 该脚本为主脚本，可以自动从预设仓库获取最新域名列表（直连/代理/拒绝三类）
 
