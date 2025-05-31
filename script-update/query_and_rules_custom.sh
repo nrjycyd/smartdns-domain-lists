@@ -105,7 +105,7 @@ if [ -s "$TMP_NEW_RULES" ]; then
     sort -u "$TMP_NEW_RULES" >> "$DOWNLOAD_CUSTOM"
     echo "已追加 $(wc -l < "$TMP_NEW_RULES") 条规则到 $DOWNLOAD_CUSTOM。"
 
-    # 执行自定义规则更新脚本
+    # 执行域名整理脚本
     PROCESS_DOMAIN_LISTS="$SCRIPT_DIR/process_domain_lists.sh"
     if [ -x "$PROCESS_DOMAIN_LISTS" ]; then
         "$PROCESS_DOMAIN_LISTS"
