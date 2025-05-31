@@ -32,6 +32,11 @@
 
 本项目提供一个自动化脚本：[fetch_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/fetch_domain_lists.sh)
 
+> 主脚本，需要手动使用 `sudo` 命令执行或添加到 cron 作业；
+>
+> 分配执行权限：
+> `sudo chmod +x /usr/local/bin/fetch_domain_lists.sh`
+
 可以自动从预设仓库获取最新域名列表（直连/代理/拒绝三类）
 
 添加脚本执行权限：
@@ -57,6 +62,12 @@ sudo ./update_domain_lists.sh
 本项目提供一个自动化脚本：
 - [query_and_rules_custom.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/query_and_rules_custom.sh)
 - [process_domain_lists.sh](https://github.com/nrjycyd/smartdns-domain-lists/blob/main/script-update/process_domain_lists.sh)
+
+> 从脚本，无需单独手动执行或添加到 cron 作业，由主脚本调配执行；
+>
+> 分配执行权限：
+> `sudo chmod +x /usr/local/bin/query_and_rules_custom.sh`   
+> `sudo chmod +x /usr/local/bin/process_domain_lists.sh`
 
 在 `domain-set` 目录创建 `custom-list.txt` 文件，编辑分流模板
 
