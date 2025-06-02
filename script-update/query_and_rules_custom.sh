@@ -100,22 +100,83 @@ while read -r domain; do
     esac
 done < "$TMP_DOMAIN_LIST"
 
-# 去重后追加（仅在有新增时）
-if [ -s "$TMP_NEW_RULES" ]; then
-    sort -u "$TMP_NEW_RULES" >> "$DOWNLOAD_CUSTOM"
-    echo "已追加 $(wc -l < "$TMP_NEW_RULES") 条规则到 $DOWNLOAD_CUSTOM。"
+# # 去重后追加（仅在有新增时）
+# if [ -s "$TMP_NEW_RULES" ]; then
+#     sort -u "$TMP_NEW_RULES" >> "$DOWNLOAD_CUSTOM"
+#     echo "已追加 $(wc -l < "$TMP_NEW_RULES") 条规则到 $DOWNLOAD_CUSTOM。"
 
-    # 执行域名整理脚本
-    PROCESS_DOMAIN_LISTS="$SCRIPT_DIR/process_domain_lists.sh"
-    if [ -x "$PROCESS_DOMAIN_LISTS" ]; then
-        "$PROCESS_DOMAIN_LISTS"
-    else
-        echo "警告："$PROCESS_DOMAIN_LISTS" 不存在或不可执行，跳过执行。"
+#     # 执行域名整理脚本
+#     PROCESS_DOMAIN_LISTS="$SCRIPT_DIR/process_domain_lists.sh"
+#     if [ -x "$PROCESS_DOMAIN_LISTS" ]; then
+#         "$PROCESS_DOMAIN_LISTS"
+#     else
+#         echo "警告："$PROCESS_DOMAIN_LISTS" 不存在或不可执行，跳过执行。"
+#     fi
+# else
+#     echo "无新增规则，$DOWNLOAD_CUSTOM 保持不变。"
+# fi
+
+# 准备哈希缓存目录
+HASH_DIR="$SCRIPT_DIR/.hash"
+mkdir -p "$HASH_DIR"
+
+NEED_PROCESS=0
+
+# 检查三个主列表是否有变化
+for VAR_NAME in DOWNLOAD_DIRECT DOWNLOAD_PROXY DOWNLOAD_REJECT; do
+    FILE_PATH="${!VAR_NAME}"
+    FILE_NAME=$(basename "$FILE_PATH")
+    HASH_FILE="$HASH_DIR/${FILE_NAME}.md5"
+
+    NEW_HASH=$(md5sum "$FILE_PATH" 2>/dev/null | awk '{print $1}')
+    OLD_HASH=""
+    [ -f "$HASH_FILE" ] && OLD_HASH=$(<"$HASH_FILE")
+
+    if [ "$NEW_HASH" != "$OLD_HASH" ]; then
+        echo "$FILE_NAME 发生变化"
+        echo "$NEW_HASH" > "$HASH_FILE"
+        NEED_PROCESS=1
     fi
+done
+
+# 检查 TMP_NEW_RULES 是否要追加进 DOWNLOAD_CUSTOM
+if [ -s "$TMP_NEW_RULES" ]; then
+    TMP_SORTED=$(mktemp)
+    sort -u "$TMP_NEW_RULES" > "$TMP_SORTED"
+
+    TMP_MERGED=$(mktemp)
+    cat "$DOWNLOAD_CUSTOM" "$TMP_SORTED" | sort -u > "$TMP_MERGED"
+
+    NEW_CUSTOM_HASH=$(md5sum "$TMP_MERGED" | awk '{print $1}')
+    OLD_CUSTOM_HASH=$(md5sum "$DOWNLOAD_CUSTOM" | awk '{print $1}')
+
+    if [ "$NEW_CUSTOM_HASH" != "$OLD_CUSTOM_HASH" ]; then
+        cat "$TMP_SORTED" >> "$DOWNLOAD_CUSTOM"
+        echo "已追加 $(wc -l < "$TMP_SORTED") 条规则到 $DOWNLOAD_CUSTOM。"
+        echo "$NEW_CUSTOM_HASH" > "$HASH_DIR/$(basename "$DOWNLOAD_CUSTOM").md5"
+        NEED_PROCESS=1
+    else
+        echo "$DOWNLOAD_CUSTOM 内容未变，未追加规则。"
+    fi
+
+    rm -f "$TMP_SORTED" "$TMP_MERGED"
 else
     echo "无新增规则，$DOWNLOAD_CUSTOM 保持不变。"
 fi
 
+# 如果任何变动，执行整理脚本
+PROCESS_DOMAIN_LISTS="$SCRIPT_DIR/process_domain_lists.sh"
+if [ "$NEED_PROCESS" -eq 1 ]; then
+    if [ -x "$PROCESS_DOMAIN_LISTS" ]; then
+        echo "文件变化，执行域名整理脚本..."
+        "$PROCESS_DOMAIN_LISTS"
+    else
+        echo "警告：$PROCESS_DOMAIN_LISTS 不存在或不可执行，跳过执行。"
+    fi
+else
+    echo "所有文件未变化，跳过域名整理。"
+    echo "-------------------------------------"
+fi
 
 # 清理
 rm -f "$TMP_DOMAIN_LIST" "$TMP_NEW_RULES"
