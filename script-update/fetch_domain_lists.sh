@@ -87,8 +87,8 @@ QUERY_AND_RULES_CUSTOM="$SCRIPT_DIR/query_and_rules_custom.sh"
 if [ -f "$QUERY_AND_RULES_CUSTOM" ]; then
     echo "检测到域名查询及规则自定义脚本，执行中: $QUERY_AND_RULES_CUSTOM" >> "$LOG_FILE"
     if bash "$QUERY_AND_RULES_CUSTOM" >> "$LOG_FILE" 2>&1; then
-        echo "自定义更新脚本执行完成" >> "$LOG_FILE"
-        echo "跳过默认更新流程" >> "$LOG_FILE"
+        # echo "自定义更新脚本执行完成" >> "$LOG_FILE"
+        # echo "跳过默认更新流程" >> "$LOG_FILE"
         exit 0
     else
         echo "自定义更新脚本执行失败!" >> "$LOG_FILE"
