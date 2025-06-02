@@ -66,5 +66,5 @@ fi
 echo "[$(date +'%Y-%m-%d %H:%M:%S')] 更新完成" >> "$LOG_FILE"
 echo "-------------------------------------" >> "$LOG_FILE"
 
-[ -n "$BAK_DIR" ] && echo "备份已保存至: $BAK_DIR (保留${MAX_BACKUPS}份)"
-echo "详细日志: $LOG_FILE"
+# [ -n "$BAK_DIR" ] && echo "备份已保存至: $BAK_DIR (保留${MAX_BACKUPS}份)"
+# echo "详细日志: $LOG_FILE"
