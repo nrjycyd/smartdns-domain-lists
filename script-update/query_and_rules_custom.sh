@@ -53,51 +53,67 @@ done
 > "$TMP_NEW_RULES"
 > "$LOG_UNCLASSIFIED"
 
-# 国家归属判断函数
+# 增强版国家查询函数
 get_country() {
     local ip="$1"
     local country
+    local method
 
-    # 本地 geoiplookup
-    geoip_output=$(geoiplookup "$ip")
-    country=$(echo "$geoip_output" | grep -o 'Country: .*' | awk '{print $2}')
+    # 本地 GeoIP 查询
+    if [[ -f "$GEOIP_DB" && -x $(command -v mmdblookup) ]]; then
+        country=$(mmdblookup --file "$GEOIP_DB" --ip "$ip" country iso_code 2>/dev/null | \
+                  grep -oE '"[A-Z]{2}"' | tr -d '"' | head -n1)
 
-    # 若无效，用 ip-api.com
-    if [[ -z "$country" || "$country" == "--" ]]; then
-        country=$(curl -m 3 -s "http://ip-api.com/line/$ip?fields=countryCode" | head -n1)
+        if [[ -n "$country" && "$country" != "null" ]]; then
+            echo "$country:mmdblookup"
+            return 0
+        else
+            echo "DEBUG: mmdblookup查询失败，返回值为: '$country'" >&2
+        fi
+    else
+        echo "DEBUG: 缺少mmdblookup或数据库文件" >&2
+    fi
+
+    # API 查询
+    sleep $API_DELAY
+    country=$(curl -m 5 -s "http://ip-api.com/line/$ip?fields=countryCode" | head -n1)
+    method="ip-api.com"
+
+    if [[ "$country" == *"rate limited"* ]]; then
+        sleep 5
+        country=$(curl -m 5 -s "http://ip-api.com/line/$ip?fields=countryCode" | head -n1)
     fi
 
     [[ -z "$country" || "$country" == "ZZ" ]] && country="UNKNOWN"
-    echo "$country"
+    echo "$country:$method"
 }
 
-# 处理域名
-while read -r domain; do
+# 处理域名（带调试信息）
+while read -r domain || [[ -n "$domain" ]]; do
     [[ -z "$domain" ]] && continue
-    echo "$exclude_domains" | grep -qx "$domain" && continue
+    [[ -n "$exclude_domains" ]] && grep -qxF "$domain" <<< "$exclude_domains" && continue
 
-    ip=$(dig +short "$domain" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -n1)
-    if [[ -z "$ip" ]]; then
-        echo "[$domain] 无法解析 IP，跳过" >&2
-        continue
-    fi
+    # DNS解析
+    ip=$(dig +short "$domain" @"$PUBLIC_DNS" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' | head -n1)
+    [[ -z "$ip" ]] && echo "[DNS失败] $domain" >&2 && continue
 
-    country=$(get_country "$ip")
+    # 获取国家信息
+    result=$(get_country "$ip")
+    country="${result%%:*}"
+    method="${result#*:}"
 
+    # 确定处理动作
     case "$country" in
-        CN)
-            echo "$domain,direct" >> "$TMP_NEW_RULES"
-            echo "[$domain] 属于中国，加入 direct。"
-            ;;
-        UNKNOWN)
-            echo "$domain,proxy" >> "$TMP_NEW_RULES"
-            echo "$domain [$ip] 无法识别归属地，默认 proxy。" >> "$LOG_UNCLASSIFIED"
-            ;;
-        *)
-            echo "$domain,proxy" >> "$TMP_NEW_RULES"
-            echo "[$domain] 属于 $country，加入 proxy。"
+        CN) action="direct" ;;
+        *)  action="proxy"
+            [[ "$country" == "UNKNOWN" ]] && echo "$domain [$ip] 无法识别归属地" >> "$LOG_UNCLASSIFIED"
             ;;
     esac
+
+    # 输出处理结果
+    printf "[%-10s] %-40s → %-15s → %-5s → 标记为 %s\n" \
+           "$method" "$domain" "$ip" "$country" "$action" >&2
+    echo "$domain,$action" >> "$TMP_NEW_RULES"
 done < "$TMP_DOMAIN_LIST"
 
 # # 去重后追加（仅在有新增时）
