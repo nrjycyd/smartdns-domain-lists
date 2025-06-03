@@ -86,8 +86,8 @@ grep 'send query' "$LOG_SMARTDNS" | grep 'total server number 0' \
     | awk '{for(i=1;i<=NF;i++) if ($i ~ /send/) print $(i+2)}' \
     | sort -u > "$TMP_DOMAIN_LIST"
 
-# 检查必要依赖
-for cmd in dig curl geoiplookup; do
+# 检查必要命令依赖
+for cmd in dig curl geoiplookup mmdblookup; do
     command -v "$cmd" >/dev/null 2>&1 || { echo "缺少 $cmd 命令，请先安装。"; exit 1; }
 done
 
