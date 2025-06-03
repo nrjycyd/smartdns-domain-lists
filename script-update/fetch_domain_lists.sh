@@ -41,7 +41,7 @@ download_file() {
     return 1
 }
 
-# ============= 备份函数 =============
+# ============= 备份函数（按时间归类） =============
 backup_file() {
     [ -z "$BAK_DIR" ] && return 0
     [ "$MAX_BACKUPS" -eq 0 ] && return 0
@@ -50,18 +50,21 @@ backup_file() {
     [ -f "$file" ] || return 0
 
     local filename=$(basename "$file")
-    local timestamp=$(date +"%Y%m%d-%H%M%S")
-    local backup_file="${BAK_DIR}/${filename}.bak-${timestamp}"
+    local timestamp=$(date +"%Y%m%d%H%M%S")
+    local subdir="${BAK_DIR}/${timestamp}"
+
+    mkdir -p "$subdir"
+    local backup_file="${subdir}/${filename}.bak"
 
     if cp -f "$file" "$backup_file"; then
-        echo "备份成功: $(basename "$backup_file")" >> "$LOG_FILE"
+        echo "备份成功: ${timestamp}/$(basename "$backup_file")" >> "$LOG_FILE"
 
-        # 清理旧备份
-        ls -t "${BAK_DIR}/${filename}.bak-"* 2>/dev/null | \
-        awk -v max="$MAX_BACKUPS" 'NR>max {print $0}' | \
+        # 清理旧备份：只保留每个 filename 最新的 $MAX_BACKUPS 份（跨子目录）
+        find "$BAK_DIR" -type f -name "${filename}.bak" | \
+        sort -r | awk -v max="$MAX_BACKUPS" 'NR>max' | \
         while read -r old; do
             rm -f "$old"
-            echo "已清理旧备份: $(basename "$old")" >> "$LOG_FILE"
+            echo "已清理旧备份: ${old#$BAK_DIR/}" >> "$LOG_FILE"
         done
     else
         echo "备份失败: $file → $backup_file" >> "$LOG_FILE"
