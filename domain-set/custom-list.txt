@@ -6,6 +6,6 @@ cdn.jsdelivr.net,direct
 test-ipv6.com,direct
 pool.ntp.org,direct
 qnap.com,direct
-ip-api.com,proxy
+ip-api.com,direct
 get.acme.sh,proxy
 vuejs.press,proxy
