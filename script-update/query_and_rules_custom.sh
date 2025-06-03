@@ -4,6 +4,42 @@
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 CONFIG_FILE="$SCRIPT_DIR/config"
 
+# === 函数：安装依赖 ===
+install_dependencies() {
+    echo "[INFO] 检查并安装必要依赖..." | tee -a "$LOG_FILE"
+    sudo apt-get update
+    sudo apt-get install -y geoip-bin libmaxminddb0 libmaxminddb-dev mmdb-bin curl dnsutils
+}
+
+# === 函数：自动更新 GeoIP 数据库 ===
+update_geoip_db() {
+    echo "[INFO] 检查并更新 GeoIP 数据库..." >> "$LOG_FILE"
+
+    HASH_DIR="$SCRIPT_DIR/.hash"
+    HASH_FILE="$HASH_DIR/GeoLite2-Country.mmdb.md5"
+    sudo mkdir -p "$(dirname "$GEOIP_DB")"
+    mkdir -p "$HASH_DIR"
+
+    TMP_DB="/tmp/GeoLite2-Country.mmdb"
+    if wget -q --timeout=10 -O "$TMP_DB" "$GEOIP_URL"; then
+        new_md5=$(md5sum "$TMP_DB" | awk '{print $1}')
+        old_md5=""
+        [ -f "$HASH_FILE" ] && old_md5=$(cat "$HASH_FILE")
+
+        if [ "$new_md5" != "$old_md5" ]; then
+            sudo mv "$TMP_DB" "$GEOIP_DB"
+            echo "$new_md5" > "$HASH_FILE"
+            echo "[INFO] GeoIP 数据库已更新: $GEOIP_DB" >> "$LOG_FILE"
+        else
+            rm -f "$TMP_DB"
+            echo "[INFO] GeoIP 数据库无更新" >> "$LOG_FILE"
+        fi
+    else
+        echo "[WARN] 下载 GeoIP 数据库失败: $GEOIP_URL" >> "$LOG_FILE"
+        rm -f "$TMP_DB"
+    fi
+}
+
 # 加载配置文件
 if [ -f "$CONFIG_FILE" ]; then
     # shellcheck source=/dev/null
@@ -12,6 +48,12 @@ else
     echo "配置文件不存在: $CONFIG_FILE"
     exit 1
 fi
+
+# 安装依赖
+install_dependencies
+
+# 你可以根据需求调用 GeoIP 更新函数，比如：
+# update_geoip_db
 
 # 缓存文件路径
 TMP_DOMAIN_LIST="/tmp/smartdns_failed_domains.txt"
