@@ -6,18 +6,18 @@ CONFIG_FILE="$SCRIPT_DIR/config"
 
 # === 函数：安装依赖 ===
 install_dependencies() {
-    echo "[INFO] 检查并安装必要依赖..." | tee -a "$LOG_FILE"
+    echo "[INFO] 检查并安装必要依赖..." >> "$LOG_FILE"
     
     # 更新软件包索引，抑制详细输出
-    sudo apt-get update -qq
+    sudo apt-get update -qq >/dev/null 2>&1
     
     # 检查并安装各个包，逐一判断是否已安装
     for pkg in geoip-bin libmaxminddb0 libmaxminddb-dev mmdb-bin curl dnsutils; do
         if ! dpkg -s "$pkg" >/dev/null 2>&1; then
-            echo "[INFO] 安装 $pkg ..." | tee -a "$LOG_FILE"
+            echo "[INFO] 安装 $pkg ..." >> "$LOG_FILE"
             sudo apt-get install -y "$pkg" >> "$LOG_FILE" 2>&1
         else
-            echo "[INFO] 已安装 $pkg" | tee -a "$LOG_FILE"
+            echo "[INFO] 已安装 $pkg" >> "$LOG_FILE"
         fi
     done
 }
@@ -63,8 +63,8 @@ fi
 # 安装依赖
 install_dependencies
 
-# 你可以根据需求调用 GeoIP 更新函数，比如：
-# update_geoip_db
+# 更新 GeoIP 数据库
+update_geoip_db
 
 # 缓存文件路径
 TMP_DOMAIN_LIST="/tmp/smartdns_failed_domains.txt"
