@@ -21,6 +21,11 @@ LOG_SMARTDNS="/var/log/smartdns/smartdns.log"
 # 未分类域名日志文件路径
 LOG_UNCLASSIFIED="/var/log/smartdns_unclassified.log"
 
+# IP 归属地查询常量配置
+PUBLIC_DNS="8.8.8.8"
+GEOIP_URL="https://raw.githubusercontent.com/P3TERX/GeoLite.mmdb/download/GeoLite2-Country.mmdb"
+GEOIP_DB="/usr/share/GeoIP/GeoLite2-Country.mmdb"
+API_DELAY=1  # API查询间隔(秒)
 
 # ------------ 派生路径（不可修改）------------
 # 下载的原始文件
