@@ -7,8 +7,19 @@ CONFIG_FILE="$SCRIPT_DIR/config"
 # === 函数：安装依赖 ===
 install_dependencies() {
     echo "[INFO] 检查并安装必要依赖..." | tee -a "$LOG_FILE"
-    sudo apt-get update
-    sudo apt-get install -y geoip-bin libmaxminddb0 libmaxminddb-dev mmdb-bin curl dnsutils
+    
+    # 更新软件包索引，抑制详细输出
+    sudo apt-get update -qq
+    
+    # 检查并安装各个包，逐一判断是否已安装
+    for pkg in geoip-bin libmaxminddb0 libmaxminddb-dev mmdb-bin curl dnsutils; do
+        if ! dpkg -s "$pkg" >/dev/null 2>&1; then
+            echo "[INFO] 安装 $pkg ..." | tee -a "$LOG_FILE"
+            sudo apt-get install -y "$pkg" >> "$LOG_FILE" 2>&1
+        else
+            echo "[INFO] 已安装 $pkg" | tee -a "$LOG_FILE"
+        fi
+    done
 }
 
 # === 函数：自动更新 GeoIP 数据库 ===
