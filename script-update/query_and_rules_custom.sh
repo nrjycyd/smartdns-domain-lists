@@ -59,7 +59,6 @@ install_dependencies
 TMP_DOMAIN_LIST="/tmp/smartdns_failed_domains.txt"
 TMP_NEW_RULES="/tmp/smartdns_new_rules.txt"
 
-
 # 创建规则文件（若不存在）并添加注释头
 if [ ! -f "$DOWNLOAD_CUSTOM" ]; then
     {
