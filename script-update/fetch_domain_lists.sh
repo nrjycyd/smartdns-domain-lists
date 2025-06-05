@@ -13,22 +13,6 @@ else
     exit 1
 fi
 
-# === 初始化 GeoIP 本地环境 ===
-if ! command -v mmdblookup >/dev/null; then
-    echo "[INFO] 安装 mmdblookup 及相关依赖..."
-    sudo apt-get update
-    sudo apt-get install -y geoip-bin libmaxminddb0 libmaxminddb-dev mmdb-bin
-fi
-
-# === 准备 GeoIP 数据库 ===
-if [[ ! -f "$GEOIP_DB" ]]; then
-    echo "[INFO] 下载 GeoLite2-Country.mmdb..."
-    sudo mkdir -p "$(dirname "$GEOIP_DB")"
-    sudo wget -qO "$GEOIP_DB" "$GEOIP_URL"
-else
-    echo "[INFO] GeoIP 数据库已存在: $GEOIP_DB"
-fi
-
 # === 初始化目录结构 ===
 mkdir -p "$FILE_DIR" "$DOWNLOAD_DIR"
 [ -n "$BAK_DIR" ] && mkdir -p "$BAK_DIR"
