@@ -42,21 +42,23 @@ download_file() {
 }
 
 # ============= 备份函数（按时间归类） =============
-backup_file() {
+backup_files() {
     [ -z "$BAK_DIR" ] && return 0
     [ "$MAX_BACKUPS" -eq 0 ] && return 0
 
-    local file="$1"
-    [ -f "$file" ] || return 0
-
-    local filename=$(basename "$file")
     local timestamp=$(date +"%Y%m%d%H%M%S")
     local subdir="${BAK_DIR}/${timestamp}"
 
-    mkdir -p "$subdir"
-    local backup_file="${subdir}/${filename}.bak"
+    mkdir -p "$subdir" || return 1
 
-    if cp -f "$file" "$backup_file"; then
+    local success=0
+
+    for file in "$@"; do
+        [ -f "$file" ] || continue
+        cp -f "$file" "$subdir/" && success=1
+    done
+
+    if [ "$success" -eq 1 ]; then
         echo "备份成功: ${timestamp}" >> "$LOG_FILE"
 
         # 清理旧备份目录，仅保留最新的 $MAX_BACKUPS 个目录
