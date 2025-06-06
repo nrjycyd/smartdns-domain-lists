@@ -77,12 +77,8 @@ for type in direct proxy reject; do
     fi
 done
 
-# 备份
-[ -n "$BAK_DIR" ] && {
-    backup_file "$FILE_DIRECT"
-    backup_file "$FILE_PROXY"
-    backup_file "$FILE_REJECT"
-}
+# 统一备份多个文件
+backup_files "$FILE_DIRECT" "$FILE_PROXY" "$FILE_REJECT"
 
 # 执行自定义脚本
 QUERY_AND_RULES_CUSTOM="$SCRIPT_DIR/query_and_rules_custom.sh"
