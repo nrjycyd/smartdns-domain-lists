@@ -59,12 +59,11 @@ backup_file() {
     if cp -f "$file" "$backup_file"; then
         echo "备份成功: ${timestamp}/$(basename "$backup_file")" >> "$LOG_FILE"
 
-        # 清理旧备份：只保留每个 filename 最新的 $MAX_BACKUPS 份（跨子目录）
-        find "$BAK_DIR" -type f -name "${filename}.bak" | \
-        sort -r | awk -v max="$MAX_BACKUPS" 'NR>max' | \
-        while read -r old; do
-            rm -f "$old"
-            echo "已清理旧备份: ${old#$BAK_DIR/}" >> "$LOG_FILE"
+        # 清理旧备份目录，仅保留最新的 $MAX_BACKUPS 个目录
+        find "$BAK_DIR" -mindepth 1 -maxdepth 1 -type d | sort -r | awk -v max="$MAX_BACKUPS" 'NR > max' | \
+        while read -r old_dir; do
+            rm -rf "$old_dir"
+            echo "已清理旧备份目录: ${old_dir#$BAK_DIR/}" >> "$LOG_FILE"
         done
     else
         echo "备份失败: $file → $backup_file" >> "$LOG_FILE"
