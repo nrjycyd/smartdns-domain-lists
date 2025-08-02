@@ -37,19 +37,19 @@
 添加脚本执行权限：
 
 ```bash
-chmod +x ./update_domain_lists.sh
+chmod +x ./fetch_domain_lists.sh
 ```
 
 运行脚本：
 
 ```bash
-sudo ./update_domain_lists.sh
+sudo ./fetch_domain_lists.sh
 ```
 
 添加设置每日自动更新：
 
 ```bash
-0 3 * * * ./update_domain_lists.sh
+0 3 * * * ./fetch_domain_lists.sh
 ```
 
 ### 三、自定义域名分流规则（可选项）
