@@ -11774,6 +11774,7 @@ git.io
 gitbook.com
 gitbook.io
 github-cloud.s3.amazonaws.com
+github.ai
 github.blog
 github.com
 github.community
@@ -15248,6 +15249,7 @@ itemdb.com
 itemfix.com
 itfromtheinside.com
 ithelp.ithome.com.tw
+itiger.com
 itlearningspace-scot.ac.uk
 itnel.com
 itnow.ac.uk
