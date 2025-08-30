@@ -8578,6 +8578,7 @@ download.qatp1.net
 download.visualstudio.microsoft.com
 downloadpass.com
 downloadsforipod.com
+dpdns.org
 dphk.org
 dpoc.ac.uk
 dpool.top
