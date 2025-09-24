@@ -1974,6 +1974,7 @@ api.ai
 api.linksalpha.com
 api.nebula-emby.com
 api.news
+api.palworldgame.com
 api.viu.now.com
 apiary.io
 apibay.org
@@ -20940,6 +20941,7 @@ ocsp-certum.com
 ocsp-responder.com
 ocsp.microsoft.com
 october-review.org
+octocaptcha.com
 ocul.us
 oculus-china.com
 oculus.com
