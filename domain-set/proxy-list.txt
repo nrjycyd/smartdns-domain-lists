@@ -6856,6 +6856,8 @@ cof.ac.uk
 cofacts.tw
 coffeemanga.to
 cogc.ac.uk
+cohere.ai
+cohere.com
 coin2co.in
 coinalyze.net
 coinbase.com
@@ -27103,6 +27105,7 @@ tensorflow.org
 tentowns.ac.uk
 tenzinpalmo.com
 terabox.com
+teraboxcdn.com
 terapeack.com
 terapeak.ca
 terapeak.com
