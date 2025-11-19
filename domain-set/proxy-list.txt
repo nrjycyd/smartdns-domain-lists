@@ -1165,6 +1165,7 @@ ahxxx.club
 ai-kan.net
 ai-wen.net
 ai.binwang.me
+ai.dev
 ai.google.dev
 ai3sd.ac.uk
 ai7995.site
