@@ -17,24 +17,28 @@ jobs:
 
       - name: Download and process domain lists
         run: |
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt  >> domain-set/direct-list.txt
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt    >> domain-set/direct-list.txt
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt   >> domain-set/direct-list.txt
-          sed -i '/^regexp:/d; s/full://g' domain-set/direct-list.txt
-          sort -u domain-set/direct-list.txt -o domain-set/direct-list.txt
-
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt >> domain-set/proxy-list.txt
-          sed -i '/^regexp:/d; s/full://g' domain-set/proxy-list.txt
-          sort -u domain-set/proxy-list.txt -o domain-set/proxy-list.txt
-
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt >> domain-set/reject-list.txt
-          sed -i '/^regexp:/d; s/full://g' domain-set/reject-list.txt
-          sort -u domain-set/reject-list.txt -o domain-set/reject-list.txt
-
-          # Download and process PCDN domain lists
-          curl -sSL https://thhbdd.github.io/Block-pcdn-domains/ban.txt > temp-pcdn1.txt
-          curl -sSL https://cdn.jsdelivr.net/gh/susetao/PCDNFilter-CHN-@main/PCDNFilter.txt > temp-pcdn2.txt
-          cat temp-pcdn1.txt temp-pcdn2.txt | \
+          # Process direct-list
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt > temp-direct-1.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt > temp-direct-2.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt > temp-direct-3.txt
+          cat temp-direct-*.txt | \
+            sed '/^regexp:/d; s/full://g' | \
+            sort -u > domain-set/direct-list.txt
+          
+          # Process proxy-list
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt | \
+            sed '/^regexp:/d; s/full://g' | \
+            sort -u > domain-set/proxy-list.txt
+          
+          # Process reject-list
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt | \
+            sed '/^regexp:/d; s/full://g' | \
+            sort -u > domain-set/reject-list.txt
+          
+          # Process PCDN list
+          curl -sSL https://thhbdd.github.io/Block-pcdn-domains/ban.txt > temp-pcdn-1.txt
+          curl -sSL https://cdn.jsdelivr.net/gh/susetao/PCDNFilter-CHN-@main/PCDNFilter.txt > temp-pcdn-2.txt
+          cat temp-pcdn-*.txt | \
             grep -v '^#' | \
             grep -v '^$' | \
             grep -v '^/' | \
@@ -42,15 +46,16 @@ jobs:
             grep '\.' | \
             sort -u > domain-set/pcdn-list.txt
           
-          # Download and process HttpDNS domain list
-          curl -sSL https://raw.githubusercontent.com/yyysuo/firetv/master/httpdns.txt > temp-httpdns.txt
-          cat temp-httpdns.txt | \
+          # Process HttpDNS list
+          curl -sSL https://raw.githubusercontent.com/yyysuo/firetv/master/httpdns.txt | \
             grep -v '^#' | \
             grep -v '^$' | \
             sed 's/||//g; s/\^//g' | \
             grep '\.' | \
             sort -u > domain-set/httpdns-list.txt
           
+          # Clean up
+          rm -f temp-*.txt      
 
       - name: Commit and push updated domain lists to repository
         env:
