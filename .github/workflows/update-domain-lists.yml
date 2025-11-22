@@ -35,6 +35,12 @@ jobs:
           sed -i '/^\s*$/d; /^\s*#/d' domain-set/httpdns-list.txt
           sort -u domain-set/httpdns-list.txt -o domain-set/httpdns-list.txt
 
+          curl -sSL https://cdn.jsdelivr.net/gh/susetao/PCDNFilter-CHN-@main/PCDNFilter.txt >> domain-set/pcdn-list.txt
+          curl -sSL https://thhbdd.github.io/Block-pcdn-domains/ban.txt >> domain-set/pcdn-list.txt
+          sed -i '/^regexp:/d; s/full://g; /^\s*$/d; /^\s*#/d' domain-set/pcdn-list.txt
+          sort -u domain-set/pcdn-list.txt -o domain-set/pcdn-list.txt
+          
+
       - name: Commit and push updated domain lists to repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
