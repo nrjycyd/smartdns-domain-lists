@@ -31,14 +31,25 @@ jobs:
           sed -i '/^regexp:/d; s/full://g' domain-set/reject-list.txt
           sort -u domain-set/reject-list.txt -o domain-set/reject-list.txt
 
-          curl -sSL https://raw.githubusercontent.com/yyysuo/firetv/master/httpdns.txt >> domain-set/httpdns-list.txt
-          sed -i '/^\s*$/d; /^\s*#/d' domain-set/httpdns-list.txt
-          sort -u domain-set/httpdns-list.txt -o domain-set/httpdns-list.txt
-
-          curl -sSL https://cdn.jsdelivr.net/gh/susetao/PCDNFilter-CHN-@main/PCDNFilter.txt >> domain-set/pcdn-list.txt
-          curl -sSL https://thhbdd.github.io/Block-pcdn-domains/ban.txt >> domain-set/pcdn-list.txt
-          sed -i '/^regexp:/d; s/full://g; /^\s*$/d; /^\s*#/d' domain-set/pcdn-list.txt
-          sort -u domain-set/pcdn-list.txt -o domain-set/pcdn-list.txt
+          # Download and process PCDN domain lists
+          curl -sSL https://thhbdd.github.io/Block-pcdn-domains/ban.txt > temp-pcdn1.txt
+          curl -sSL https://cdn.jsdelivr.net/gh/susetao/PCDNFilter-CHN-@main/PCDNFilter.txt > temp-pcdn2.txt
+          cat temp-pcdn1.txt temp-pcdn2.txt | \
+            grep -v '^#' | \
+            grep -v '^$' | \
+            grep -v '^/' | \
+            sed 's/||//g; s/\^//g' | \
+            grep '\.' | \
+            sort -u > domain-set/pcdn-list.txt
+          
+          # Download and process HttpDNS domain list
+          curl -sSL https://raw.githubusercontent.com/yyysuo/firetv/master/httpdns.txt > temp-httpdns.txt
+          cat temp-httpdns.txt | \
+            grep -v '^#' | \
+            grep -v '^$' | \
+            sed 's/||//g; s/\^//g' | \
+            grep '\.' | \
+            sort -u > domain-set/httpdns-list.txt
           
 
       - name: Commit and push updated domain lists to repository
