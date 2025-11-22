@@ -31,6 +31,10 @@ jobs:
           sed -i '/^regexp:/d; s/full://g' domain-set/reject-list.txt
           sort -u domain-set/reject-list.txt -o domain-set/reject-list.txt
 
+          curl -sSL https://raw.githubusercontent.com/yyysuo/firetv/master/httpdns.txt >> domain-set/httpdns-list.txt
+          sed -i '/^\s*$/d; /^\s*#/d' domain-set/httpdns-list.txt
+          sort -u domain-set/httpdns-list.txt -o domain-set/httpdns-list.txt
+
       - name: Commit and push updated domain lists to repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
