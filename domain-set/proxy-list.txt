@@ -1187,6 +1187,7 @@ akiba-web.com
 akinator.com
 akita-bank.co.jp
 akow.org
+akstat.io
 akthelp.com
 al-islam.com
 alabout.com
@@ -25588,6 +25589,7 @@ yandex.st
 yandex.sx
 yandex.tj
 yandex.tm
+yandex.tr
 yandex.ua
 yandex.uz
 yandexadexchange.net
