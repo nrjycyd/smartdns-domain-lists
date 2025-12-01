@@ -70,18 +70,21 @@ jobs:
           echo "reject-list 域名数: $(wc -l < domain-set/reject-list.txt)"
           
           echo ""
-          echo "=== 阶段5: 按优先级去重 (reject > proxy > direct) ==="
+          echo "=== 阶段5: 按优先级去重 (reject > direct > proxy) ==="
+          echo "优先级策略: Reject(最高) > Direct(中) > Proxy(低)"
           
-          # 从 proxy-list 中移除所有在 reject-list 中的域名
-          grep -vFf domain-set/reject-list.txt temp-proxy-step1.txt > domain-set/proxy-list.txt || true
-          echo "proxy-list 去重后域名数: $(wc -l < domain-set/proxy-list.txt)"
-          
+          # 1. 确定 direct-list (只剔除 reject-list)
           # 从 direct-list 中移除所有在 reject-list 中的域名
-          grep -vFf domain-set/reject-list.txt temp-direct-step1.txt > temp-direct-step2.txt || true
+          grep -vFf domain-set/reject-list.txt temp-direct-step1.txt > domain-set/direct-list.txt || true
+          echo "direct-list 去重后最终域名数: $(wc -l < domain-set/direct-list.txt)"
           
-          # 从 direct-list 中移除所有在 proxy-list 中的域名
-          grep -vFf domain-set/proxy-list.txt temp-direct-step2.txt > domain-set/direct-list.txt || true
-          echo "direct-list 去重后域名数: $(wc -l < domain-set/direct-list.txt)"
+          # 2. 确定 proxy-list (剔除 reject-list 和 direct-list)
+          # 先从 proxy-list 中移除 reject-list
+          grep -vFf domain-set/reject-list.txt temp-proxy-step1.txt > temp-proxy-step2.txt || true
+          
+          # 再从 proxy-list 中移除已经确定好的 direct-list (因为 Direct > Proxy)
+          grep -vFf domain-set/direct-list.txt temp-proxy-step2.txt > domain-set/proxy-list.txt || true
+          echo "proxy-list 去重后最终域名数: $(wc -l < domain-set/proxy-list.txt)"
           
           # Process PCDN list
           curl -sSL https://thhbdd.github.io/Block-pcdn-domains/ban.txt > temp-pcdn-1.txt
