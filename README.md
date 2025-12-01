@@ -24,19 +24,19 @@
 
    - 从 proxy-list 中排除 apple-cn 和 google-cn 的域名
 
-   - 按优先级去重 (reject > proxy > direct)
+   - 按优先级去重 (reject > direct > proxy)
 
      ```
      去重顺序:
      1. reject-list 保持不变 (最高优先级)
-     2. 从 proxy-list 中移除所有在 reject-list 中的域名
-     3. 从 direct-list 中移除所有在 reject-list 中的域名
-     4. 从 direct-list 中移除所有在 proxy-list 中的域名 (已去重后的)
+     2. 从 direct-list 中移除所有在 reject-list 中的域名
+     3. 从 proxy-list 中移除所有在 reject-list 中的域名
+     4. 从 proxy-list 中移除所有在 direct-list 中的域名 (已去重后的)
      
      最终结果:
      - reject-list: 完整列表
-     - proxy-list: 不含 reject 中的域名
-     - direct-list: 不含 reject 和 proxy 中的域名
+     - direct-list: 不含 reject 中的域名
+     - proxy-list: 不含 reject 和 direct-list 中的域名
      ```
 
 ## 使用说明
