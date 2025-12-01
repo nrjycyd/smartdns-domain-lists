@@ -236,7 +236,6 @@
 24porn.com
 24porn.pro
 25u.com
-265.com
 265sdwe3.com
 2789av.com
 27mmwmmw.top
@@ -256,8 +255,6 @@
 2kgames.com
 2lib.org
 2lipstube.com
-2mdn-cn.net
-2mdn.net
 2o7.net
 2shared.com
 2waky.com
@@ -819,7 +816,6 @@ adidas.se
 adinst.com
 admeld.com
 admetrica.ru
-admob-cn.com
 admob.com
 adobe-aemassets-value.com
 adobe-audience-finder.com
@@ -1788,10 +1784,7 @@ apole.com
 apornotube.net
 aporntv.com
 apornvideo.com
-app-analytics-services.com
 app-dynamics.com
-app-measurement-cn.com
-app-measurement.com
 app-store.wang
 app.box.com
 app.smartmailcloud.com
@@ -2136,7 +2129,6 @@ applw.com
 appmediagroup.com
 approvedusedbmw.com
 apps.evozi.com
-apps5.oingo.com
 appsflayer.com
 appshopper.com
 appsocks.net
@@ -2562,7 +2554,6 @@ av69.us
 av6k.com
 av6k.vip
 avaaz.org
-avail.googleflights.net
 avast.com
 avatara.com
 avatargarenanow-a.akamaihd.net
@@ -5502,8 +5493,6 @@ clearwisdom.net
 clementine-player.org
 click-url.com
 clickedu.co.uk
-clickserve.cc-dt.com
-clickserver.googleads.com
 client-teamviewer-com.trafficmanager.net
 clients1.google.com
 climate-server.com
@@ -5613,7 +5602,6 @@ cn.streetvoice.com
 cn6.eu
 cna.com.tw
 cnabc.com
-cnappinstall.googleadapis.com
 cnbc.com
 cnbcfm.com
 cnbeta.com
@@ -5789,7 +5777,6 @@ contactmagazine.net
 contactossexoecuador.com
 containersonaws.com
 contechacademy.com
-content.googleadapis.com
 contentful.com
 contest.com
 contests.twilio.com
@@ -6219,7 +6206,6 @@ darrenliuwei.com
 dart.dev
 dartlang.org
 dartpad.dev
-dartsearch-cn.net
 dartsearch.net
 darwindimensions.com
 darwinsource.com
@@ -7044,8 +7030,6 @@ dotvpn.com
 doub.io
 doubibackup.com
 doubiyunbackup.com
-doubleclick-cn.net
-doubleclick.net
 doublethinklab.org
 douchi.space
 doufurufabu.xyz
@@ -7069,7 +7053,6 @@ dowjones.io
 dowjoneson.com
 download.aircrack-ng.org
 download.com
-download.qatp1.net
 download.visualstudio.microsoft.com
 downloadpass.com
 downloadsforipod.com
@@ -8870,7 +8853,6 @@ finlitsummit.org
 fiotolia.com
 fire-emblem-heroes.com
 firearmsworld.net
-firebase-settings.crashlytics.com
 firebase.com
 firebase.google.com
 firebase.googleapis.com
@@ -10111,9 +10093,7 @@ goldwave.com
 golos-ameriki.ru
 golosameriki.com
 gongkou-cc.sbs
-gonglchuangl.net
 gongm.in
-gongyichuangyi.net
 gonike.com
 gonzo-movies.com
 gonzo.com
@@ -10142,8 +10122,6 @@ googil.com
 googl.com
 google
 google-access.net
-google-analytics-cn.com
-google-analytics.com
 google-ohttp-relay-safebrowsing.fastly-edge.com
 google-syndication.com
 google.ad
@@ -10346,13 +10324,8 @@ google.vg
 google.vu
 google.ws
 googleacquisitionmigration.com
-googleadservices-cn.com
-googleadservices.com
-googleanalytics.com
-googleapis-cn.com
 googleapis.cn
 googleapis.com
-googleapps-cn.com
 googleapps.com
 googlearth.com
 googleartproject.com
@@ -10373,7 +10346,6 @@ googleearth.com
 googlefiber.com
 googlefiber.net
 googlefinland.com
-googleflights-cn.net
 googlegroups.com
 googlehosted.com
 googleideas.com
@@ -10381,8 +10353,6 @@ googleinsidesearch.com
 googlemail.com
 googlemaps.com
 googlemashups.com
-googleoptimize-cn.com
-googleoptimize.com
 googlepagecreator.com
 googlephotos.com
 googleplay.com
@@ -10391,16 +10361,7 @@ googlescholar.com
 googlesource.com
 googlestore.com
 googlesverige.com
-googlesyndication-cn.com
-googlesyndication.com
-googletagmanager-cn.com
-googletagmanager.com
-googletagservices-cn.com
-googletagservices.com
-googletraveladservices-cn.com
-googletraveladservices.com
 googleusercontent.com
-googlevads-cn.com
 googleventures.com
 googlevideo.com
 googleweblight.com
@@ -10521,11 +10482,9 @@ gsccdn.com
 gsearch.media
 gslink.us
 gsrc.io
-gstatic-cn.com
 gstatic.com
 gsuite.com
 gt536.top
-gtm.oasisfeng.com
 gtricks.com
 gtv.org
 gtv1.org
@@ -10569,9 +10528,7 @@ gv.com
 gvlib.com
 gvm.com.tw
 gvt0.com
-gvt1-cn.com
 gvt1.com
-gvt2-cn.com
 gvt2.com
 gvt3.com
 gvt5.com
@@ -11158,8 +11115,6 @@ hktshop.com
 hl2rcv.adobe.com
 hlbelygl.com
 hlrcv.stage.adobe.com
-hls-amt.itunes.apple.com
-hls.itunes.apple.com
 hlsp1.pw
 hm.com
 hmd.site
@@ -15575,7 +15530,6 @@ mongodb.com
 mongodb.org
 monica.im
 monitorchina.org
-monitoring.qpdp1.net
 monitrix.net
 mono-project.com
 monocloud.me
@@ -16825,7 +16779,6 @@ nownews.com
 nowtorrents.com
 noxinfluencer.com
 nozomi.la
-np-edge.itunes.apple.com
 npa.go.jp
 npm.community
 npmjs.com
@@ -18159,7 +18112,6 @@ platinumlinks.org
 play-asia.com
 play-bmm.shop
 play-bmmer.buzz
-play-edge.itunes.apple.com
 play4free.com
 playapex.com
 playartifact.com
@@ -18969,7 +18921,6 @@ pzhanfor.today
 q10.jp
 q13.com
 q13fox.com
-qagpublic.qatp1.net
 qatarescortsvip.com
 qattdh.cc
 qattdh.top
@@ -18981,7 +18932,6 @@ qbmengmei6.mom
 qcmod.xyz
 qctconnect.com
 qdiehzz7.me
-qgadmin.qcpp1.net
 qgirl.com.tw
 qhigh.com
 qi-gong.me
@@ -18991,7 +18941,6 @@ qianglie.com
 qiangwaikan.com
 qiangyou.org
 qianmo.tw
-qiao-cn.com
 qidian.ca
 qinav.com
 qingse.one
@@ -19015,7 +18964,6 @@ qorno.com
 qpoe.com
 qporno.xxx
 qprize.com
-qpx.googleflights.net
 qq.co.za
 qq33qq.com
 qqbs.asia
@@ -19044,8 +18992,6 @@ qualcommretail.com
 qualcommventures.cn
 qualcommventures.com
 qualphone.com
-qualysapi.qatp1.net
-qualysguard.qpdp1.net
 quanben-xiaoshuo.com
 quanben.io
 quantil.com
@@ -19309,8 +19255,6 @@ reaxys.com
 rebates.jp
 rebatesrule.net
 rebrandly.com
-recaptcha-cn.net
-recaptcha.net
 recelebrity.com
 reckitt.net
 reckittbenckiser.com
@@ -19812,7 +19756,6 @@ scaleflex.com
 scaleform.com
 scandalplanet.com
 scanlover.com
-scanservice1.qcpp1.net
 scasino.com
 scat-enema.com
 scat-japan.com
@@ -23042,7 +22985,6 @@ uocn.org
 uoherald.com
 up01.cc
 upbit.com
-update.crashlytics.com
 updatetube.com
 upfrontcfd.com
 upfrontfea.com
@@ -23113,7 +23055,6 @@ utcnist.colorado.edu
 utcnist2.colorado.edu
 utcnist3.colorado.edu
 utopianpal.com
-uts-api.itunes.apple.com
 uug22.com
 uug23.com
 uug25.com
@@ -24800,7 +24741,6 @@ www.ajsands.com
 www.antd.org
 www.aolnews.com
 www.cmoinc.org
-www.destinationurl.com
 www.dwheeler.com
 www.eastturkistan.net
 www.gmiddle.com
@@ -24815,7 +24755,6 @@ www.moztw.org
 www.owind.com
 www.oxid.it
 www.powerpointninja.com
-www.pxcc.com
 www.s4miniarchive.com
 www.sb
 www.tablesgenerator.com
@@ -25077,7 +25016,6 @@ xn--d1acpjx3f.xn--p1ai
 xn--d4ty0ojsqzfd.com
 xn--fiqs8sxootzz.xn--hxt814e
 xn--flw351e
-xn--flw351e.com
 xn--ggle-55da.com
 xn--gmq348bujlxrb.com
 xn--gmq92kd2rm1kx34a.com
