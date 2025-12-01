@@ -18,7 +18,7 @@ jobs:
       - name: Download and process domain lists
         run: |
           # Process direct-list
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/china-list.txt > temp-direct-1.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt > temp-direct-1.txt
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt > temp-direct-2.txt
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt > temp-direct-3.txt
           cat temp-direct-*.txt | \
