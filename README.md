@@ -11,10 +11,33 @@
 ## 主要功能
 
 1. **自动定时更新**：每天 UTC 时间 3:00 (北京时间 11:00) 自动执行更新
-3. **域名分类处理**：
+2. **同步上游域名列表**：
    - 直连列表 (direct-list)：包含国内[直连域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt)、[苹果中国域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt)、[谷歌中国域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt)
    - 代理列表 (proxy-list)：需要[代理访问的域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt)
    - 屏蔽列表 (reject-list)：需要屏蔽的[广告域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt)
+
+3. **域名分类处理**：
+
+   - 将 apple-cn 和 google-cn 的域名独立出来
+
+   - 从 direct-list 中排除 apple-cn 和 google-cn 的域名
+
+   - 从 proxy-list 中排除 apple-cn 和 google-cn 的域名
+
+   - 按优先级去重 (reject > proxy > direct)
+
+     ```
+     去重顺序:
+     1. reject-list 保持不变 (最高优先级)
+     2. 从 proxy-list 中移除所有在 reject-list 中的域名
+     3. 从 direct-list 中移除所有在 reject-list 中的域名
+     4. 从 direct-list 中移除所有在 proxy-list 中的域名 (已去重后的)
+     
+     最终结果:
+     - reject-list: 完整列表
+     - proxy-list: 不含 reject 中的域名
+     - direct-list: 不含 reject 和 proxy 中的域名
+     ```
 
 ## 使用说明
 
