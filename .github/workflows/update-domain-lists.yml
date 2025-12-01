@@ -18,17 +18,32 @@ jobs:
       - name: Download and process domain lists
         run: |
           # Process direct-list
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt > temp-direct-1.txt
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt > temp-direct-2.txt
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt > temp-direct-3.txt
-          cat temp-direct-*.txt | \
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt | \
             sed '/^regexp:/d; s/full://g' | \
             sort -u > domain-set/direct-list.txt
           
-          # Process proxy-list
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt | \
+          # Process apple-cn (独立文件)
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt | \
             sed '/^regexp:/d; s/full://g' | \
-            sort -u > domain-set/proxy-list.txt
+            sort -u > domain-set/apple-cn.txt
+          
+          # Process google-cn (独立文件)
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt | \
+            sed '/^regexp:/d; s/full://g' | \
+            sort -u > domain-set/google-cn.txt
+          
+          # Process proxy-list (排除 google-cn 和 apple-cn)
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt > temp-proxy.txt
+          
+          # 创建排除列表
+          cat domain-set/apple-cn.txt domain-set/google-cn.txt > temp-exclude.txt
+          
+          # 从 proxy-list 中移除排除列表中的域名
+          cat temp-proxy.txt | \
+            sed '/^regexp:/d; s/full://g' | \
+            sort -u > temp-proxy-clean.txt
+          
+          grep -vFf temp-exclude.txt temp-proxy-clean.txt > domain-set/proxy-list.txt || true
           
           # Process reject-list
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt | \
