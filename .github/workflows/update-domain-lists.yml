@@ -17,71 +17,23 @@ jobs:
 
       - name: Download and process domain lists
         run: |
-          echo "=== 阶段1: 下载并独立 apple-cn 和 google-cn ==="
-          
-          # 下载 apple-cn 和 google-cn (独立文件)
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt | \
+          # Process direct-list
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt > temp-direct-1.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt > temp-direct-2.txt
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt > temp-direct-3.txt
+          cat temp-direct-*.txt | \
             sed '/^regexp:/d; s/full://g' | \
-            sort -u > domain-set/apple-cn.txt
-          echo "apple-cn.txt 域名数: $(wc -l < domain-set/apple-cn.txt)"
+            sort -u > domain-set/direct-list.txt
           
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt | \
-            sed '/^regexp:/d; s/full://g' | \
-            sort -u > domain-set/google-cn.txt
-          echo "google-cn.txt 域名数: $(wc -l < domain-set/google-cn.txt)"
-          
-          # 创建 apple-cn 和 google-cn 的合并排除列表
-          cat domain-set/apple-cn.txt domain-set/google-cn.txt | sort -u > temp-apple-google-exclude.txt
-          echo "apple+google 合并域名数: $(wc -l < temp-apple-google-exclude.txt)"
-          
-          echo ""
-          echo "=== 阶段2: 处理 direct-list (排除 apple-cn 和 google-cn) ==="
-          
-          # 下载并处理 direct-list
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt | \
-            sed '/^regexp:/d; s/full://g' | \
-            sort -u > temp-direct-original.txt
-          echo "原始 direct-list 域名数: $(wc -l < temp-direct-original.txt)"
-          
-          # 从 direct-list 中排除 apple-cn 和 google-cn
-          grep -vFf temp-apple-google-exclude.txt temp-direct-original.txt > temp-direct-step1.txt || true
-          echo "排除 apple/google 后 direct-list 域名数: $(wc -l < temp-direct-step1.txt)"
-          
-          echo ""
-          echo "=== 阶段3: 处理 proxy-list (排除 apple-cn 和 google-cn) ==="
-          
-          # 下载并处理 proxy-list
+          # Process proxy-list
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt | \
             sed '/^regexp:/d; s/full://g' | \
-            sort -u > temp-proxy-original.txt
-          echo "原始 proxy-list 域名数: $(wc -l < temp-proxy-original.txt)"
+            sort -u > domain-set/proxy-list.txt
           
-          # 从 proxy-list 中排除 apple-cn 和 google-cn
-          grep -vFf temp-apple-google-exclude.txt temp-proxy-original.txt > temp-proxy-step1.txt || true
-          echo "排除 apple/google 后 proxy-list 域名数: $(wc -l < temp-proxy-step1.txt)"
-          
-          echo ""
-          echo "=== 阶段4: 处理 reject-list (保持原样,最高优先级) ==="
-          
-          # 下载 reject-list (最高优先级,保持不变)
+          # Process reject-list
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt | \
             sed '/^regexp:/d; s/full://g' | \
             sort -u > domain-set/reject-list.txt
-          echo "reject-list 域名数: $(wc -l < domain-set/reject-list.txt)"
-          
-          echo ""
-          echo "=== 阶段5: 按优先级去重 (reject > proxy > direct) ==="
-          
-          # 从 proxy-list 中移除所有在 reject-list 中的域名
-          grep -vFf domain-set/reject-list.txt temp-proxy-step1.txt > domain-set/proxy-list.txt || true
-          echo "proxy-list 去重后域名数: $(wc -l < domain-set/proxy-list.txt)"
-          
-          # 从 direct-list 中移除所有在 reject-list 中的域名
-          grep -vFf domain-set/reject-list.txt temp-direct-step1.txt > temp-direct-step2.txt || true
-          
-          # 从 direct-list 中移除所有在 proxy-list 中的域名
-          grep -vFf domain-set/proxy-list.txt temp-direct-step2.txt > domain-set/direct-list.txt || true
-          echo "direct-list 去重后域名数: $(wc -l < domain-set/direct-list.txt)"
           
           # Process PCDN list
           curl -sSL https://thhbdd.github.io/Block-pcdn-domains/ban.txt > temp-pcdn-1.txt
@@ -103,129 +55,7 @@ jobs:
             sort -u > domain-set/httpdns-list.txt
           
           # Clean up
-          rm -f temp-*.txt
-
-      - name: Check for duplicate domains across lists
-        run: |
-          echo ""
-          echo "=========================================="
-          echo "=== 域名列表重复检查 (应全部为 0) ==="
-          echo "=========================================="
-          echo ""
-          
-          # 检查 direct-list 与 apple-cn 的重复
-          echo ">>> direct-list.txt 与 apple-cn.txt 的重复:"
-          DUPLICATE_COUNT=$(comm -12 <(sort domain-set/direct-list.txt) <(sort domain-set/apple-cn.txt) | wc -l)
-          echo "重复数量: $DUPLICATE_COUNT"
-          if [ "$DUPLICATE_COUNT" -ne 0 ]; then
-            echo "⚠️  警告: 发现重复域名!"
-            comm -12 <(sort domain-set/direct-list.txt) <(sort domain-set/apple-cn.txt) | head -10
-          else
-            echo "✅ 通过"
-          fi
-          echo ""
-          
-          # 检查 direct-list 与 google-cn 的重复
-          echo ">>> direct-list.txt 与 google-cn.txt 的重复:"
-          DUPLICATE_COUNT=$(comm -12 <(sort domain-set/direct-list.txt) <(sort domain-set/google-cn.txt) | wc -l)
-          echo "重复数量: $DUPLICATE_COUNT"
-          if [ "$DUPLICATE_COUNT" -ne 0 ]; then
-            echo "⚠️  警告: 发现重复域名!"
-            comm -12 <(sort domain-set/direct-list.txt) <(sort domain-set/google-cn.txt) | head -10
-          else
-            echo "✅ 通过"
-          fi
-          echo ""
-          
-          # 检查 direct-list 与 proxy-list 的重复
-          echo ">>> direct-list.txt 与 proxy-list.txt 的重复:"
-          DUPLICATE_COUNT=$(comm -12 <(sort domain-set/direct-list.txt) <(sort domain-set/proxy-list.txt) | wc -l)
-          echo "重复数量: $DUPLICATE_COUNT"
-          if [ "$DUPLICATE_COUNT" -ne 0 ]; then
-            echo "⚠️  警告: 发现重复域名!"
-            comm -12 <(sort domain-set/direct-list.txt) <(sort domain-set/proxy-list.txt) | head -10
-          else
-            echo "✅ 通过"
-          fi
-          echo ""
-          
-          # 检查 direct-list 与 reject-list 的重复
-          echo ">>> direct-list.txt 与 reject-list.txt 的重复:"
-          DUPLICATE_COUNT=$(comm -12 <(sort domain-set/direct-list.txt) <(sort domain-set/reject-list.txt) | wc -l)
-          echo "重复数量: $DUPLICATE_COUNT"
-          if [ "$DUPLICATE_COUNT" -ne 0 ]; then
-            echo "⚠️  警告: 发现重复域名!"
-            comm -12 <(sort domain-set/direct-list.txt) <(sort domain-set/reject-list.txt) | head -10
-          else
-            echo "✅ 通过"
-          fi
-          echo ""
-          
-          # 检查 proxy-list 与 reject-list 的重复
-          echo ">>> proxy-list.txt 与 reject-list.txt 的重复:"
-          DUPLICATE_COUNT=$(comm -12 <(sort domain-set/proxy-list.txt) <(sort domain-set/reject-list.txt) | wc -l)
-          echo "重复数量: $DUPLICATE_COUNT"
-          if [ "$DUPLICATE_COUNT" -ne 0 ]; then
-            echo "⚠️  警告: 发现重复域名!"
-            comm -12 <(sort domain-set/proxy-list.txt) <(sort domain-set/reject-list.txt) | head -10
-          else
-            echo "✅ 通过"
-          fi
-          echo ""
-          
-          # 检查 apple-cn 与 google-cn 的重复
-          echo ">>> apple-cn.txt 与 google-cn.txt 的重复:"
-          DUPLICATE_COUNT=$(comm -12 <(sort domain-set/apple-cn.txt) <(sort domain-set/google-cn.txt) | wc -l)
-          echo "重复数量: $DUPLICATE_COUNT"
-          if [ "$DUPLICATE_COUNT" -ne 0 ]; then
-            echo "⚠️  警告: 发现重复域名!"
-            comm -12 <(sort domain-set/apple-cn.txt) <(sort domain-set/google-cn.txt) | head -10
-          else
-            echo "✅ 通过"
-          fi
-          echo ""
-          
-          # 检查 proxy-list 与 apple-cn 的重复
-          echo ">>> proxy-list.txt 与 apple-cn.txt 的重复:"
-          DUPLICATE_COUNT=$(comm -12 <(sort domain-set/proxy-list.txt) <(sort domain-set/apple-cn.txt) | wc -l)
-          echo "重复数量: $DUPLICATE_COUNT"
-          if [ "$DUPLICATE_COUNT" -ne 0 ]; then
-            echo "⚠️  警告: 发现重复域名!"
-            comm -12 <(sort domain-set/proxy-list.txt) <(sort domain-set/apple-cn.txt) | head -10
-          else
-            echo "✅ 通过"
-          fi
-          echo ""
-          
-          # 检查 proxy-list 与 google-cn 的重复
-          echo ">>> proxy-list.txt 与 google-cn.txt 的重复:"
-          DUPLICATE_COUNT=$(comm -12 <(sort domain-set/proxy-list.txt) <(sort domain-set/google-cn.txt) | wc -l)
-          echo "重复数量: $DUPLICATE_COUNT"
-          if [ "$DUPLICATE_COUNT" -ne 0 ]; then
-            echo "⚠️  警告: 发现重复域名!"
-            comm -12 <(sort domain-set/proxy-list.txt) <(sort domain-set/google-cn.txt) | head -10
-          else
-            echo "✅ 通过"
-          fi
-          echo ""
-          
-          # 统计各文件的域名数量
-          echo "=========================================="
-          echo "=== 各文件域名数量统计 ==="
-          echo "=========================================="
-          echo "direct-list.txt:  $(wc -l < domain-set/direct-list.txt) 个域名"
-          echo "proxy-list.txt:   $(wc -l < domain-set/proxy-list.txt) 个域名"
-          echo "reject-list.txt:  $(wc -l < domain-set/reject-list.txt) 个域名"
-          echo "apple-cn.txt:     $(wc -l < domain-set/apple-cn.txt) 个域名"
-          echo "google-cn.txt:    $(wc -l < domain-set/google-cn.txt) 个域名"
-          echo "pcdn-list.txt:    $(wc -l < domain-set/pcdn-list.txt) 个域名"
-          echo "httpdns-list.txt: $(wc -l < domain-set/httpdns-list.txt) 个域名"
-          echo ""
-          
-          # 计算总域名数
-          TOTAL=$(($(wc -l < domain-set/direct-list.txt) + $(wc -l < domain-set/proxy-list.txt) + $(wc -l < domain-set/reject-list.txt) + $(wc -l < domain-set/apple-cn.txt) + $(wc -l < domain-set/google-cn.txt)))
-          echo "前5个文件总域名数: $TOTAL 个 (不含 pcdn 和 httpdns)"
-          echo "=========================================="
+          rm -f temp-*.txt      
 
       - name: Commit and push updated domain lists to repository
         env:
