@@ -21750,7 +21750,6 @@ vtrahe.page
 vtsociety.org
 vtunnel.com
 vtvan.com
-vuejs.press
 vuku.cc
 vulgarx.com
 vultr.com

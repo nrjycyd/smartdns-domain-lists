@@ -75183,7 +75183,6 @@ plcloud.com
 plctlab.com
 plentypolymer.com
 plesk-cn.com
-plex.direct
 plex2.com
 plexpt.com
 plfrog.com
@@ -96205,6 +96204,7 @@ vtstar.net
 vtuzx.com
 vue-js.com
 vue88.com
+vuejs.press
 vuepush.com
 vuevideo.net
 vulbox.com
