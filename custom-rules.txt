@@ -16,7 +16,6 @@ test-ipv6.com,direct
 pool.ntp.org,direct
 qnap.com,direct
 51zmt.top,direct
-cdn.sohucs.com,direct
 
 # 代理域名 (proxy)
 ip-api.com,proxy
