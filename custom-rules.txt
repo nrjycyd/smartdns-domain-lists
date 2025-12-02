@@ -20,7 +20,6 @@ qnap.com,direct
 # 代理域名 (proxy)
 ip-api.com,proxy
 get.acme.sh,proxy
-vuejs.press,proxy
 
 # 拒绝域名 (reject)
 ad.example.com,reject
