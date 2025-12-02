@@ -1,4 +1,38 @@
-# 给域名自定义分流规则
-# direct 直连
-# proxy  代理
-# reject 拒绝
+# =============================================
+# SmartDNS 自定义分流规则
+# =============================================
+# 格式: 域名,规则类型
+# 规则类型:
+#   - direct: 直连 (国内DNS)
+#   - proxy:  代理 (国外DNS/代理)
+#   - reject: 拒绝 (广告/恶意域名)
+#
+# 优先级: 此文件的规则优先级最高，会覆盖其他所有规则
+# =============================================
+
+# 直连域名 (direct)
+cdn.jsdelivr.net,direct
+test-ipv6.com,direct
+pool.ntp.org,direct
+qnap.com,direct
+plex.direct,direct
+51zmt.top,direct
+
+# 代理域名 (proxy)
+ip-api.com,proxy
+get.acme.sh,proxy
+vuejs.press,proxy
+
+# 拒绝域名 (reject)
+ad.example.com,reject
+tracker.example.com,reject
+analytics.example.com,reject
+
+# =============================================
+# 注意事项:
+# 1. 每行一条规则，格式: 域名,规则类型
+# 2. 以 # 开头的行为注释
+# 3. 空行会被忽略
+# 4. 域名不要包含协议 (http:// 或 https://)
+# 5. 域名会自动去除首尾空格
+# =============================================
