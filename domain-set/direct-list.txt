@@ -5482,6 +5482,7 @@
 51zjedu.com
 51zjxm.com
 51zmt.net
+51zmt.top
 51znt.com
 51znyx.com
 51zr.com
@@ -19320,6 +19321,7 @@ cdn.fun
 cdn.globalsigncdn.com.cdn.cloudflare.net
 cdn.ist
 cdn.jetbrains.com
+cdn.jsdelivr.net
 cdn.marketplaceimages.windowsphone.com
 cdn.samsung.com
 cdn.shanghai.nyu.edu
@@ -23462,7 +23464,6 @@ cn.eset.com
 cn.mm.bing.net
 cn.net
 cn.online.standardchartered.com
-cn.pool.ntp.org
 cn.sc.com
 cn.vc
 cn.windowssearch.com
@@ -75182,6 +75183,7 @@ plcloud.com
 plctlab.com
 plentypolymer.com
 plesk-cn.com
+plex.direct
 plex2.com
 plexpt.com
 plfrog.com
@@ -75375,6 +75377,7 @@ pooioo.com
 pook.com
 pookcdn.com
 pooketools.com
+pool.ntp.org
 poorren.com
 pop-bags.com
 pop-fashion.com
@@ -77717,6 +77720,7 @@ qmz5.com
 qmzhibo.com
 qmzs.com
 qnali.com
+qnap.com
 qnapcn.com
 qnbar.com
 qncd.com
@@ -91012,6 +91016,7 @@ tesla-cdn.thron.cn
 tesolsh.com
 tesoon.com
 test-cignacmb.com
+test-ipv6.com
 testbird.com
 testcoo.com
 testeb.com
@@ -96200,7 +96205,6 @@ vtstar.net
 vtuzx.com
 vue-js.com
 vue88.com
-vuejs.press
 vuepush.com
 vuevideo.net
 vulbox.com

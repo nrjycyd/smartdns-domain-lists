@@ -4455,7 +4455,6 @@ cdn-telegram.org
 cdn-terapeak.com
 cdn-vk.ru
 cdn.arstechnica.net
-cdn.jsdelivr.net
 cdn.seatguru.com
 cdn.softlayer.net
 cdn.statically.io
@@ -8748,6 +8747,7 @@ geph.io
 geraldoatlarge.com
 gerefoundation.org
 gerritcodereview.com
+get.acme.sh
 get.app
 get.dev
 get.how
@@ -11270,6 +11270,7 @@ ios-icloud.com
 iosinthecar.com
 iotinactionevents.com
 iownyour.org
+ip-api.com
 ip.gs
 ip.sb
 ip73.com
@@ -16396,7 +16397,6 @@ polymer-project.org
 polymerhk.com
 polymerproject.org
 ponyanimalsex.com
-pool.ntp.org
 poolbinance.com
 poolin.com
 poop-pee.online
@@ -17060,7 +17060,6 @@ qmov.com
 qmov.net
 qmp4.com
 qmttqg3k.me
-qnap.com
 qombol.com
 qoo10.jp
 qooqlevideo.com
@@ -19658,7 +19657,6 @@ test-ipv6.arauc.br
 test-ipv6.belwue.net
 test-ipv6.carnet.hr
 test-ipv6.cl
-test-ipv6.com
 test-ipv6.cs.umd.edu
 test-ipv6.csclub.uwaterloo.ca
 test-ipv6.cz
@@ -21752,6 +21750,7 @@ vtrahe.page
 vtsociety.org
 vtunnel.com
 vtvan.com
+vuejs.press
 vuku.cc
 vulgarx.com
 vultr.com
