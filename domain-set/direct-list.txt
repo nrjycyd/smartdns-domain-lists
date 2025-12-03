@@ -23465,6 +23465,7 @@ cn.eset.com
 cn.mm.bing.net
 cn.net
 cn.online.standardchartered.com
+cn.pool.ntp.org
 cn.sc.com
 cn.vc
 cn.windowssearch.com
