@@ -15,6 +15,7 @@ cdn.jsdelivr.net,direct
 test-ipv6.com,direct
 pool.ntp.org,direct
 qnap.com,direct
+plex.tv,direct
 51zmt.top,direct
 cdn.sohucs.com,direct
 
