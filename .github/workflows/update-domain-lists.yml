@@ -135,9 +135,9 @@ jobs:
             cat custom-direct.txt custom-proxy.txt custom-reject.txt | sort -u > custom-all-domains.txt
             
             # 从各列表中移除这些域名
-            grep -vFf custom-all-domains.txt temp-direct-step2.txt > temp-direct-step3.txt || cp temp-direct-step2.txt temp-direct-step3.txt
-            grep -vFf custom-all-domains.txt temp-proxy-step3.txt > temp-proxy-step4.txt || cp temp-proxy-step3.txt temp-proxy-step4.txt
-            grep -vFf custom-all-domains.txt temp-reject-original.txt > temp-reject-step1.txt || cp temp-reject-original.txt temp-reject-step1.txt
+            grep -vxFf custom-all-domains.txt temp-direct-step2.txt > temp-direct-step3.txt || cp temp-direct-step2.txt temp-direct-step3.txt
+            grep -vxFf custom-all-domains.txt temp-proxy-step3.txt > temp-proxy-step4.txt || cp temp-proxy-step3.txt temp-proxy-step4.txt
+            grep -vxFf custom-all-domains.txt temp-reject-original.txt > temp-reject-step1.txt || cp temp-reject-original.txt temp-reject-step1.txt
             
             # 添加自定义域名到对应列表
             cat temp-direct-step3.txt custom-direct.txt | sort -u > domain-set/direct-list.txt
