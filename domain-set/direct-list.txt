@@ -14362,7 +14362,6 @@ bbrmedia.com
 bbrtv.com
 bbs-alsontech.com
 bbs-go.com
-bbs.ztedevices.com
 bbs0415.com
 bbs0551.com
 bbs1x.net
@@ -44458,6 +44457,7 @@ hapierxia.com
 hapingapp.com
 hapipixia.com
 hapiyixia.com
+hapjs.org
 haplat.net
 happi123.com
 happigo.com
@@ -100705,7 +100705,6 @@ www.tutorabc.com
 www.uz0.xyz
 www.viveport.com
 www.volvocars.com
-www.ztedevices.com
 www2489.com
 www4-static.gog-statics.com
 www48-365365.com
