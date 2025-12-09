@@ -11,16 +11,16 @@
 # =============================================
 
 # 直连域名 (direct)
-cdn.jsdelivr.net,direct
-test-ipv6.com,direct
-pool.ntp.org,direct
-qnap.com,direct
-plex.tv,direct
-51zmt.top,direct
+domain:pool.ntp.org,direct
+domain:test-ipv6.com,direct
+domain:qnap.com,direct
+domain:plex.tv,direct
+domain:51zmt.top,direct
+full:cdn.jsdelivr.net,direct
 
 # 代理域名 (proxy)
-ip-api.com,proxy
-get.acme.sh,proxy
+domain:ip-api.com,proxy
+full:get.acme.sh,proxy
 
 # 拒绝域名 (reject)
 ad.example.com,reject
