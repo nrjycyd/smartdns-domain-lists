@@ -99,6 +99,16 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt | \
             sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
             sort -u > temp-proxy-original.txt
+          
+          # 下载并处理 gfw-list
+          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt | \
+            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
+            sort -u > temp-gfw.txt
+          
+          # 合并 proxy-list 和 gfw-list
+          cat temp-proxy-original.txt temp-gfw.txt | sort -u > temp-proxy-merged.txt
+          mv temp-proxy-merged.txt temp-proxy-original.txt
+          
           echo "原始 proxy-list 域名数: $(wc -l < temp-proxy-original.txt)"
           
           # 从 proxy-list 中排除 apple-cn 和 google-cn
