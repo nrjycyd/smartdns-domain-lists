@@ -79,7 +79,6 @@
 -.cbsservice.aws.syncbak.com
 -.cdn-spotify-experiments.conductrics.com
 -.cdn.js7k.com
--.cdn.jsdelivr.net
 -.cdngarenanow-a.akamaihd.net
 -.chinapower.csis.org
 -.cisco.evergage.com
@@ -188,6 +187,7 @@
 -.gamedownloads-rockstargames-com.akamaized.net
 -.gamer-cds.cdn.hinet.net
 -.gamer2-cds.cdn.hinet.net
+-.get.acme.sh
 -.gigabyte2.azureedge.net
 -.github-api.arkoselabs.com
 -.github-cloud.s3.amazonaws.com
@@ -10181,7 +10181,6 @@ ger.file.myqcloud.com
 geraldoatlarge.com
 gerefoundation.org
 gerritcodereview.com
-get.acme.sh
 get.app
 get.dev
 get.how

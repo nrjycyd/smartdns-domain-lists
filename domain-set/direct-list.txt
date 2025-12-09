@@ -24,6 +24,7 @@
 -.cdn-cn.apple-mapkit.com
 -.cdn.ampproject.org
 -.cdn.globalsigncdn.com.cdn.cloudflare.net
+-.cdn.jsdelivr.net
 -.cdn.marketplaceimages.windowsphone.com
 -.certs-lb.apple.com.akadns.net
 -.cl2-cdn.origin-apple.com.akadns.net
@@ -19644,7 +19645,6 @@ cdn-v.com
 cdn.fun
 cdn.ist
 cdn.jetbrains.com
-cdn.jsdelivr.net
 cdn.samsung.com
 cdn.shanghai.nyu.edu
 cdn.show
