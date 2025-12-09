@@ -13,8 +13,8 @@
 1. **自动定时更新**：每天 UTC 时间 3:00 (北京时间 11:00) 自动执行更新
 2. **同步上游域名列表**：
    - 直连列表 (direct-list)：包含国内[直连域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt)、[苹果中国域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt)、[谷歌中国域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt)
-   - 代理列表 (proxy-list)：需要[代理访问的域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt)
-   - 屏蔽列表 (reject-list)：需要屏蔽的[广告域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt)
+   - 代理列表 (proxy-list)：包含[代理访问的域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt)、[GFWList 域名列表](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt)
+   - 屏蔽列表 (reject-list)：包含[广告域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt)
 
 3. **域名分类处理**：
 
