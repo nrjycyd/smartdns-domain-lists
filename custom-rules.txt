@@ -32,4 +32,7 @@ ad.example.com,reject
 # 3. 空行会被忽略
 # 4. 域名不要包含协议 (http:// 或 https://)
 # 5. 域名会自动去除首尾空格
+# 6. 支持的前缀: domain: 和 full:
+# 7. domain: 会转换为 example.com 格式
+# 8. full: 会转换为 -.example.com 格式，意味着仅匹配主域名
 # =============================================
