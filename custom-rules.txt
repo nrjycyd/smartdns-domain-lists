@@ -25,12 +25,6 @@ full:get.acme.sh,proxy
 # 拒绝域名 (reject)
 ad.example.com,reject
 
-
-domain:0000000000000000000000000example.com,proxy
-sub:0000000000000000000000000example.com,proxy
-full:0000000000000000000000000example.com,reject
-suffix:0000000000000000000000000example.com,proxy
-
 # =============================================
 # 注意事项:
 # 1. 每行一条规则，格式: 域名,规则类型
@@ -38,7 +32,8 @@ suffix:0000000000000000000000000example.com,proxy
 # 3. 空行会被忽略
 # 4. 域名不要包含协议 (http:// 或 https://)
 # 5. 域名会自动去除首尾空格
-# 6. 支持的前缀: domain: 和 full:
-# 7. domain: 会转换为 example.com 格式
-# 8. full: 会转换为 -.example.com 格式，意味着仅匹配主域名
+# 6. 前缀 domain: 会转换为 example.com 格式 ，在 smartdns 中会匹配 example.com 和 *.example.com
+# 7. 前缀 sub: 会转换为 *.example.com 格式，在 smartdns 中会匹配 *.example.com，不匹配 example.com
+# 8. 前缀 full: 会转换为 -.example.com 格式，在 smartdns 中会匹配 *.example.com
+# 9. 前缀 suffix: 会转换为 *example.com 格式，在 smartdns 中会匹配 *example.com 和 *.*example.com
 # =============================================
