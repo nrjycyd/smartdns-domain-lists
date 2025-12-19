@@ -7,6 +7,7 @@
 #   - sub: 会转换为 *.example.com 格式，在 smartdns 中会匹配 *.example.com，不匹配 example.com
 #   - full: 会转换为 -.example.com 格式，在 smartdns 中会匹配 example.com，不匹配 *.example.com
 #   - suffix: 会转换为 *example.com 格式，在 smartdns 中会匹配 *example.com 和 *.*example.com
+#
 # 规则类型:
 #   - direct: 直连 (国内DNS)
 #   - proxy:  代理 (国外DNS/代理)
