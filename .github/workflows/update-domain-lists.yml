@@ -18,19 +18,45 @@ jobs:
       - name: Download and process domain lists
         run: |
           echo "=== 阶段0: 处理自定义规则 (最高优先级) ==="
-          
+
           # 下载自定义规则文件
           if curl -fsSL https://raw.githubusercontent.com/${{ github.repository }}/main/custom-rules.txt -o custom-rules.txt; then
             echo "自定义规则文件下载成功"
             
-            # 解析自定义规则，分类到不同的临时文件
-            grep -v "^#" custom-rules.txt | grep -v "^$" | \
-            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
-            while IFS=',' read -r domain rule; do
+            # 初始化临时文件
+            : > custom-direct.txt
+            : > custom-proxy.txt
+            : > custom-reject.txt
+            
+            # 解析自定义规则，逐行处理
+            grep -v "^#" custom-rules.txt | grep -v "^$" | while IFS=',' read -r domain rule; do
               # 去除空格
               domain=$(echo "$domain" | tr -d ' ')
               rule=$(echo "$rule" | tr -d ' ')
               
+              # 跳过空行
+              [[ -z "$domain" ]] && continue
+              
+              # 转换前缀到 SmartDNS 格式（互斥判断）
+              if [[ "$domain" =~ ^domain: ]]; then
+                # domain:example.com → example.com
+                domain="${domain#domain:}"
+              elif [[ "$domain" =~ ^sub: ]]; then
+                # sub:example.com → *.example.com
+                domain="*.${domain#sub:}"
+              elif [[ "$domain" =~ ^full: ]]; then
+                # full:example.com → -.example.com
+                domain="-.${domain#full:}"
+              elif [[ "$domain" =~ ^suffix: ]]; then
+                # suffix:example.com → *example.com
+                domain="*${domain#suffix:}"
+              elif [[ "$domain" =~ ^regexp: ]]; then
+                # 跳过正则表达式（SmartDNS 不支持）
+                continue
+              fi
+              # 无前缀的保持原样
+              
+              # 分类到对应文件
               case "$rule" in
                 direct)
                   echo "$domain" >> custom-direct.txt
@@ -43,9 +69,6 @@ jobs:
                   ;;
               esac
             done
-            
-            # 确保文件存在（即使为空）
-            touch custom-direct.txt custom-proxy.txt custom-reject.txt
             
             # 去重排序
             sort -u custom-direct.txt -o custom-direct.txt 2>/dev/null || touch custom-direct.txt
