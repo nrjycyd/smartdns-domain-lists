@@ -25,7 +25,8 @@ jobs:
             
             # 解析自定义规则，分类到不同的临时文件
             grep -v "^#" custom-rules.txt | grep -v "^$" | \
-            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
+            # sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
+            sed '/^regexp:/d; s/^domain://; s/^sub:/*./; s/^full:/-./; s/^suffix:/*/' | \
             while IFS=',' read -r domain rule; do
               # 去除空格
               domain=$(echo "$domain" | tr -d ' ')
