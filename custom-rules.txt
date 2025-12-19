@@ -34,6 +34,6 @@ ad.example.com,reject
 # 5. 域名会自动去除首尾空格
 # 6. 前缀 domain: 会转换为 example.com 格式 ，在 smartdns 中会匹配 example.com 和 *.example.com
 # 7. 前缀 sub: 会转换为 *.example.com 格式，在 smartdns 中会匹配 *.example.com，不匹配 example.com
-# 8. 前缀 full: 会转换为 -.example.com 格式，在 smartdns 中会匹配 *.example.com
+# 8. 前缀 full: 会转换为 -.example.com 格式，在 smartdns 中会匹配 example.com，不匹配 *.example.com
 # 9. 前缀 suffix: 会转换为 *example.com 格式，在 smartdns 中会匹配 *example.com 和 *.*example.com
 # =============================================
