@@ -24,10 +24,7 @@ jobs:
             echo "自定义规则文件下载成功"
             
             # 解析自定义规则，分类到不同的临时文件
-            grep -v "^#" custom-rules.txt | grep -v "^$" | \
-            # sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
-            sed '/^regexp:/d; s/^domain://; s/^sub:/*./; s/^full:/-./; s/^suffix:/*/' | \
-            while IFS=',' read -r domain rule; do
+            grep -v "^#" custom-rules.txt | grep -v "^$" | while IFS=',' read -r domain rule; do
               # 去除空格
               domain=$(echo "$domain" | tr -d ' ')
               rule=$(echo "$rule" | tr -d ' ')
@@ -67,12 +64,12 @@ jobs:
           
           # 下载 apple-cn 和 google-cn (独立文件)
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt | \
-            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
+            sed '/^regexp:/d; s/full://g' | \
             sort -u > domain-set/apple-cn.txt
           echo "apple-cn.txt 域名数: $(wc -l < domain-set/apple-cn.txt)"
           
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt | \
-            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
+            sed '/^regexp:/d; s/full://g' | \
             sort -u > domain-set/google-cn.txt
           echo "google-cn.txt 域名数: $(wc -l < domain-set/google-cn.txt)"
           
@@ -85,12 +82,12 @@ jobs:
           
           # 下载并处理 direct-list
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt | \
-            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
+            sed '/^regexp:/d; s/full://g' | \
             sort -u > temp-direct-original.txt
           echo "原始 direct-list 域名数: $(wc -l < temp-direct-original.txt)"
           
           # 从 direct-list 中排除 apple-cn 和 google-cn
-          grep -vxFf temp-apple-google-exclude.txt temp-direct-original.txt > temp-direct-step1.txt || true
+          grep -vFf temp-apple-google-exclude.txt temp-direct-original.txt > temp-direct-step1.txt || true
           echo "排除 apple/google 后 direct-list 域名数: $(wc -l < temp-direct-step1.txt)"
           
           echo ""
@@ -98,22 +95,12 @@ jobs:
           
           # 下载并处理 proxy-list
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt | \
-            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
+            sed '/^regexp:/d; s/full://g' | \
             sort -u > temp-proxy-original.txt
-          
-          # 下载并处理 gfw-list
-          curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt | \
-            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
-            sort -u > temp-gfw.txt
-          
-          # 合并 proxy-list 和 gfw-list
-          cat temp-proxy-original.txt temp-gfw.txt | sort -u > temp-proxy-merged.txt
-          mv temp-proxy-merged.txt temp-proxy-original.txt
-          
           echo "原始 proxy-list 域名数: $(wc -l < temp-proxy-original.txt)"
           
           # 从 proxy-list 中排除 apple-cn 和 google-cn
-          grep -vxFf temp-apple-google-exclude.txt temp-proxy-original.txt > temp-proxy-step1.txt || true
+          grep -vFf temp-apple-google-exclude.txt temp-proxy-original.txt > temp-proxy-step1.txt || true
           echo "排除 apple/google 后 proxy-list 域名数: $(wc -l < temp-proxy-step1.txt)"
           
           echo ""
@@ -121,23 +108,23 @@ jobs:
           
           # 下载 reject-list (最高优先级,保持不变)
           curl -sSL https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt | \
-            sed '/^regexp:/d; s/^full:/-./; s/^domain://' | \
+            sed '/^regexp:/d; s/full://g' | \
             sort -u > temp-reject-original.txt
           echo "原始 reject-list 域名数: $(wc -l < temp-reject-original.txt)"
           
           echo ""
-          echo "=== 阶段5: 按优先级去重 (reject > proxy > direct) ==="
-          
-          # 从 proxy-list 中移除所有在 reject-list 中的域名
-          grep -vxFf temp-reject-original.txt temp-proxy-step1.txt > temp-proxy-step2.txt || true
-          echo "proxy-list 去重后域名数（去除reject中的）: $(wc -l < temp-proxy-step2.txt)"
+          echo "=== 阶段5: 按优先级去重 (reject > direct > proxy) ==="
           
           # 从 direct-list 中移除所有在 reject-list 中的域名
-          grep -vxFf temp-reject-original.txt temp-direct-step1.txt > temp-direct-step2.txt || true
+          grep -vFf temp-reject-original.txt temp-direct-step1.txt > temp-direct-step2.txt || true
+          echo "direct-list 去重后域名数: $(wc -l < temp-direct-step2.txt)"
           
-          # 从 direct-list 中移除所有在 proxy-list 中的域名（proxy 优先级高于 direct）
-          grep -vxFf temp-proxy-step2.txt temp-direct-step2.txt > temp-direct-step3.txt || true
-          echo "direct-list 去重后域名数（去除reject和proxy中的）: $(wc -l < temp-direct-step3.txt)"
+          # 从 proxy-list 中移除所有在 reject-list 中的域名
+          grep -vFf temp-reject-original.txt temp-proxy-step1.txt > temp-proxy-step2.txt || true
+          
+          # 从 proxy-list 中移除所有在 direct-list 中的域名
+          grep -vFf temp-direct-step2.txt temp-proxy-step2.txt > temp-proxy-step3.txt || true
+          echo "proxy-list 去重后域名数: $(wc -l < temp-proxy-step3.txt)"
           
           echo ""
           echo "=== 阶段6: 应用自定义规则 (覆盖所有其他规则) ==="
@@ -148,13 +135,13 @@ jobs:
             cat custom-direct.txt custom-proxy.txt custom-reject.txt | sort -u > custom-all-domains.txt
             
             # 从各列表中移除这些域名
-            grep -vxFf custom-all-domains.txt temp-direct-step3.txt > temp-direct-step4.txt || cp temp-direct-step3.txt temp-direct-step4.txt
-            grep -vxFf custom-all-domains.txt temp-proxy-step2.txt > temp-proxy-step3.txt || cp temp-proxy-step2.txt temp-proxy-step3.txt
-            grep -vxFf custom-all-domains.txt temp-reject-original.txt > temp-reject-step1.txt || cp temp-reject-original.txt temp-reject-step1.txt
+            grep -vFf custom-all-domains.txt temp-direct-step2.txt > temp-direct-step3.txt || cp temp-direct-step2.txt temp-direct-step3.txt
+            grep -vFf custom-all-domains.txt temp-proxy-step3.txt > temp-proxy-step4.txt || cp temp-proxy-step3.txt temp-proxy-step4.txt
+            grep -vFf custom-all-domains.txt temp-reject-original.txt > temp-reject-step1.txt || cp temp-reject-original.txt temp-reject-step1.txt
             
             # 添加自定义域名到对应列表
-            cat temp-direct-step4.txt custom-direct.txt | sort -u > domain-set/direct-list.txt
-            cat temp-proxy-step3.txt custom-proxy.txt | sort -u > domain-set/proxy-list.txt
+            cat temp-direct-step3.txt custom-direct.txt | sort -u > domain-set/direct-list.txt
+            cat temp-proxy-step4.txt custom-proxy.txt | sort -u > domain-set/proxy-list.txt
             cat temp-reject-step1.txt custom-reject.txt | sort -u > domain-set/reject-list.txt
             
             echo "应用自定义规则后："
@@ -163,8 +150,8 @@ jobs:
             echo "  reject-list 最终域名数: $(wc -l < domain-set/reject-list.txt)"
           else
             echo "没有自定义规则，使用原始处理结果"
-            cp temp-direct-step3.txt domain-set/direct-list.txt
-            cp temp-proxy-step2.txt domain-set/proxy-list.txt
+            cp temp-direct-step2.txt domain-set/direct-list.txt
+            cp temp-proxy-step3.txt domain-set/proxy-list.txt
             cp temp-reject-original.txt domain-set/reject-list.txt
           fi
           
