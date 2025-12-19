@@ -26,10 +26,10 @@ full:get.acme.sh,proxy
 ad.example.com,reject
 
 
-domain:0000000000000000000000000example.com
-sub:0000000000000000000000000example.com
-full:0000000000000000000000000example.com
-suffix:0000000000000000000000000example.com
+domain:0000000000000000000000000example.com,proxy
+sub:0000000000000000000000000example.com,proxy
+full:0000000000000000000000000example.com,reject
+suffix:0000000000000000000000000example.com,proxy
 
 # =============================================
 # 注意事项:
