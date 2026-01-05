@@ -30,7 +30,7 @@ domain:ip-api.com,proxy
 full:get.acme.sh,proxy
 
 # 拒绝域名 (reject)
-ad.example.com,reject
+domain:jddebug.com,reject
 
 # =============================================
 # 注意事项:
