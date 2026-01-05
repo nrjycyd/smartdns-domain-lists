@@ -5594,7 +5594,6 @@ ad.ettoday.net
 ad.eurosport.com
 ad.eva.vn
 ad.everytime.kr
-ad.example.com
 ad.exyws.org
 ad.feedbag.co.kr
 ad.filmweb.pl
@@ -55940,6 +55939,7 @@ jcyyxq.joker-ev.jp
 jd6wnmvacs.com
 jdbjhd.saniweb.nl
 jddaw.com
+jddebug.com
 jddfg.elfbeads.com
 jdecansbndbbg.website
 jdeekqk-bjqt.fun
