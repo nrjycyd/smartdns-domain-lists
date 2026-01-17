@@ -1290,6 +1290,7 @@ abitno.linpie.com
 ablmm.com
 ablwang.com
 aboluowang.com
+about.gitlab.com
 about.me
 aboutamazon.co.uk
 aboutamazon.com
@@ -17562,15 +17563,19 @@ ntdca.com
 ntdimg.com
 ntdtv-dc.com
 ntdtv.ca
+ntdtv.co.il
 ntdtv.co.kr
 ntdtv.com
 ntdtv.com.tw
 ntdtv.cz
+ntdtv.fr
 ntdtv.jp
 ntdtv.kr
 ntdtv.org
 ntdtv.ru
+ntdtv.se
 ntdtvla.com
+ntdvideo.tw
 ntdvn.com
 ntnews.com.au
 ntp-os01.ocn.ad.jp
