@@ -5608,6 +5608,7 @@ casquesbeatsaudio.com
 castbox.fm
 castingcouch-x.com
 castro.fm
+cataboom.com
 catalina.hk
 catalinacruz.com
 catbox.moe
@@ -6457,6 +6458,7 @@ conoha.jp
 conquerwithcharacter.com
 conscrypt.com
 conscrypt.org
+consentpro.com
 constructware.com
 consul.io
 contactmagazine.net
@@ -18126,6 +18128,7 @@ orsm.net
 orthopaedic-cadcam.com
 orthotics-cadcam.com
 osakamotion.net
+osano.com
 osapublishing.org
 osdn.net
 osfoora.com
@@ -23702,6 +23705,7 @@ uselessjunk.com
 usenix.org
 useplannr.com
 userapi.com
+usercentrics.eu
 usercontent.dev
 usercontent.goog
 userpxt.io
