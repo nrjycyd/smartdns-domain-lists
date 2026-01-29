@@ -286,6 +286,7 @@
 -.ood.opsource.net
 -.openaiapi-site.azureedge.net
 -.openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+-.openaicom.imgix.net
 -.openaicomproductionae4b.blob.core.windows.net
 -.opgg-static.akamaized.net
 -.origin-a.akamaihd.net
@@ -2804,6 +2805,8 @@ argotunnel.com
 aria.ms
 ark.to
 arlingtoncemetery.mil
+arma3.com
+armaplatform.com
 armovs.com
 arnoldrenderer.com
 arphic.com
@@ -3382,6 +3385,7 @@ babypink.to
 babyzone.com
 backchina.com
 backdoorlesbians.com
+backend-v2.crixet.com
 backpackers.com.tw
 backroomcastingcouch.com
 backtotiananmen.com
@@ -3481,6 +3485,7 @@ battleforcecomix.com
 battlefront2.com
 battlefrontii.com
 battlelog.com
+battleye.com
 baxsound.com
 bayareabmw.com
 bayvoice.net
@@ -4158,6 +4163,7 @@ biqle.ru
 bird.so
 bisq.io
 bisq.network
+bistudio.com
 bisyoujyogyaruge.topaz.ne.jp
 bit-z.com
 bit.do
@@ -4839,6 +4845,7 @@ bodgirls.com
 bodog88.com
 bodyandsoul.com.au
 bodyfluids-jav.com
+bohemia.net
 boj.or.jp
 bokep.net
 bokepseks.org
@@ -6528,6 +6535,7 @@ cricketcountry.com
 cristyli.com
 crit-staging.com
 critiquebrainz.org
+crixet.com
 crmdynint-gcc.com
 crmdynint.com
 crocotube.com
@@ -6812,6 +6820,7 @@ daylenerio.com
 daylife.com
 daytonbmw.com
 daytontrucktires.com
+dayz.com
 dazn-api.com
 dazn.com
 dazndn.com
@@ -14943,6 +14952,7 @@ mairbeats.com
 maizhong.org
 makaan.com
 makeanything.com
+makearmanotwar.com
 makebettercode.com
 makecode.org
 makeeu.com
@@ -20932,6 +20942,7 @@ sih.app
 sijihuisuo.club
 sijihuisuo.com
 sikiswap.com
+silicagame.com
 silicon-mobility.com
 siliconmobility.com
 silkbook.com
@@ -23890,6 +23901,7 @@ vietdaikynguyen.com
 viewerswives.net
 viewgals.com
 viewpointsfromfacebook.com
+vigorgame.com
 vijayatemple.org
 vikiporn.com
 vilanet.me
@@ -25993,6 +26005,7 @@ yipub.com
 yiqiedoushiganggangkaishi.org
 yizhihongxing.com
 yjcontentdelivery.com
+ylands.com
 ymail.com
 ymhsf.top
 ymhsf1.top

@@ -10,6 +10,7 @@
 -.amp-api-search-edge.apps.apple.com
 -.amp-api.apps.apple.com
 -.amp-api.music.apple.com
+-.aod-ssl.itunes.apple.com
 -.aod.itunes.apple.com
 -.api-edge.apps.apple.com
 -.apptrailers.itunes.apple.com
