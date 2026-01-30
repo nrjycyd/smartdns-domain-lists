@@ -886,7 +886,6 @@
 2kgames.com
 2lib.org
 2lipstube.com
-2mdn.net
 2shared.com
 2waky.com
 3-a.net
@@ -2759,7 +2758,6 @@ appyq.com
 apress.com
 aps.org
 aptoide.com
-apture.com
 apyle.com
 aqdlt.net
 arabianchicks.com
@@ -2931,10 +2929,12 @@ ateam-oracle.com
 atgfw.org
 athenaeizou.com
 atkgallery.com
+atl-paas.net
 atlanta168.com
 atlantaminidealers.com
 atlasdmt.com
 atlasonepoint.com
+atlassian-dev.net
 atlassian.com
 atlassian.net
 atnext.com
@@ -3283,7 +3283,6 @@ awsloft-stockholm.com
 awssecworkshops.com
 awsstatic.com
 awsthinkbox.com
-awstrack.me
 awstrust.com
 awwcn.buzz
 awwcn.xyz
@@ -6152,7 +6151,6 @@ cloudflarebrowser.com
 cloudflarechallenge.com
 cloudflareclient.com
 cloudflarecp.com
-cloudflareinsights.com
 cloudflareok.com
 cloudflarepartners.com
 cloudflareportal.com
@@ -6565,7 +6563,6 @@ crypton.co.jp
 crysis.jp
 crystalgunnsworld.com
 crystalmiss.com
-cs.co
 cs4hs.com
 csakporno.hu
 csdparty.com
@@ -9580,6 +9577,9 @@ fotolia.tv
 fotolja.com
 fotoscaserasx.com
 foundationdb.org
+foundationdns.com
+foundationdns.net
+foundationdns.org
 fountmedia.io
 fourthinternational.org
 fourthns.systems
@@ -10859,7 +10859,6 @@ google.vg
 google.vu
 google.ws
 googleacquisitionmigration.com
-googleanalytics.com
 googleapis-cn.com
 googleapis.cn
 googleapis.com
@@ -10902,8 +10901,6 @@ googlesource.com
 googlestore.com
 googlesverige.com
 googlesyndication-cn.com
-googlesyndication.com
-googletagmanager.com
 googletagservices-cn.com
 googletraveladservices-cn.com
 googletraveladservices.com
@@ -10945,7 +10942,6 @@ gotgeeks.com
 gothdporn.com
 gotporn.com
 gotquestions.org
-gotraffic.net
 gotrusted.com
 gotw.ca
 gouri.xyz
@@ -13709,6 +13705,7 @@ jinpianwang.com
 jinrizhiyi.news
 jintian.net
 jinx.com
+jira.com
 jitouch.com
 jitsi.org
 jiuse.ai
@@ -15048,7 +15045,6 @@ marketing-cloud.com
 marketing-nirvana.com
 marketingcloud.com
 marketo.co.uk
-marketo.com
 marketo.tv
 marketodesigner.com
 marketolive.com
@@ -17746,7 +17742,6 @@ omniroot.com
 omnitalk.com
 omnitalk.org
 omnitek.tv
-omniture.com
 omny.fm
 omobi.cc
 omoplanet.com
@@ -21505,6 +21500,7 @@ srcf.ucam.org
 srebrenica360.com
 srtcdn.net
 srttu.edu
+ss-inf.net
 ss-link.com
 ss.pythonic.life
 ss2.us
