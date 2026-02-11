@@ -46662,6 +46662,7 @@ hiwbb.com
 hiwechats.com
 hiweixiu.com
 hiwelcom.com
+hiwifi.com
 hiwiyi.com
 hiwms.com
 hiworld.com
@@ -48239,6 +48240,7 @@ hrsteelpipe.com
 hrtechchina.com
 hrtfin.com
 hrtn.net
+hrtsea.com
 hrtx.com
 hruikang.com
 hrvouge.com
@@ -69904,6 +69906,7 @@ nanyinwealth.com
 nanyuecloud.com
 nanyuenews.com
 nanyuetong.com
+nanzao.com
 nanzhougroup.com
 naobaocun.com
 naobiao.com
@@ -70373,6 +70376,7 @@ netac.com
 netandtv.com
 netat.net
 netbian.com
+netbirds.com
 netbooo.com
 netchina100.com
 netcoc.com
@@ -73736,6 +73740,7 @@ ozonabc.com
 ozonbigsell.com
 ozoninfo.com
 ozsmartbuy.com
+ozxw.com
 ozzair.org
 ozzyad.com
 p-an.com
@@ -89992,6 +89997,7 @@ talicai.com
 taliove.com
 taljdns.com
 talk-fun.com
+talk853.com
 talk915.com
 talkgw.com
 talkingchina.com
@@ -91318,6 +91324,7 @@ th.bing.com
 th21333.com
 th38.com
 th99.com
+thaicn.com
 thailycare.com
 thaivor.com
 thaiyellowpagesusa.com
@@ -93946,6 +93953,7 @@ tv2-zuqiu.com
 tv20806.com
 tv373.com
 tvandnet.com
+tvants.com
 tvapk.com
 tvapk.net
 tvbbj.com
@@ -95663,6 +95671,7 @@ vemarsstatic.com
 vemic.com
 vemte.com
 vemvm.com
+venbbs.com
 vendor-src-eo.com
 vendue.vip
 venlvcloud.com
@@ -96362,6 +96371,7 @@ vpsaa.net
 vpscang.com
 vpsce.com
 vpser.com
+vpser.net
 vpshu.com
 vpsjxw.com
 vpsno.com
@@ -101697,6 +101707,7 @@ xhsf.com
 xhslink.com
 xhslw.com
 xhsmlt.com
+xhsrcdn.com
 xhsrmyy.com
 xhsxmt.com
 xhsyqx.com
@@ -112405,6 +112416,7 @@ zhipianbang.com
 zhipianbang.vip
 zhipin.com
 zhipingke.com
+zhipucn.com
 zhipuzi.com
 zhiqi.info
 zhiqiang.org
