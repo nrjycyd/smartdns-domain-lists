@@ -21,8 +21,8 @@
 domain:pool.ntp.org,direct
 domain:test-ipv6.com,direct
 domain:qnap.com,direct
-domain:plex.tv,direct
 domain:51zmt.top,direct
+full:app.plex.tv,direct
 full:cdn.jsdelivr.net,direct
 
 # 代理域名 (proxy)
