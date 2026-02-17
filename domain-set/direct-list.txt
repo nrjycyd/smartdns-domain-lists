@@ -13,7 +13,6 @@
 -.aod-ssl.itunes.apple.com
 -.aod.itunes.apple.com
 -.api-edge.apps.apple.com
--.app.plex.tv
 -.apptrailers.itunes.apple.com
 -.auth.music.apple.com
 -.b.c2r.ts.cdn.office.net
@@ -75178,6 +75177,7 @@ plcloud.com
 plctlab.com
 plentypolymer.com
 plesk-cn.com
+plex.tv
 plex2.com
 plexpt.com
 plfrog.com
