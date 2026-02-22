@@ -1905,6 +1905,7 @@ akatns.net
 akiba-online.com
 akiba-souken.com
 akiba-web.com
+akile.io
 akinator.com
 akita-bank.co.jp
 akow.org
@@ -2934,6 +2935,7 @@ assembla.com
 assemblesystems.com
 assesphoto.com
 assets.bwbx.io
+assets.nxtrace.org
 assetsadobe.com
 assimp.org
 assistirhentai.com
@@ -14649,6 +14651,7 @@ medium.com
 medium.systems
 medow.ru
 medrxiv.org
+meee.com.tw
 meendo.com
 meet.new
 meetandfuck.games
@@ -17000,6 +17003,7 @@ openbook.org.tw
 opencas.io
 opencollective.com
 opencreate.org
+opencritic.com
 opendemocracy.net
 opendns.com
 opendroneid.org
@@ -23738,6 +23742,7 @@ www.ajsands.com
 www.antd.org
 www.aolnews.com
 www.bing.com
+www.clashverge.dev
 www.cmoinc.org
 www.dmm.com
 www.eastturkistan.net
