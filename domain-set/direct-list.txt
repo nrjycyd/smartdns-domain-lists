@@ -7,6 +7,7 @@
 -.amp-api-edge-lb-cn.itunes-apple.com.akadns.net
 -.amp-api-edge-lb.itunes-apple.com.akadns.net
 -.amp-api-edge.apps.apple.com
+-.amp-api-edge.music.apple.com
 -.amp-api-search-edge.apps.apple.com
 -.amp-api.apps.apple.com
 -.amp-api.music.apple.com
@@ -144,6 +145,8 @@
 -.menu-static.gog-statics.com
 -.misc-assets.itunes.apple.com
 -.moocs.unipus.cn
+-.musicstatus.music.apple.com
+-.mvod.itunes.apple.com
 -.myapp.itunes.apple.com
 -.myvs.download.prss.microsoft.com
 -.nexus.dell.com
@@ -244,6 +247,7 @@
 -.snpi.dell.com
 -.software.download.prss.microsoft.com
 -.sp.itunes.apple.com
+-.speedysub.music.apple.com
 -.ss.bjmu.edu.cn
 -.static-login.gog-statics.com
 -.statics.teams.cdn.office.net
