@@ -279,6 +279,7 @@
 -.ntp6.ntp-servers.net
 -.ntp7.ntp-servers.net
 -.nurofensk-prod-env.eu-west-1.elasticbeanstalk.com
+-.nvidia.custhelp.com
 -.nvidia.tt.omtrdc.net
 -.ocsp.microsoft.com
 -.officecdn-microsoft-com.akamaized.net
@@ -6504,6 +6505,7 @@ curvefish.com
 curvybbwwives.com
 curvyerotic.com
 cusp.hk
+custhelp.com
 custom-iphonecase.com
 custombeatsbydrebuy.com
 custombeatsdeals.com
@@ -16522,6 +16524,7 @@ nna.jp
 nnews.eu
 nobel.se
 nochubank.or.jp
+nodeget.com
 nodeimage.com
 nodejs.org
 nodequality.com
@@ -20433,6 +20436,7 @@ spicevpn.com
 spiceworks.com
 spiceworksstatic.com
 spicybigtits.com
+spicywriter.com
 spideroak.com
 spiderpool.com
 spiedigitallibrary.org
