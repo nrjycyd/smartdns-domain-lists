@@ -113,6 +113,7 @@
 -.init.gc.apple.com
 -.init.itunes.apple.com
 -.iosapps.itunes.apple.com
+-.izattime.qcomgeo2.com
 -.js-cdn.music.apple.com
 -.km.support.apple.com
 -.ksn-cinfo-geo.kaspersky-labs.com
@@ -279,6 +280,7 @@
 -.www.recaptcha.net
 -.www.support.apple.com
 -.www4-static.gog-statics.com
+-.xtratime.qcomgeo2.com
 -.xz.pphimalayanrt.com
 0.zone
 00.net
