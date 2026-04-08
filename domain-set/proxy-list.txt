@@ -9146,7 +9146,6 @@ finlitsummit.org
 fiotolia.com
 fire-emblem-heroes.com
 firearmsworld.net
-firebase-settings.crashlytics.com
 firebase.com
 firebase.io
 firebaseapp.com
@@ -22485,7 +22484,6 @@ uoherald.com
 up.audio
 up01.cc
 upbit.com
-update.crashlytics.com
 updates.tdesktop.com
 updatetube.com
 upfrontcfd.com
