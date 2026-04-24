@@ -1667,6 +1667,7 @@ agedm.tv
 agefans.com
 agemys.org
 agendaweek.com
+agentclientprotocol.com
 agilebits.com
 agnesb.fr
 agoogleaday.com
@@ -18221,6 +18222,7 @@ placemyad.com.au
 placesdocs.com
 planetminecraft.com
 planetsuzy.org
+plannotator.ai
 plansondemand.com
 plantsvszombies2.com
 plasticlabs.com
@@ -22670,6 +22672,7 @@ twister.net.co
 twistys.com
 twitch.tv
 twitchcdn.net
+twitchcon.com
 twitchsvc.net
 twitcomike.jp
 twitiq.com
