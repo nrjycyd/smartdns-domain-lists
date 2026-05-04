@@ -7169,6 +7169,7 @@ digitalassetlinks.org
 digitalcertvalidation.com
 digitalhub.com
 digitalid.ch
+digitalocean-ui.com
 digitalocean.com
 digitaloceanspaces.com
 digitalpack.com
@@ -19882,9 +19883,6 @@ sbuxcard.com
 sc-cdn.net
 sc.com
 sca-tolo.info
-scache.vzw.com
-scache1.vzw.com
-scache2.vzw.com
 scala-lang.org
 scala-sbt.org
 scaleflex.com
@@ -21044,7 +21042,6 @@ ss-inf.net
 ss-link.com
 ss2.us
 ss7.app
-ss7.vzw.com
 ssdevrd.com
 ssglobal.co
 sshs.club
