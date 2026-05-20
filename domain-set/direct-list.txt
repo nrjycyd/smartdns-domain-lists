@@ -35,9 +35,7 @@
 -.cma.itunes.apple.com
 -.cn.download.nvidia.com
 -.cn.windowssearch.com
--.cnappinstall.googleadapis.com
 -.communities.apple.com
--.content.googleadapis.com
 -.crl-lb.apple.com.akadns.net
 -.crl.globalsign.net
 -.crl.kaspersky.com
@@ -77,13 +75,11 @@
 -.dnl-19.geo.kaspersky.com
 -.docs.microsoft.com
 -.download.microsoft.com
--.download.qatp1.net
 -.downloaddispatch.itunes.apple.com
 -.ea2cn-dev-outlet.dell.com
 -.ea2cn-prod-outlet.dell.com
 -.ea2cn-staging-outlet.dell.com
 -.edge.geo.kaspersky.com
--.emmapplecodevice.googleapis.com
 -.emoi-cncdn.bing.com
 -.end-api.shallow.ink
 -.end.shallow.ink
@@ -98,7 +94,6 @@
 -.gbxgateway-dev.dell.com
 -.gbxgateway.dell.com
 -.geetest.datasink.sensorsdata.cn
--.go.corp.google.com
 -.gog-cdn-fastly.gog.com
 -.gog-cdn.akamaized.net
 -.gog.qtlglb.com
@@ -149,17 +144,12 @@
 -.ksn-url.geoksn.kaspersky.com
 -.ksn-verdict-geo.kaspersky-labs.com
 -.ksn-verdict.geoksn.kaspersky.com
--.l2-uberproxy.corp.google.com
 -.learn.microsoft.com
--.logger-dev.corp.google.com
--.logger.corp.google.com
--.login.corp.google.com
 -.lv.queniujq.cn
 -.maps.apple.com
 -.mdr.ksn.kaspersky-labs.com
 -.menu-static.gog-statics.com
 -.misc-assets.itunes.apple.com
--.monitoring.qpdp1.net
 -.moocs.unipus.cn
 -.musicstatus.music.apple.com
 -.mvod.itunes.apple.com
@@ -225,13 +215,6 @@
 -.play.itunes.apple.com
 -.play.music.apple.com
 -.productcard.gog-statics.com
--.proxyconfig.corp.google.com
--.qagpublic.qatp1.net
--.qgadmin.qcpp1.net
--.qualysapi.qatp1.net
--.qualysguard.qpdp1.net
--.r.cert.corp.google.com
--.rapture-prod.corp.google.com
 -.refresh-bkg.activation-v2.kaspersky.com
 -.res-1.cdn.office.net
 -.res.cdn.office.net
@@ -261,7 +244,6 @@
 -.s3.mzstatic.com
 -.s4.mzstatic.com
 -.s5.mzstatic.com
--.scanservice1.qcpp1.net
 -.scene7-cdn.dell.com
 -.sdx.microsoft.com
 -.se-edge.itunes.apple.com
@@ -277,33 +259,21 @@
 -.sp.itunes.apple.com
 -.speedysub.music.apple.com
 -.ss.bjmu.edu.cn
--.sslredirect.corp.google.com
 -.static-login.gog-statics.com
 -.statics.teams.cdn.office.net
 -.storeedgefd.dsx.mp.microsoft.com
--.streaming-uberproxy-rotation.corp.google.com
--.streaming-uberproxy.corp.google.com
 -.streamingaudio.itunes.apple.com
 -.study.163.com
 -.su.itunes.apple.com
--.sup-ssh-relay.corp.google.com
--.sup-ssh-relay2.corp.google.com
--.sup.corp.google.com
--.sup.l.google.com
 -.supportassist.dell.com
 -.surface.downloads.prss.microsoft.com
 -.sync.itunes.apple.com
 -.tesla-cdn.thron.cn
--.test.gbugs-qa.chromium.org
 -.tf-feedback.itunes.apple.com
 -.time.amazonaws.cn
 -.time.izatcloud.net
 -.time.xtracloud.net
--.tools.l.google.com
 -.tp.louisvuitton.com
--.uberproxy-debug4.corp.google.com
--.uberproxy.corp.google.com
--.uberproxy6.corp.google.com
 -.universal-activity-service.itunes.apple.com
 -.uplaypc-s-ubisoft.cdn.ubi.com
 -.upp.itunes.apple.com
@@ -319,7 +289,6 @@
 -.www.recaptcha.net
 -.www.support.apple.com
 -.www4-static.gog-statics.com
--.xn--flw351e.com
 -.xtratime.qcomgeo2.com
 -.xz.pphimalayanrt.com
 0.zone
@@ -2003,6 +1972,7 @@
 123242.com
 123245.com
 123254.com
+123278.com
 123294.com
 123295.com
 12333.com
@@ -4118,6 +4088,7 @@
 332831.com
 333-555.com
 333.com
+3331.com
 33315.com
 333232.xyz
 333333.com
@@ -12798,6 +12769,7 @@ ant-cloud.net
 ant-financial.com
 ant-open.com
 anta.com
+antafu.com
 antaiib.com
 antairui.net
 antangbusiness.com
@@ -16200,6 +16172,7 @@ bhshtksp.com
 bhshunhui.com
 bhshyy.com
 bhsr.com
+bhsun.com
 bhszyyy.com
 bhtv.cc
 bhuitong.com
@@ -49154,7 +49127,6 @@ hujibbs.com
 hujingnb.com
 huke88.com
 hukeck.com
-hukelc.com
 hukenb.com
 hukexyy.com
 hukou021.com
@@ -50357,6 +50329,7 @@ hzzkj.net
 hzzp.com
 hzzpko3186.vip
 hzzqzc.com
+hzzred.com
 hzzrmc.com
 hzzsfs.com
 hzzsxh.com
@@ -54519,6 +54492,7 @@ jidouauto.com
 jidubook.com
 jidujiao.com
 jidujiasu.com
+jie.ge
 jieanjiaotong.com
 jiebai.com
 jiebanchuyou.com
@@ -54846,6 +54820,7 @@ jingdongyouxuan.com
 jingdudai.com
 jingdukaoyan.com
 jingdw.com
+jingeshou.com
 jingge.com
 jinggeng.net
 jinggon.com
@@ -55529,6 +55504,7 @@ jj00.com
 jj0833.com
 jj20.com
 jj59.com
+jj5agame.com
 jj831.com
 jj99.icu
 jjbang.com
@@ -55996,7 +55972,6 @@ jnydgm.com
 jnyng.com
 jnyyjt.com
 jnzhuoxin.com
-jnzjzx.net
 jnzl.com
 jnzongchi.com
 jnzx.cc
@@ -67336,6 +67311,7 @@ modelarts-maas.com
 modelevel.com
 modelltd.com
 modelones.com
+modelscope.ai
 modelscope.net
 modelwhale.com
 modeng178.com
@@ -77408,7 +77384,6 @@ qygbet427.vip
 qygjyey.com
 qyglzz.com
 qygvip128.com
-qygvip40.com
 qyhgsb.com
 qyhl.vip
 qyhr.org
@@ -78370,7 +78345,6 @@ rightknights.com
 rightpaddle.com
 rigol.com
 rigouwang.com
-riitao.com
 riji001.com
 riji100zi.com
 rijigu.com
@@ -79381,6 +79355,7 @@ safenext.com
 safetyimg.com
 safetystatic.com
 safetyvod.com
+safewk.com
 safround.com
 sagewc-exp.com
 sagigame.net
@@ -80415,7 +80390,6 @@ sdglobaltrade.com
 sdglql.com
 sdgmjiaoyun.com
 sdgren.com
-sdgsdggg.xyz
 sdgsgcjsjt.com
 sdgsjc.com
 sdgslb.com
@@ -80492,6 +80466,7 @@ sdj88.com
 sdjcf.com
 sdjcsh.com
 sdjcw.com
+sdjcxxgs.com
 sdjiance.com
 sdjiankan.com
 sdjianmei.com
@@ -95385,6 +95360,7 @@ wcjbb.net
 wcjm.org
 wclbox.com
 wcloud.com
+wcloudcdn.com
 wcode.net
 wcp.hk
 wcqjyw.com
@@ -97137,7 +97113,6 @@ wisdri.com
 wise-iot.com
 wise99.com
 wiseasy.com
-wisebond.net
 wisecity.net
 wisecotech.com
 wisedoo.com
@@ -98188,6 +98163,7 @@ wujogroup.com
 wujue.com
 wukaikai.tech
 wukao.com
+wukazhifupos.com
 wukong.com
 wukong.la
 wukongbjb.com
@@ -109570,6 +109546,7 @@ zhenyuansoft.com
 zhenyunpan.com
 zhenzhuchanfu.com
 zheshenet.com
+zheshouka.com
 zhetao.com
 zhetian.org
 zhetouniu.com
