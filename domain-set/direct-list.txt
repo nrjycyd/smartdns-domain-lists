@@ -106,8 +106,6 @@
 -.hospital.pku.edu.cn
 -.i.dell.com
 -.i.pki.goog
--.icloud-cdn.icloud.com.akadns.net
--.icloud.cdn-apple.com
 -.images-cn-8.ssl-images-amazon.com
 -.images-cn.ssl-images-amazon.com
 -.inappcheck-cn.itunes-apple.com.akadns.net
@@ -171,8 +169,6 @@
 -.ntp6.aliyun.com
 -.ntp7.aliyun.com
 -.o.pki.goog
--.ocsp-lb.apple.com.akadns.net
--.ocsp2-lb.apple.com.akadns.net
 -.oemsoc.download.prss.microsoft.com
 -.officecdn.microsoft.com
 -.opencourse.pku.edu.cn
@@ -209,7 +205,6 @@
 -.p7-juejin.byteimg.com
 -.p8-juejin.byteimg.com
 -.p9-juejin.byteimg.com
--.pancake.cdn-apple.com.akadns.net
 -.pd-nk.itunes.apple.com
 -.pd.itunes.apple.com
 -.play.itunes.apple.com
@@ -218,7 +213,6 @@
 -.refresh-bkg.activation-v2.kaspersky.com
 -.res-1.cdn.office.net
 -.res.cdn.office.net
--.reserve-prime.apple.com
 -.s00.upd.kaspersky.com
 -.s01.upd.kaspersky.com
 -.s02.upd.kaspersky.com
