@@ -280,6 +280,7 @@
 -.www.dell.com
 -.www.entrust.cn
 -.www.microsoft.com
+-.www.recaptcha-cn.net
 -.www.recaptcha.net
 -.www.support.apple.com
 -.www4-static.gog-statics.com
