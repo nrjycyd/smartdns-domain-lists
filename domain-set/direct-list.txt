@@ -1,3 +1,4 @@
+-.account-cn.alibabacloud.com
 -.activate.activation-v2.kaspersky.com
 -.activation-v2.geo.kaspersky.com
 -.activation-v2.kaspersky.com
@@ -14,6 +15,7 @@
 -.aod-ssl.itunes.apple.com
 -.aod.itunes.apple.com
 -.api-edge.apps.apple.com
+-.api.alibabacloud.com
 -.apptrailers.itunes.apple.com
 -.auth.music.apple.com
 -.azuremigrate.download.prss.microsoft.com
@@ -34,6 +36,7 @@
 -.client-api.itunes.apple.com
 -.clientperipherals.dell.com
 -.cma.itunes.apple.com
+-.cn.alibabacloud.com
 -.cn.download.nvidia.com
 -.cn.windowssearch.com
 -.collaborate.download.prss.microsoft.com
@@ -76,6 +79,7 @@
 -.dnl-18.geo.kaspersky.com
 -.dnl-19.geo.kaspersky.com
 -.download.microsoft.com
+-.download.visualstudio.microsoft.com
 -.downloaddispatch.itunes.apple.com
 -.dreamspark.download.prss.microsoft.com
 -.dreamsparkuat.download.prss.microsoft.com
@@ -264,6 +268,7 @@
 -.speedysub.music.apple.com
 -.ss.bjmu.edu.cn
 -.statics.teams.cdn.office.net
+-.status.alibabacloud.com
 -.storecorefulfillment.download.prss.microsoft.com
 -.storeedge.microsoft.com
 -.storeedgefd.dsx.mp.microsoft.com
