@@ -3,7 +3,8 @@
 
 import os
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
+
 
 TARGET_FILES = {
     "DIRECT": "domain-set/direct-list.txt",
@@ -22,24 +23,39 @@ def get_line_count(file_path):
     """统计文件行数"""
     if not os.path.exists(file_path):
         return 0
-    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+
+    with open(
+        file_path,
+        "r",
+        encoding="utf-8",
+        errors="ignore"
+    ) as f:
         return sum(1 for _ in f)
 
 
 def read_old_stats(content):
     """读取 README 历史统计"""
+
     stats = {}
+
     for key in TARGET_FILES:
         match = re.search(
-            rf"\|\s*{key}\s*\|\s*(\d+)\s*\|",
+            rf"\|\s*{key}\s*\|\s*(?:\*\*)?(\d+)",
             content
         )
-        stats[key] = int(match.group(1)) if match else None
+
+        stats[key] = (
+            int(match.group(1))
+            if match
+            else None
+        )
+
     return stats
 
 
 def diff_text(current, old):
     """生成变化标识"""
+
     if old is None:
         return "🔵 new"
 
@@ -47,6 +63,7 @@ def diff_text(current, old):
 
     if diff > 0:
         return f"🟢 +{diff}"
+
     if diff < 0:
         return f"🔴 {diff}"
 
@@ -55,8 +72,13 @@ def diff_text(current, old):
 
 def update_readme(stats_text):
     """替换 README 统计区域"""
+
     if os.path.exists(README_FILE):
-        with open(README_FILE, "r", encoding="utf-8") as f:
+        with open(
+            README_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
             content = f.read()
     else:
         content = ""
@@ -67,14 +89,29 @@ def update_readme(stats_text):
         "<!-- STATS_END -->"
     )
 
-    pattern = r"<!-- STATS_START -->.*?<!-- STATS_END -->"
+    pattern = (
+        r"<!-- STATS_START -->.*?<!-- STATS_END -->"
+    )
 
-    if re.search(pattern, content, re.DOTALL):
-        content = re.sub(pattern, new_block, content, flags=re.DOTALL)
+    if re.search(
+        pattern,
+        content,
+        flags=re.DOTALL
+    ):
+        content = re.sub(
+            pattern,
+            new_block,
+            content,
+            flags=re.DOTALL
+        )
     else:
         content += "\n\n" + new_block
 
-    with open(README_FILE, "w", encoding="utf-8") as f:
+    with open(
+        README_FILE,
+        "w",
+        encoding="utf-8"
+    ) as f:
         f.write(content)
 
 
@@ -86,17 +123,32 @@ def main():
         for key, path in TARGET_FILES.items()
     }
 
+    # UTC 转北京时间
     update_time = (
-        datetime.utcnow() + timedelta(hours=8)
-    ).strftime("%Y-%m-%d %H:%M:%S")
+        datetime.now(timezone.utc)
+        + timedelta(hours=8)
+    ).strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
 
     if os.path.exists(README_FILE):
-        with open(README_FILE, "r", encoding="utf-8") as f:
+        with open(
+            README_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
             readme_content = f.read()
     else:
         readme_content = ""
 
     old_stats = read_old_stats(readme_content)
+
+    # 调试信息
+    print("旧统计:")
+    print(old_stats)
+
+    print("当前统计:")
+    print(current_stats)
 
     stats_text = f"""🔔 最后更新时间：{update_time}
 
@@ -112,6 +164,7 @@ def main():
 """
 
     update_readme(stats_text)
+
     print("✅ README 统计区域更新完成")
 
 
