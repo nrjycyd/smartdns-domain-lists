@@ -114,20 +114,15 @@ def main():
 
     stats_text = f"""🔔 最后更新时间：{update_time}
 
-DIRECT规则数：{current_stats['DIRECT']}，{diff_text(current_stats['DIRECT'], old_stats['DIRECT'])}
-
-PROXY规则数：{current_stats['PROXY']}，{diff_text(current_stats['PROXY'], old_stats['PROXY'])}
-
-REJECT规则数：{current_stats['REJECT']}，{diff_text(current_stats['REJECT'], old_stats['REJECT'])}
-
-APPLE_CN规则数：{current_stats['APPLE_CN']}，{diff_text(current_stats['APPLE_CN'], old_stats['APPLE_CN'])}
-
-GOOGLE_CN规则数：{current_stats['GOOGLE_CN']}，{diff_text(current_stats['GOOGLE_CN'], old_stats['GOOGLE_CN'])}
-
-PCDN规则数：{current_stats['PCDN']}，{diff_text(current_stats['PCDN'], old_stats['PCDN'])}
-
-HTTPDNS规则数：{current_stats['HTTPDNS']}，{diff_text(current_stats['HTTPDNS'], old_stats['HTTPDNS'])}
-
+| 规则类型 | 数量 | 变化 |
+|:---|---:|---:|
+| DIRECT | {current_stats['DIRECT']} | {diff_text(current_stats['DIRECT'], old_stats['DIRECT'])} |
+| PROXY | {current_stats['PROXY']} | {diff_text(current_stats['PROXY'], old_stats['PROXY'])} |
+| REJECT | {current_stats['REJECT']} | {diff_text(current_stats['REJECT'], old_stats['REJECT'])} |
+| APPLE_CN | {current_stats['APPLE_CN']} | {diff_text(current_stats['APPLE_CN'], old_stats['APPLE_CN'])} |
+| GOOGLE_CN | {current_stats['GOOGLE_CN']} | {diff_text(current_stats['GOOGLE_CN'], old_stats['GOOGLE_CN'])} |
+| PCDN | {current_stats['PCDN']} | {diff_text(current_stats['PCDN'], old_stats['PCDN'])} |
+| HTTPDNS | {current_stats['HTTPDNS']} | {diff_text(current_stats['HTTPDNS'], old_stats['HTTPDNS'])} |
 """
 
     update_readme(stats_text)
