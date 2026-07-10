@@ -4,15 +4,17 @@
 
 ## 规则统计
 <!-- DOMAIN-STATS-START -->
+> 每日自动更新，更新时间：2026-07-10 03:32 UTC
+
 | 文件 | 域名数量 | 变化 |
 |------|---------|------|
-| direct-list.txt | 111,541 | - |
-| proxy-list.txt | 26,859 | - |
-| reject-list.txt | 164,737 | - |
-| apple-cn.txt | 164 | - |
-| google-cn.txt | 112 | - |
-| pcdn-list.txt | 51 | - |
-| httpdns-list.txt | 95 | - |
+| direct-list.txt | 111,541 | 0 |
+| proxy-list.txt | 26,859 | 0 |
+| reject-list.txt | 164,737 | 0 |
+| apple-cn.txt | 164 | 0 |
+| google-cn.txt | 112 | 0 |
+| pcdn-list.txt | 51 | 0 |
+| httpdns-list.txt | 95 | 0 |
 <!-- DOMAIN-STATS-END -->
 
 ## 主要功能
