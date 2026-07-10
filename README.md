@@ -5,7 +5,21 @@
 ## 规则统计
 <!-- STATS_START -->
 
-等待 GitHub Actions 更新
+最后更新时间：2026-07-10 12:53:31
+
+DIRECT规则数：111540，new
+
+PROXY规则数：26860，new
+
+REJECT规则数：164737，new
+
+APPLE规则数：164，new
+
+GOOGLE规则数：112，new
+
+PCDN规则数：51，new
+
+HTTPDNS规则数：95，new
 
 <!-- STATS_END -->
 
