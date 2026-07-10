@@ -315,7 +315,7 @@ jobs:
       - name: Execute README statistics script
         run: |
           # 运行分离出来的独立统计脚本
-          python3 update_readme_stats.py
+          python3 .github/workflows/update_readme_stats.py
       
       - name: Commit and push updated domain lists to repository
         env:
