@@ -1,95 +1,144 @@
-#!/bin/bash
-# update_readme_stats.sh - 统计各域名列表文件数量，更新 README.md 中的域名统计表格
-# 在仓库根目录执行
+#!/usr/bin/env python3
+"""update_readme_stats.py - 统计各域名列表文件数量，更新 README.md 中的域名统计表格。
 
-set -euo pipefail
+在仓库根目录执行。
+"""
 
-DOMAIN_DIR="domain-set"
-README="README.md"
-STATS_FILE="/tmp/stats.md"
+import os
+import re
+from datetime import datetime, timezone
 
-# ---- 1. 统计各文件域名数 ----
-D_COUNT=$(wc -l < "${DOMAIN_DIR}/direct-list.txt")
-P_COUNT=$(wc -l < "${DOMAIN_DIR}/proxy-list.txt")
-R_COUNT=$(wc -l < "${DOMAIN_DIR}/reject-list.txt")
-A_COUNT=$(wc -l < "${DOMAIN_DIR}/apple-cn.txt")
-G_COUNT=$(wc -l < "${DOMAIN_DIR}/google-cn.txt")
-PC_COUNT=$(wc -l < "${DOMAIN_DIR}/pcdn-list.txt")
-H_COUNT=$(wc -l < "${DOMAIN_DIR}/httpdns-list.txt")
+DOMAIN_DIR = "domain-set"
+README = "README.md"
+MARKER_START = "<!-- DOMAIN-STATS-START -->"
+MARKER_END = "<!-- DOMAIN-STATS-END -->"
 
-echo "=== 各文件域名数量统计 ==="
-echo "direct-list.txt:  ${D_COUNT} 条"
-echo "proxy-list.txt:   ${P_COUNT} 条"
-echo "reject-list.txt:  ${R_COUNT} 条"
-echo "apple-cn.txt:     ${A_COUNT} 条"
-echo "google-cn.txt:    ${G_COUNT} 条"
-echo "pcdn-list.txt:    ${PC_COUNT} 条"
-echo "httpdns-list.txt: ${H_COUNT} 条"
-echo ""
+FILES = [
+    "direct-list.txt",
+    "proxy-list.txt",
+    "reject-list.txt",
+    "apple-cn.txt",
+    "google-cn.txt",
+    "pcdn-list.txt",
+    "httpdns-list.txt",
+]
 
-TOTAL=$((D_COUNT + P_COUNT + R_COUNT + A_COUNT + G_COUNT))
-echo "前5个文件总域名数: ${TOTAL} (不含 pcdn 和 httpdns)"
 
-# ---- 2. 从现有 README 提取昨日数据 ----
-extract_count() {
-    # 从 README 表格中提取指定文件的旧域名数
-    awk -F'|' -v file="$1" 'index($0, file) { gsub(/,/,"",$3); gsub(/ /,"",$3); print $3; exit }' "${README}"
-}
+def count_domains() -> dict[str, int]:
+    """统计各文件的域名数量."""
+    counts = {}
+    for fname in FILES:
+        path = os.path.join(DOMAIN_DIR, fname)
+        try:
+            with open(path, encoding="utf-8") as f:
+                # wc -l 等价：统计行数
+                counts[fname] = sum(1 for _ in f)
+        except FileNotFoundError:
+            counts[fname] = 0
+    return counts
 
-OLD_D=$(extract_count "direct-list.txt")
-OLD_P=$(extract_count "proxy-list.txt")
-OLD_R=$(extract_count "reject-list.txt")
-OLD_A=$(extract_count "apple-cn.txt")
-OLD_G=$(extract_count "google-cn.txt")
-OLD_PC=$(extract_count "pcdn-list.txt")
-OLD_H=$(extract_count "httpdns-list.txt")
 
-# 默认值 (首次运行无历史数据)
-OLD_D=${OLD_D:-0}; OLD_P=${OLD_P:-0}; OLD_R=${OLD_R:-0}
-OLD_A=${OLD_A:-0}; OLD_G=${OLD_G:-0}; OLD_PC=${OLD_PC:-0}; OLD_H=${OLD_H:-0}
+def extract_old_counts(readme_path: str) -> dict[str, int]:
+    """从 README 现有标记区内提取昨日的域名数量."""
+    old = {}
+    try:
+        with open(readme_path, encoding="utf-8") as f:
+            content = f.read()
+    except FileNotFoundError:
+        return old
 
-# ---- 3. 计算变化量 ----
-D_DELTA=$((D_COUNT - OLD_D))
-P_DELTA=$((P_COUNT - OLD_P))
-R_DELTA=$((R_COUNT - OLD_R))
-A_DELTA=$((A_COUNT - OLD_A))
-G_DELTA=$((G_COUNT - OLD_G))
-PC_DELTA=$((PC_COUNT - OLD_PC))
-H_DELTA=$((H_COUNT - OLD_H))
+    # 取标记区之间的内容
+    m = re.search(
+        re.escape(MARKER_START) + r"\n(.*?)\n" + re.escape(MARKER_END),
+        content,
+        re.DOTALL,
+    )
+    if not m:
+        return old
 
-fmt_delta() {
-    local d=$1
-    if [ "$d" -gt 0 ]; then echo "+${d}"; elif [ "$d" -lt 0 ]; then echo "${d}"; else echo "0"; fi
-}
+    block = m.group(1)
+    # 匹配表格行: | filename | 12345 | ... |
+    pattern = re.compile(r"\|\s*(\S+\.txt)\s*\|\s*([\d,]+)\s*\|")
+    for match in pattern.finditer(block):
+        fname = match.group(1)
+        count_str = match.group(2).replace(",", "")
+        try:
+            old[fname] = int(count_str)
+        except ValueError:
+            pass
+    return old
 
-echo ""
-echo "=== 相对昨日变化 ==="
-echo "direct-list.txt:  $(fmt_delta $D_DELTA)"
-echo "proxy-list.txt:   $(fmt_delta $P_DELTA)"
-echo "reject-list.txt:  $(fmt_delta $R_DELTA)"
-echo "apple-cn.txt:     $(fmt_delta $A_DELTA)"
-echo "google-cn.txt:    $(fmt_delta $G_DELTA)"
-echo "pcdn-list.txt:    $(fmt_delta $PC_DELTA)"
-echo "httpdns-list.txt: $(fmt_delta $H_DELTA)"
 
-# ---- 4. 生成表格并注入 README ----
-cat > "${STATS_FILE}" << STATS_EOF
-| 文件 | 域名数量 | 变化 |
-|------|---------|------|
-| direct-list.txt | ${D_COUNT} | $(fmt_delta $D_DELTA) |
-| proxy-list.txt | ${P_COUNT} | $(fmt_delta $P_DELTA) |
-| reject-list.txt | ${R_COUNT} | $(fmt_delta $R_DELTA) |
-| apple-cn.txt | ${A_COUNT} | $(fmt_delta $A_DELTA) |
-| google-cn.txt | ${G_COUNT} | $(fmt_delta $G_DELTA) |
-| pcdn-list.txt | ${PC_COUNT} | $(fmt_delta $PC_DELTA) |
-| httpdns-list.txt | ${H_COUNT} | $(fmt_delta $H_DELTA) |
-STATS_EOF
+def fmt_delta(delta: int) -> str:
+    """格式化变化量，带符号."""
+    if delta > 0:
+        return f"+{delta}"
+    elif delta < 0:
+        return str(delta)
+    else:
+        return "0"
 
-awk '/<!-- DOMAIN-STATS-START -->/ { print; while (getline < "'"${STATS_FILE}"'") print; in_block=1; next }
-     /<!-- DOMAIN-STATS-END -->/   { in_block=0 }
-     !in_block' "${README}" > "${README}.tmp" && mv "${README}.tmp" "${README}"
 
-rm -f "${STATS_FILE}"
-echo ""
-echo "README.md 已更新域名统计数据"
-echo "=========================================="
+def generate_stats_md(counts: dict[str, int], old_counts: dict[str, int]) -> str:
+    """生成统计块内容."""
+    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+    lines = [
+        f"> 每日自动更新，更新时间：{now_utc}",
+        "",
+        "| 文件 | 域名数量 | 变化 |",
+        "|------|---------|------|",
+    ]
+
+    for fname in FILES:
+        count = counts.get(fname, 0)
+        old = old_counts.get(fname, 0)
+        delta = count - old
+        lines.append(f"| {fname} | {count:,} | {fmt_delta(delta)} |")
+
+    return "\n".join(lines)
+
+
+def update_readme(readme_path: str, stats_md: str) -> None:
+    """将统计块注入 README 标记之间."""
+    with open(readme_path, encoding="utf-8") as f:
+        content = f.read()
+
+    replacement = f"{MARKER_START}\n{stats_md}\n{MARKER_END}"
+    pattern = re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END)
+    new_content = re.sub(pattern, replacement, content, count=1, flags=re.DOTALL)
+
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.write(new_content)
+
+
+def main() -> None:
+    counts = count_domains()
+    old_counts = extract_old_counts(README)
+
+    # 打印统计日志
+    print("=== 各文件域名数量统计 ===")
+    total = 0
+    for fname in FILES:
+        c = counts.get(fname, 0)
+        print(f"{fname:25s} {c:>8,} 条")
+        if fname not in ("pcdn-list.txt", "httpdns-list.txt"):
+            total += c
+    print(f"\n前5个文件总域名数: {total:,} (不含 pcdn 和 httpdns)")
+
+    print("\n=== 相对昨日变化 ===")
+    for fname in FILES:
+        c = counts.get(fname, 0)
+        old = old_counts.get(fname, 0)
+        print(f"{fname:25s} {fmt_delta(c - old):>6}")
+
+    # 生成统计块并写入 README
+    stats_md = generate_stats_md(counts, old_counts)
+    update_readme(README, stats_md)
+
+    print(f"\nREADME.md 已更新域名统计数据")
+    print("=" * 50)
+
+
+if __name__ == "__main__":
+    main()
