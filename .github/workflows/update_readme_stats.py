@@ -1,144 +1,243 @@
 #!/usr/bin/env python3
-"""update_readme_stats.py - 统计各域名列表文件数量，更新 README.md 中的域名统计表格。
-
-在仓库根目录执行。
-"""
+# -*- coding: utf-8 -*-
 
 import os
 import re
-from datetime import datetime, timezone
-
-DOMAIN_DIR = "domain-set"
-README = "README.md"
-MARKER_START = "<!-- DOMAIN-STATS-START -->"
-MARKER_END = "<!-- DOMAIN-STATS-END -->"
-
-FILES = [
-    "direct-list.txt",
-    "proxy-list.txt",
-    "reject-list.txt",
-    "apple-cn.txt",
-    "google-cn.txt",
-    "pcdn-list.txt",
-    "httpdns-list.txt",
-]
+from datetime import datetime, timedelta
 
 
-def count_domains() -> dict[str, int]:
-    """统计各文件的域名数量."""
-    counts = {}
-    for fname in FILES:
-        path = os.path.join(DOMAIN_DIR, fname)
-        try:
-            with open(path, encoding="utf-8") as f:
-                # wc -l 等价：统计行数
-                counts[fname] = sum(1 for _ in f)
-        except FileNotFoundError:
-            counts[fname] = 0
-    return counts
+# ===============================
+# 需要统计的规则文件
+# ===============================
+
+TARGET_FILES = {
+    'DIRECT': 'domain-set/direct-list.txt',
+    'PROXY': 'domain-set/proxy-list.txt',
+    'REJECT': 'domain-set/reject-list.txt',
+    'APPLE': 'domain-set/apple-cn.txt',
+    'GOOGLE': 'domain-set/google-cn.txt',
+    'PCDN': 'domain-set/pcdn-list.txt',
+    'HTTPDNS': 'domain-set/httpdns-list.txt'
+}
 
 
-def extract_old_counts(readme_path: str) -> dict[str, int]:
-    """从 README 现有标记区内提取昨日的域名数量."""
-    old = {}
-    try:
-        with open(readme_path, encoding="utf-8") as f:
-            content = f.read()
-    except FileNotFoundError:
-        return old
-
-    # 取标记区之间的内容
-    m = re.search(
-        re.escape(MARKER_START) + r"\n(.*?)\n" + re.escape(MARKER_END),
-        content,
-        re.DOTALL,
-    )
-    if not m:
-        return old
-
-    block = m.group(1)
-    # 匹配表格行: | filename | 12345 | ... |
-    pattern = re.compile(r"\|\s*(\S+\.txt)\s*\|\s*([\d,]+)\s*\|")
-    for match in pattern.finditer(block):
-        fname = match.group(1)
-        count_str = match.group(2).replace(",", "")
-        try:
-            old[fname] = int(count_str)
-        except ValueError:
-            pass
-    return old
+README_FILE = "README.md"
 
 
-def fmt_delta(delta: int) -> str:
-    """格式化变化量，带符号."""
-    if delta > 0:
-        return f"+{delta}"
-    elif delta < 0:
-        return str(delta)
+# ===============================
+# 获取文件行数
+# ===============================
+
+def get_line_count(file_path):
+
+    if not os.path.exists(file_path):
+        return 0
+
+    with open(
+        file_path,
+        "r",
+        encoding="utf-8",
+        errors="ignore"
+    ) as f:
+        return sum(1 for _ in f)
+
+
+
+# ===============================
+# 读取 README 旧统计数据
+# ===============================
+
+def read_old_stats(content):
+
+    old_stats = {}
+
+    for key in TARGET_FILES.keys():
+
+        match = re.search(
+            rf'{key}\s*规则数：(\d+)',
+            content
+        )
+
+        if match:
+            old_stats[key] = int(match.group(1))
+        else:
+            old_stats[key] = None
+
+
+    return old_stats
+
+
+
+# ===============================
+# 生成变化字符串
+# ===============================
+
+def diff_text(current, old):
+
+    if old is None:
+        return "new"
+
+    diff = current - old
+
+    if diff > 0:
+        return f"update +{diff}"
+
+    elif diff < 0:
+        return f"update {diff}"
+
     else:
-        return "0"
+        return "update +0"
 
 
-def generate_stats_md(counts: dict[str, int], old_counts: dict[str, int]) -> str:
-    """生成统计块内容."""
-    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
-    lines = [
-        f"> 每日自动更新，更新时间：{now_utc}",
-        "",
-        "| 文件 | 域名数量 | 变化 |",
-        "|------|---------|------|",
-    ]
+# ===============================
+# 更新 README 指定区域
+# ===============================
 
-    for fname in FILES:
-        count = counts.get(fname, 0)
-        old = old_counts.get(fname, 0)
-        delta = count - old
-        lines.append(f"| {fname} | {count:,} | {fmt_delta(delta)} |")
+def update_readme(stats_text):
 
-    return "\n".join(lines)
+    if os.path.exists(README_FILE):
 
+        with open(
+            README_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+            content = f.read()
 
-def update_readme(readme_path: str, stats_md: str) -> None:
-    """将统计块注入 README 标记之间."""
-    with open(readme_path, encoding="utf-8") as f:
-        content = f.read()
-
-    replacement = f"{MARKER_START}\n{stats_md}\n{MARKER_END}"
-    pattern = re.escape(MARKER_START) + r".*?" + re.escape(MARKER_END)
-    new_content = re.sub(pattern, replacement, content, count=1, flags=re.DOTALL)
-
-    with open(readme_path, "w", encoding="utf-8") as f:
-        f.write(new_content)
+    else:
+        content = ""
 
 
-def main() -> None:
-    counts = count_domains()
-    old_counts = extract_old_counts(README)
+    new_block = f"""<!-- STATS_START -->
 
-    # 打印统计日志
-    print("=== 各文件域名数量统计 ===")
-    total = 0
-    for fname in FILES:
-        c = counts.get(fname, 0)
-        print(f"{fname:25s} {c:>8,} 条")
-        if fname not in ("pcdn-list.txt", "httpdns-list.txt"):
-            total += c
-    print(f"\n前5个文件总域名数: {total:,} (不含 pcdn 和 httpdns)")
+{stats_text.strip()}
 
-    print("\n=== 相对昨日变化 ===")
-    for fname in FILES:
-        c = counts.get(fname, 0)
-        old = old_counts.get(fname, 0)
-        print(f"{fname:25s} {fmt_delta(c - old):>6}")
+<!-- STATS_END -->"""
 
-    # 生成统计块并写入 README
-    stats_md = generate_stats_md(counts, old_counts)
-    update_readme(README, stats_md)
 
-    print(f"\nREADME.md 已更新域名统计数据")
-    print("=" * 50)
+    pattern = (
+        r"<!-- STATS_START -->"
+        r".*?"
+        r"<!-- STATS_END -->"
+    )
+
+
+    if re.search(
+        pattern,
+        content,
+        flags=re.DOTALL
+    ):
+
+        content = re.sub(
+            pattern,
+            new_block,
+            content,
+            flags=re.DOTALL
+        )
+
+    else:
+
+        content += "\n\n" + new_block
+
+
+
+    with open(
+        README_FILE,
+        "w",
+        encoding="utf-8"
+    ) as f:
+        f.write(content)
+
+
+
+# ===============================
+# 主程序
+# ===============================
+
+def main():
+
+
+    # 当前统计
+
+    current_stats = {}
+
+    for key,path in TARGET_FILES.items():
+
+        current_stats[key] = get_line_count(path)
+
+
+
+    # 北京时间
+
+    bj_time = (
+        datetime.utcnow()
+        +
+        timedelta(hours=8)
+    )
+
+
+    update_time = bj_time.strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
+
+
+
+    # 读取 README
+
+    if os.path.exists(README_FILE):
+
+        with open(
+            README_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+            readme_content = f.read()
+
+    else:
+
+        readme_content = ""
+
+
+
+    old_stats = read_old_stats(
+        readme_content
+    )
+
+
+
+    # 生成统计文本
+
+    stats_text = f"""
+最后更新时间：{update_time}
+
+DIRECT规则数：{current_stats['DIRECT']}，{diff_text(current_stats['DIRECT'], old_stats['DIRECT'])}
+
+PROXY规则数：{current_stats['PROXY']}，{diff_text(current_stats['PROXY'], old_stats['PROXY'])}
+
+REJECT规则数：{current_stats['REJECT']}，{diff_text(current_stats['REJECT'], old_stats['REJECT'])}
+
+APPLE规则数：{current_stats['APPLE']}，{diff_text(current_stats['APPLE'], old_stats['APPLE'])}
+
+GOOGLE规则数：{current_stats['GOOGLE']}，{diff_text(current_stats['GOOGLE'], old_stats['GOOGLE'])}
+
+PCDN规则数：{current_stats['PCDN']}，{diff_text(current_stats['PCDN'], old_stats['PCDN'])}
+
+HTTPDNS规则数：{current_stats['HTTPDNS']}，{diff_text(current_stats['HTTPDNS'], old_stats['HTTPDNS'])}
+"""
+
+
+    update_readme(
+        stats_text
+    )
+
+
+    print(
+        "✅ README 统计区域更新完成"
+    )
+
 
 
 if __name__ == "__main__":
+
     main()
