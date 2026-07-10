@@ -25,8 +25,8 @@ domain:plex.tv,direct
 full:cdn.jsdelivr.net,direct
 
 # 代理域名 (proxy)
-domain:ip-api.com,proxy
-full:get.acme.sh,proxy
+#domain:ip-api.com,proxy
+#full:get.acme.sh,proxy
 
 # 拒绝域名 (reject)
 domain:jddebug.com,reject
