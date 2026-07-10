@@ -6,17 +6,17 @@
 
 <!-- STATS_START -->
 
-🔔 最后更新时间：2026-07-10 14:20:06
+🔔 最后更新时间：2026-07-10 14:23:38
 
 | 规则类型 | 数量 | 变化 |
 |:---|---:|---:|
-| DIRECT | 111541 | <span style="color:gray">+0</span> |
-| PROXY | 26859 | <span style="color:gray">+0</span> |
-| REJECT | 164737 | <span style="color:gray">+0</span> |
-| APPLE_CN | 164 | <span style="color:gray">+0</span> |
-| GOOGLE_CN | 112 | <span style="color:gray">+0</span> |
-| PCDN | 51 | <span style="color:gray">+0</span> |
-| HTTPDNS | 95 | <span style="color:gray">+0</span> |
+| DIRECT | 111541 | ⚪ +0 |
+| PROXY | 26859 | ⚪ +0 |
+| REJECT | 164737 | ⚪ +0 |
+| APPLE_CN | 164 | ⚪ +0 |
+| GOOGLE_CN | 112 | ⚪ +0 |
+| PCDN | 51 | ⚪ +0 |
+| HTTPDNS | 95 | ⚪ +0 |
 
 <!-- STATS_END -->
 
