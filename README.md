@@ -5,11 +5,11 @@
 ## 规则统计
 <!-- STATS_START -->
 
-最后更新时间：2026-07-10 12:59:32
+最后更新时间：2026-07-10 13:00:53
 
-DIRECT规则数：111540，update +0
+DIRECT规则数：111541，update +1
 
-PROXY规则数：26860，update +0
+PROXY规则数：26859，update -1
 
 REJECT规则数：164737，update +0
 
