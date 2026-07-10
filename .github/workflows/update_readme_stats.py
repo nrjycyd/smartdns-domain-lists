@@ -152,7 +152,7 @@ def main():
 
     stats_text = f"""🔔 最后更新时间：{update_time}
 
-| 规则类型 | 数量 | 变化 |
+| 规则类型 | 数量 | 较上次更新 |
 |:---|---:|---:|
 | DIRECT | {current_stats['DIRECT']} | {diff_text(current_stats['DIRECT'], old_stats['DIRECT'])} |
 | PROXY | {current_stats['PROXY']} | {diff_text(current_stats['PROXY'], old_stats['PROXY'])} |
