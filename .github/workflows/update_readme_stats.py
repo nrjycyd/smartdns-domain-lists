@@ -10,8 +10,8 @@ TARGET_FILES = {
     "DIRECT": "domain-set/direct-list.txt",
     "PROXY": "domain-set/proxy-list.txt",
     "REJECT": "domain-set/reject-list.txt",
-    "APPLE_CN": "domain-set/apple-cn.txt",
-    "GOOGLE_CN": "domain-set/google-cn.txt",
+    "APPLE": "domain-set/apple-cn.txt",
+    "GOOGLE": "domain-set/google-cn.txt",
     "PCDN": "domain-set/pcdn-list.txt",
     "HTTPDNS": "domain-set/httpdns-list.txt"
 }
