@@ -2,11 +2,7 @@
 
 这是一个自动更新域名列表的项目，定期从 Loyalsoldier 的 [v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 仓库获取最新的域名分类列表，处理为 SmartDNS 可直接使用的格式。
 
-**数据处理**：
-
-- 移除 `regexp:` 开头的行
-- 移除 `full:` 前缀
-- 去重排序
+## 规则统计
 
 ## 主要功能
 
@@ -15,8 +11,11 @@
    - 直连列表 (direct-list)：包含国内[直连域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/direct-list.txt)、[苹果中国域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/apple-cn.txt)、[谷歌中国域名](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/google-cn.txt)
    - 代理列表 (proxy-list)：包含[代理域名列表](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/proxy-list.txt)、[GFWList 域名列表](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/gfw.txt)
    - 屏蔽列表 (reject-list)：包含[广告域名列表](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/reject-list.txt)
+3. **数据处理**：
+- 移除 `regexp:` 开头的行
+- 移除 `full:` 前缀
 
-3. **域名分类处理**：
+5. **域名去重排序及分类处理**：
 
    - 将 apple-cn 和 google-cn 的域名独立出来
 
