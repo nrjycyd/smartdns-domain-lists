@@ -22499,6 +22499,7 @@ test-ipv6.arauc.br
 test-ipv6.belwue.net
 test-ipv6.carnet.hr
 test-ipv6.cl
+test-ipv6.com
 test-ipv6.cs.umd.edu
 test-ipv6.csclub.uwaterloo.ca
 test-ipv6.cz
