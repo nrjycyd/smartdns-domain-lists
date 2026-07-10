@@ -6,11 +6,11 @@
 
 <!-- STATS_START -->
 
-最后更新时间：2026-07-10 13:19:42
+最后更新时间：2026-07-10 13:21:58
 
-DIRECT规则数：111541，update +0
+DIRECT规则数：111540，update -1
 
-PROXY规则数：26859，update +0
+PROXY规则数：26860，update +1
 
 REJECT规则数：164737，update +0
 
