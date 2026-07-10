@@ -312,6 +312,11 @@ jobs:
           echo "前5个文件总域名数: $TOTAL 个 (不含 pcdn 和 httpdns)"
           echo "=========================================="
 
+
+      - name: Execute README statistics script        # 独立统计步骤
+        run: |
+          python3 .github/workflows/update_readme_stats.py
+    
       - name: Commit and push updated domain lists to repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
