@@ -119,8 +119,8 @@ def main():
 | DIRECT | {current_stats['DIRECT']} | {diff_text(current_stats['DIRECT'], old_stats['DIRECT'])} |
 | PROXY | {current_stats['PROXY']} | {diff_text(current_stats['PROXY'], old_stats['PROXY'])} |
 | REJECT | {current_stats['REJECT']} | {diff_text(current_stats['REJECT'], old_stats['REJECT'])} |
-| APPLE_CN_CN | {current_stats['APPLE_CN_CN']} | {diff_text(current_stats['APPLE_CN_CN'], old_stats['APPLE_CN_CN'])} |
-| GOOGLE_CN_CN | {current_stats['GOOGLE_CN_CN']} | {diff_text(current_stats['GOOGLE_CN_CN'], old_stats['GOOGLE_CN_CN'])} |
+| APPLE_CN | {current_stats['APPLE_CN']} | {diff_text(current_stats['APPLE_CN'], old_stats['APPLE_CN'])} |
+| GOOGLE_CN | {current_stats['GOOGLE_CN']} | {diff_text(current_stats['GOOGLE_CN'], old_stats['GOOGLE_CN'])} |
 | PCDN | {current_stats['PCDN']} | {diff_text(current_stats['PCDN'], old_stats['PCDN'])} |
 | HTTPDNS | {current_stats['HTTPDNS']} | {diff_text(current_stats['HTTPDNS'], old_stats['HTTPDNS'])} |
 """
