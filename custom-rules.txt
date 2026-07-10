@@ -19,7 +19,6 @@
 
 # 直连域名 (direct)
 domain:pool.ntp.org,direct
-domain:test-ipv6.com,direct
 domain:qnap.com,direct
 domain:51zmt.top,direct
 domain:plex.tv,direct
