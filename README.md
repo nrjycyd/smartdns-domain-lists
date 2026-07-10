@@ -8,20 +8,6 @@
 
 最后更新时间：2026-07-10 13:30:41
 
-DIRECT规则数：111541，update +0
-
-PROXY规则数：26859，update +0
-
-REJECT规则数：164737，update +0
-
-APPLE规则数：164，update +0
-
-GOOGLE规则数：112，update +0
-
-PCDN规则数：51，update +0
-
-HTTPDNS规则数：95，update +0
-
 <!-- STATS_END -->
 
 ## 主要功能
