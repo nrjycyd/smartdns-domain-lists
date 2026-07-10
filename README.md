@@ -2,8 +2,6 @@
 
 这是一个自动更新域名列表的项目，定期从 Loyalsoldier 的 [v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 仓库获取最新的域名分类列表，处理为 SmartDNS 可直接使用的格式。
 
-## 规则统计
-
 <!-- STATS_START -->
 
 🔔 最后更新时间：2026-07-10 14:58:40
