@@ -202,6 +202,7 @@
 -.gamedownloads-rockstargames-com.akamaized.net
 -.gamer-cds.cdn.hinet.net
 -.gamer2-cds.cdn.hinet.net
+-.get.acme.sh
 -.gigabyte2.azureedge.net
 -.github-api.arkoselabs.com
 -.github-cloud.s3.amazonaws.com
@@ -13256,6 +13257,7 @@ iop.org
 ios-icloud.com
 iosinthecar.com
 iotinactionevents.com
+ip-api.com
 ip.gs
 ip.sb
 ip73.com
@@ -22497,7 +22499,6 @@ test-ipv6.arauc.br
 test-ipv6.belwue.net
 test-ipv6.carnet.hr
 test-ipv6.cl
-test-ipv6.com
 test-ipv6.cs.umd.edu
 test-ipv6.csclub.uwaterloo.ca
 test-ipv6.cz
