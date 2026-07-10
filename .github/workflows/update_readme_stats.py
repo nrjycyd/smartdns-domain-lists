@@ -112,7 +112,7 @@ def main():
 
     old_stats = read_old_stats(readme_content)
 
-    stats_text = f"""最后更新时间：{update_time}
+    stats_text = f"""🔔 最后更新时间：{update_time}
 
 DIRECT规则数：{current_stats['DIRECT']}，{diff_text(current_stats['DIRECT'], old_stats['DIRECT'])}
 
