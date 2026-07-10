@@ -3,6 +3,17 @@
 这是一个自动更新域名列表的项目，定期从 Loyalsoldier 的 [v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 仓库获取最新的域名分类列表，处理为 SmartDNS 可直接使用的格式。
 
 ## 规则统计
+<!-- DOMAIN-STATS-START -->
+| 文件 | 域名数量 | 变化 |
+|------|---------|------|
+| direct-list.txt | 111,541 | - |
+| proxy-list.txt | 26,859 | - |
+| reject-list.txt | 164,737 | - |
+| apple-cn.txt | 164 | - |
+| google-cn.txt | 112 | - |
+| pcdn-list.txt | 51 | - |
+| httpdns-list.txt | 95 | - |
+<!-- DOMAIN-STATS-END -->
 
 ## 主要功能
 
