@@ -39,22 +39,6 @@
      - direct-list: 不含 reject 和 proxy-list 中的域名
      ```
 
-## 域名统计
-
-> 每日自动更新，更新时间：UTC 23:00
-
-<!-- DOMAIN-STATS-START -->
-| 文件 | 域名数量 | 变化 |
-|------|---------|------|
-| direct-list.txt | 111,541 | - |
-| proxy-list.txt | 26,859 | - |
-| reject-list.txt | 164,737 | - |
-| apple-cn.txt | 164 | - |
-| google-cn.txt | 112 | - |
-| pcdn-list.txt | 51 | - |
-| httpdns-list.txt | 95 | - |
-<!-- DOMAIN-STATS-END -->
-
 ## 使用说明
 
 ### 一、手动获取域名列表
