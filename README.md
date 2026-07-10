@@ -6,21 +6,21 @@
 
 <!-- STATS_START -->
 
-最后更新时间：2026-07-10 13:32:32
+最后更新时间：2026-07-10 13:33:33
 
-DIRECT规则数：111540，new
+DIRECT规则数：111541，update +1
 
-PROXY规则数：26860，new
+PROXY规则数：26859，update -1
 
-REJECT规则数：164737，new
+REJECT规则数：164737，update +0
 
-APPLE规则数：164，new
+APPLE规则数：164，update +0
 
-GOOGLE规则数：112，new
+GOOGLE规则数：112，update +0
 
-PCDN规则数：51，new
+PCDN规则数：51，update +0
 
-HTTPDNS规则数：95，new
+HTTPDNS规则数：95，update +0
 
 <!-- STATS_END -->
 
