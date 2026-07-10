@@ -6,21 +6,17 @@
 
 <!-- STATS_START -->
 
-🔔 最后更新时间：2026-07-10 14:08:48
+🔔 最后更新时间：2026-07-10 14:12:26
 
-DIRECT规则数：111541，update +0
-
-PROXY规则数：26859，update +0
-
-REJECT规则数：164737，update +0
-
-APPLE_CN规则数：164，update +0
-
-GOOGLE_CN规则数：112，update +0
-
-PCDN规则数：51，update +0
-
-HTTPDNS规则数：95，update +0
+| 规则类型 | 数量 | 变化 |
+|:---|---:|---:|
+| DIRECT | 111541 | update +0 |
+| PROXY | 26859 | update +0 |
+| REJECT | 164737 | update +0 |
+| APPLE_CN | 164 | update +0 |
+| GOOGLE_CN | 112 | update +0 |
+| PCDN | 51 | update +0 |
+| HTTPDNS | 95 | update +0 |
 
 <!-- STATS_END -->
 
