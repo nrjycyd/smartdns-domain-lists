@@ -19,6 +19,15 @@ TARGET_FILES = {
 README_FILE = "README.md"
 
 
+# 变化颜色配置
+COLORS = {
+    "increase": "green",
+    "decrease": "red",
+    "unchanged": "gray",
+    "new": "blue"
+}
+
+
 def get_line_count(file_path):
     """统计文件行数"""
     if not os.path.exists(file_path):
@@ -34,7 +43,7 @@ def read_old_stats(content):
 
     for key in TARGET_FILES:
         match = re.search(
-            rf"{key}\s*规则数：(\d+)",
+            rf"{key}\s*\|\s*(\d+)",
             content
         )
         stats[key] = int(match.group(1)) if match else None
@@ -43,18 +52,34 @@ def read_old_stats(content):
 
 
 def diff_text(current, old):
-    """生成变化描述"""
+    """根据变化生成带颜色 HTML"""
+
     if old is None:
-        return "new"
+        return (
+            f'<span style="color:{COLORS["new"]}">'
+            "new"
+            "</span>"
+        )
 
     diff = current - old
 
     if diff > 0:
-        return f"update +{diff}"
-    if diff < 0:
-        return f"update {diff}"
+        color = COLORS["increase"]
+        value = f"+{diff}"
 
-    return "update +0"
+    elif diff < 0:
+        color = COLORS["decrease"]
+        value = str(diff)
+
+    else:
+        color = COLORS["unchanged"]
+        value = "+0"
+
+    return (
+        f'<span style="color:{color}">'
+        f'{value}'
+        "</span>"
+    )
 
 
 def update_readme(stats_text):
@@ -72,9 +97,7 @@ def update_readme(stats_text):
         "<!-- STATS_END -->"
     )
 
-    pattern = (
-        r"<!-- STATS_START -->.*?<!-- STATS_END -->"
-    )
+    pattern = r"<!-- STATS_START -->.*?<!-- STATS_END -->"
 
     if re.search(pattern, content, re.DOTALL):
         content = re.sub(
