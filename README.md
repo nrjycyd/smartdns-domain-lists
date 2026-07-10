@@ -86410,3 +86410,24 @@ GOOGLE_CN规则数：112，new
 PCDN规则数：51，update +0
 HTTPDNS规则数：95，update +0
 
+
+
+<!-- STATS_START -->
+
+最后更新时间：2026-07-10 13:18:21
+
+DIRECT规则数：111540，update +0
+
+PROXY规则数：26860，update +0
+
+REJECT规则数：164737，update +0
+
+APPLE规则数：164，new
+
+GOOGLE规则数：112，new
+
+PCDN规则数：51，update +0
+
+HTTPDNS规则数：95，update +0
+
+<!-- STATS_END -->
