@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
 import re
-from pathlib import Path
 from datetime import datetime, timedelta
+
 
 # ===============================
 # 需要统计的规则文件
 # ===============================
+
 TARGET_FILES = {
     'DIRECT': 'domain-set/direct-list.txt',
     'PROXY': 'domain-set/proxy-list.txt',
@@ -18,80 +20,224 @@ TARGET_FILES = {
     'HTTPDNS': 'domain-set/httpdns-list.txt'
 }
 
-README_FILE = Path("README.md")
+
+README_FILE = "README.md"
 
 
 # ===============================
 # 获取文件行数
 # ===============================
-def get_line_count(file_path: str) -> int:
-    path = Path(file_path)
-    if not path.exists():
+
+def get_line_count(file_path):
+
+    if not os.path.exists(file_path):
         return 0
-    
-    with path.open("r", encoding="utf-8", errors="ignore") as f:
-        # 使用生成器表达式，针对大体积规则列表依然能保持低内存占用
+
+    with open(
+        file_path,
+        "r",
+        encoding="utf-8",
+        errors="ignore"
+    ) as f:
         return sum(1 for _ in f)
+
 
 
 # ===============================
 # 读取 README 旧统计数据
 # ===============================
-def read_old_stats(content: str) -> dict:
+
+def read_old_stats(content):
+
     old_stats = {}
+
     for key in TARGET_FILES.keys():
-        match = re.search(rf'{key}\s*规则数：(\d+)', content)
-        old_stats[key] = int(match.group(1)) if match else None
+
+        match = re.search(
+            rf'{key}\s*规则数：(\d+)',
+            content
+        )
+
+        if match:
+            old_stats[key] = int(match.group(1))
+        else:
+            old_stats[key] = None
+
+
     return old_stats
+
 
 
 # ===============================
 # 生成变化字符串
 # ===============================
-def diff_text(current: int, old: int) -> str:
+
+def diff_text(current, old):
+
     if old is None:
         return "new"
-    
+
     diff = current - old
-    # 合并了 >0 和 ==0 的情况，因为 +0 同样适用 f"+{diff}"
-    return f"update +{diff}" if diff >= 0 else f"update {diff}"
+
+    if diff > 0:
+        return f"update +{diff}"
+
+    elif diff < 0:
+        return f"update {diff}"
+
+    else:
+        return "update +0"
+
+
+
+# ===============================
+# 更新 README 指定区域
+# ===============================
+
+def update_readme(stats_text):
+
+    if os.path.exists(README_FILE):
+
+        with open(
+            README_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+            content = f.read()
+
+    else:
+        content = ""
+
+
+    new_block = f"""<!-- STATS_START -->
+
+{stats_text.strip()}
+
+<!-- STATS_END -->"""
+
+
+    pattern = (
+        r"<!-- STATS_START -->"
+        r".*?"
+        r"<!-- STATS_END -->"
+    )
+
+
+    if re.search(
+        pattern,
+        content,
+        flags=re.DOTALL
+    ):
+
+        content = re.sub(
+            pattern,
+            new_block,
+            content,
+            flags=re.DOTALL
+        )
+
+    else:
+
+        content += "\n\n" + new_block
+
+
+
+    with open(
+        README_FILE,
+        "w",
+        encoding="utf-8"
+    ) as f:
+        f.write(content)
+
 
 
 # ===============================
 # 主程序
 # ===============================
+
 def main():
-    # 1. 统一读取 README 内容（避免多次读取）
-    readme_content = README_FILE.read_text(encoding="utf-8") if README_FILE.exists() else ""
-    
-    # 2. 获取旧数据和当前最新数据
-    old_stats = read_old_stats(readme_content)
-    current_stats = {key: get_line_count(path) for key, path in TARGET_FILES.items()}
-    
-    # 3. 动态生成统计文本 (以后增删规则，只需修改顶部的 TARGET_FILES)
-    bj_time = (datetime.utcnow() + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
-    stats_lines = [f"最后更新时间：{bj_time}"]
-    
-    for key in TARGET_FILES.keys():
-        diff = diff_text(current_stats[key], old_stats[key])
-        stats_lines.append(f"{key}规则数：{current_stats[key]}，{diff}")
-    
-    # 使用双换行符拼接所有文本
-    stats_text = "\n\n".join(stats_lines)
-    
-    new_block = f"\n\n{stats_text}\n\n"
-    pattern = r".*?"
-    
-    # 4. 替换并写入 README
-    if re.search(pattern, readme_content, flags=re.DOTALL):
-        new_content = re.sub(pattern, new_block, readme_content, flags=re.DOTALL)
+
+
+    # 当前统计
+
+    current_stats = {}
+
+    for key,path in TARGET_FILES.items():
+
+        current_stats[key] = get_line_count(path)
+
+
+
+    # 北京时间
+
+    bj_time = (
+        datetime.utcnow()
+        +
+        timedelta(hours=8)
+    )
+
+
+    update_time = bj_time.strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
+
+
+
+    # 读取 README
+
+    if os.path.exists(README_FILE):
+
+        with open(
+            README_FILE,
+            "r",
+            encoding="utf-8"
+        ) as f:
+            readme_content = f.read()
+
     else:
-        # 如果原来没有该区块，则直接追加到末尾
-        new_content = f"{readme_content.strip()}\n\n{new_block}"
-        
-    README_FILE.write_text(new_content, encoding="utf-8")
-    print("✅ README 统计区域更新完成")
+
+        readme_content = ""
+
+
+
+    old_stats = read_old_stats(
+        readme_content
+    )
+
+
+
+    # 生成统计文本
+
+    stats_text = f"""
+最后更新时间：{update_time}
+
+DIRECT规则数：{current_stats['DIRECT']}，{diff_text(current_stats['DIRECT'], old_stats['DIRECT'])}
+
+PROXY规则数：{current_stats['PROXY']}，{diff_text(current_stats['PROXY'], old_stats['PROXY'])}
+
+REJECT规则数：{current_stats['REJECT']}，{diff_text(current_stats['REJECT'], old_stats['REJECT'])}
+
+APPLE规则数：{current_stats['APPLE']}，{diff_text(current_stats['APPLE'], old_stats['APPLE'])}
+
+GOOGLE规则数：{current_stats['GOOGLE']}，{diff_text(current_stats['GOOGLE'], old_stats['GOOGLE'])}
+
+PCDN规则数：{current_stats['PCDN']}，{diff_text(current_stats['PCDN'], old_stats['PCDN'])}
+
+HTTPDNS规则数：{current_stats['HTTPDNS']}，{diff_text(current_stats['HTTPDNS'], old_stats['HTTPDNS'])}
+"""
+
+
+    update_readme(
+        stats_text
+    )
+
+
+    print(
+        "✅ README 统计区域更新完成"
+    )
+
 
 
 if __name__ == "__main__":
+
     main()
