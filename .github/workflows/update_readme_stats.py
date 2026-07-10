@@ -10,8 +10,8 @@ TARGET_FILES = {
     "DIRECT": "domain-set/direct-list.txt",
     "PROXY": "domain-set/proxy-list.txt",
     "REJECT": "domain-set/reject-list.txt",
-    "APPLE": "domain-set/apple-cn.txt",
-    "GOOGLE": "domain-set/google-cn.txt",
+    "APPLE_CN": "domain-set/apple-cn.txt",
+    "GOOGLE_CN": "domain-set/google-cn.txt",
     "PCDN": "domain-set/pcdn-list.txt",
     "HTTPDNS": "domain-set/httpdns-list.txt"
 }
@@ -115,12 +115,19 @@ def main():
     stats_text = f"""最后更新时间：{update_time}
 
 DIRECT规则数：{current_stats['DIRECT']}，{diff_text(current_stats['DIRECT'], old_stats['DIRECT'])}
+
 PROXY规则数：{current_stats['PROXY']}，{diff_text(current_stats['PROXY'], old_stats['PROXY'])}
+
 REJECT规则数：{current_stats['REJECT']}，{diff_text(current_stats['REJECT'], old_stats['REJECT'])}
-APPLE规则数：{current_stats['APPLE']}，{diff_text(current_stats['APPLE'], old_stats['APPLE'])}
-GOOGLE规则数：{current_stats['GOOGLE']}，{diff_text(current_stats['GOOGLE'], old_stats['GOOGLE'])}
+
+APPLE_CN规则数：{current_stats['APPLE_CN']}，{diff_text(current_stats['APPLE_CN'], old_stats['APPLE_CN'])}
+
+GOOGLE_CN规则数：{current_stats['GOOGLE_CN']}，{diff_text(current_stats['GOOGLE_CN'], old_stats['GOOGLE_CN'])}
+
 PCDN规则数：{current_stats['PCDN']}，{diff_text(current_stats['PCDN'], old_stats['PCDN'])}
+
 HTTPDNS规则数：{current_stats['HTTPDNS']}，{diff_text(current_stats['HTTPDNS'], old_stats['HTTPDNS'])}
+
 """
 
     update_readme(stats_text)
