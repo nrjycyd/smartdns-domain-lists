@@ -6,7 +6,17 @@
 
 <!-- STATS_START -->
 
-🔔 最后更新时间：2026-07-10 14:35:03
+🔔 最后更新时间：2026-07-10 14:41:39
+
+| 规则类型 | 数量 | 变化 |
+|:---|---:|---:|
+| DIRECT | 111540 | new |
+| PROXY | 26860 | new |
+| REJECT | 164737 | new |
+| APPLE_CN | 164 | new |
+| GOOGLE_CN | 112 | new |
+| PCDN | 51 | new |
+| HTTPDNS | 95 | new |
 
 <!-- STATS_END -->
 
