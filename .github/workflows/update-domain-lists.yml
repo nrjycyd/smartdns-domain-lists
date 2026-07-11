@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Prepare domain-set directory
         run: mkdir -p domain-set
@@ -336,7 +336,7 @@ jobs:
         run: echo "date=$(date -u +'%Y%m%d')" >> $GITHUB_OUTPUT
 
       - name: Create Release and Upload Artifact
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: V-${{ steps.date.outputs.date }}
           name: Released on ${{ steps.date.outputs.date }}
@@ -346,7 +346,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Delete old Releases (保留最近 7 个)
-        uses: dev-drprasad/delete-older-releases@v0.2.1
+        uses: Nats-ji/delete-old-releases@v1
         with:
           keep_latest: 7
           delete_tags: true
