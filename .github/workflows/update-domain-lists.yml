@@ -174,34 +174,14 @@ jobs:
           curl -sSL https://cdn.jsdelivr.net/gh/susetao/PCDNFilter-CHN-@main/PCDNFilter.txt > temp-pcdn-2.txt
           curl -sSL https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/refs/heads/master/discretion/pcdn.txt > temp-pcdn-3.txt
           cat temp-pcdn-*.txt | \
-            tr -d '\r' | \
-            grep -v '^#' | \
-            grep -v '^$' | \
-            grep -v '^/' | \
-            sed -e 's/^||//' \
-                -e 's/\^$//' \
-                -e 's/\.$//' \
-                -e 's/^[[:space:]]*//' \
-                -e 's/[[:space:]]*$//' | \
-            tr '[:upper:]' '[:lower:]' | \
-            grep -E '^[a-z0-9.-]+\.[a-z]{2,}$' | \
-            sort -u > domain-set/pcdn-list.txt 2>/dev/null || touch domain-set/pcdn-list.txt
+            .github/scripts/normalize_domain_list.sh \
+            > domain-set/pcdn-list.txt
           
           # Process HttpDNS list
           curl -sSL https://raw.githubusercontent.com/yyysuo/firetv/master/httpdns.txt > temp-httpdns-1.txt
           cat temp-httpdns-*.txt | \
-            tr -d '\r' | \
-            grep -v '^#' | \
-            grep -v '^$' | \
-            grep -v '^/' | \
-            sed -e 's/^||//' \
-                -e 's/\^$//' \
-                -e 's/\.$//' \
-                -e 's/^[[:space:]]*//' \
-                -e 's/[[:space:]]*$//' | \
-            tr '[:upper:]' '[:lower:]' | \
-            grep -E '^[a-z0-9.-]+\.[a-z]{2,}$' | \
-            sort -u > domain-set/httpdns-list.txt 2>/dev/null || touch domain-set/httpdns-list.txt
+            .github/scripts/normalize_domain_list.sh \
+            > domain-set/httpdns-list.txt
           
           # Clean up
           rm -f temp-*.txt
