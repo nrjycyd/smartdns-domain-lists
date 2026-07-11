@@ -178,7 +178,7 @@ jobs:
             grep -v '^/' | \
             sed 's/||//g; s/\^//g' | \
             grep '\.' | \
-            sort -u > domain-set/pcdn-list.txt
+            sort -u -o > domain-set/pcdn-list.txt
           
           # Process HttpDNS list
           curl -sSL https://raw.githubusercontent.com/yyysuo/firetv/master/httpdns.txt | \
