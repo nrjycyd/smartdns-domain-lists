@@ -17,6 +17,7 @@ jobs:
 
       - name: Download and process domain lists
         run: |
+          chmod +x .github/scripts/normalize_domain_list.sh
           echo "=== 阶段0: 处理自定义规则 (最高优先级) ==="
           
           # 下载自定义规则文件
