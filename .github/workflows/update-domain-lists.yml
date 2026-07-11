@@ -346,10 +346,48 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Delete old Releases (保留最近 7 个)
-        uses: Nats-ji/delete-old-releases@v1
+        uses: actions/github-script@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          keep-count: 7
-          remove-tags: true
-          keep-old-minor-releases: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const keepLatest = 7;
+            
+            // 1. 获取所有 Releases (GitHub API 默认按时间倒序返回)
+            const { data: releases } = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
+            
+            // 2. 切片：跳过最新的 7 个，获取需要删除的旧 Releases
+            const oldReleases = releases.slice(keepLatest);
+            
+            if (oldReleases.length === 0) {
+              console.log("没有超过 7 个 Release，无需清理。");
+              return;
+            }
+            
+            // 3. 循环删除 Release 及其 Tag
+            for (const release of oldReleases) {
+              console.log(`[删除中] Release: ${release.tag_name}`);
+              
+              // 删除 Release 记录
+              await github.rest.repos.deleteRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                release_id: release.id
+              });
+              
+              // 删除对应的 Git Tag
+              try {
+                await github.rest.git.deleteRef({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  ref: `tags/${release.tag_name}`
+                });
+                console.log(`[删除成功] Tag: ${release.tag_name}`);
+              } catch (error) {
+                console.log(`[提示] Tag ${release.tag_name} 删除失败 (可能已被删除): ${error.message}`);
+              }
+            }
           
