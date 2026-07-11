@@ -5,7 +5,7 @@ import os
 import re
 from datetime import datetime, timezone, timedelta
 
-
+# 配置部分
 TARGET_FILES = {
     "DIRECT": "domain-set/direct-list.txt",
     "PROXY": "domain-set/proxy-list.txt",
@@ -18,40 +18,20 @@ TARGET_FILES = {
 
 README_FILE = "README.md"
 
-
 def get_line_count(file_path):
     """统计文件行数"""
     if not os.path.exists(file_path):
         return 0
-
-    with open(
-        file_path,
-        "r",
-        encoding="utf-8",
-        errors="ignore"
-    ) as f:
+    with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
         return sum(1 for _ in f)
-
 
 def read_old_stats(content):
     """读取 README 历史统计"""
-
     stats = {}
-
     for key in TARGET_FILES:
-        match = re.search(
-            rf"\|\s*{key}\s*\|\s*(?:\*\*)?(\d+)",
-            content
-        )
-
-        stats[key] = (
-            int(match.group(1))
-            if match
-            else None
-        )
-
+        match = re.search(rf"\|\s*{key}\s*\|\s*(?:\*\*)?(\d+)", content)
+        stats[key] = int(match.group(1)) if match else None
     return stats
-
 
 def diff_text_elegant(current, old):
     """生成优雅的 Markdown 徽章格式"""
@@ -61,113 +41,73 @@ def diff_text_elegant(current, old):
     diff = current - old
     
     # 定义颜色和前缀映射
-    config = {
-        diff > 0: ("brightgreen", f"+{diff}"),
-        diff < 0: ("red", str(diff)),
-        diff == 0: ("gray", "0")
-    }
-    
-    color, val = config[True]
+    if diff > 0:
+        color, val = "brightgreen", f"+{diff}"
+    elif diff < 0:
+        color, val = "red", str(diff)
+    else:
+        color, val = "gray", "0"
+        
     return f"![diff](https://img.shields.io/badge/change-{val}-{color}?style=flat-square)"
-
 
 def update_readme(stats_text):
     """替换 README 统计区域"""
-
     if os.path.exists(README_FILE):
-        with open(
-            README_FILE,
-            "r",
-            encoding="utf-8"
-        ) as f:
+        with open(README_FILE, "r", encoding="utf-8") as f:
             content = f.read()
     else:
         content = ""
 
     new_block = (
-        "<!-- STATS_START -->\n\n"
+        "\n\n"
         f"{stats_text.strip()}\n\n"
-        "<!-- STATS_END -->"
+        ""
     )
 
-    pattern = (
-        r"<!-- STATS_START -->.*?<!-- STATS_END -->"
-    )
+    pattern = r".*?"
 
-    if re.search(
-        pattern,
-        content,
-        flags=re.DOTALL
-    ):
-        content = re.sub(
-            pattern,
-            new_block,
-            content,
-            flags=re.DOTALL
-        )
+    if re.search(pattern, content, flags=re.DOTALL):
+        content = re.sub(pattern, new_block, content, flags=re.DOTALL)
     else:
         content += "\n\n" + new_block
 
-    with open(
-        README_FILE,
-        "w",
-        encoding="utf-8"
-    ) as f:
+    with open(README_FILE, "w", encoding="utf-8") as f:
         f.write(content)
-
 
 def main():
     """主程序"""
-
-    current_stats = {
-        key: get_line_count(path)
-        for key, path in TARGET_FILES.items()
-    }
+    current_stats = {key: get_line_count(path) for key, path in TARGET_FILES.items()}
 
     # UTC 转北京时间
-    update_time = (
-        datetime.now(timezone.utc)
-        + timedelta(hours=8)
-    ).strftime(
-        "%Y-%m-%d %H:%M:%S"
-    )
+    update_time = (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
 
     if os.path.exists(README_FILE):
-        with open(
-            README_FILE,
-            "r",
-            encoding="utf-8"
-        ) as f:
+        with open(README_FILE, "r", encoding="utf-8") as f:
             readme_content = f.read()
     else:
         readme_content = ""
 
     old_stats = read_old_stats(readme_content)
 
-    # 调试信息
-    print("旧统计:")
-    print(old_stats)
-
-    print("当前统计:")
-    print(current_stats)
+    # 循环生成表格行
+    table_rows = []
+    for key in TARGET_FILES:
+        current = current_stats[key]
+        old = old_stats.get(key)
+        badge = diff_text_elegant(current, old)
+        table_rows.append(f"| {key} | {current} | {badge} |")
+    
+    stats_rows_str = "\n".join(table_rows)
 
     stats_text = f"""🔔 最后更新时间：{update_time}
 
 | 规则类型 | 数量 | 较上次更新 |
 |:---|---:|---:|
-| DIRECT | {current_stats['DIRECT']} | {diff_text(current_stats['DIRECT'], old_stats['DIRECT'])} |
-| PROXY | {current_stats['PROXY']} | {diff_text(current_stats['PROXY'], old_stats['PROXY'])} |
-| REJECT | {current_stats['REJECT']} | {diff_text(current_stats['REJECT'], old_stats['REJECT'])} |
-| APPLE_CN | {current_stats['APPLE_CN']} | {diff_text(current_stats['APPLE_CN'], old_stats['APPLE_CN'])} |
-| GOOGLE_CN | {current_stats['GOOGLE_CN']} | {diff_text(current_stats['GOOGLE_CN'], old_stats['GOOGLE_CN'])} |
-| PCDN | {current_stats['PCDN']} | {diff_text(current_stats['PCDN'], old_stats['PCDN'])} |
-| HTTPDNS | {current_stats['HTTPDNS']} | {diff_text(current_stats['HTTPDNS'], old_stats['HTTPDNS'])} |
+{stats_rows_str}
 """
 
     update_readme(stats_text)
-
     print("✅ README 统计区域更新完成")
-
 
 if __name__ == "__main__":
     main()
