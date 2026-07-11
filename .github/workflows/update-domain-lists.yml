@@ -179,6 +179,7 @@ jobs:
           
           # Process HttpDNS list
           curl -sSL https://raw.githubusercontent.com/yyysuo/firetv/master/httpdns.txt > temp-httpdns-1.txt
+          curl -sSL https://raw.githubusercontent.com/VirgilClyne/GetSomeFries/refs/heads/main/ruleset/HTTPDNS.Block.list > temp-httpdns-2.txt
           cat temp-httpdns-*.txt | \
             .github/scripts/normalize_domain_list.sh \
             > domain-set/httpdns-list.txt
