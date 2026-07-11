@@ -351,4 +351,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           keep-count: 7
           remove-tags: true
+          keep-old-minor-releases: false
           
