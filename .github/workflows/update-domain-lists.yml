@@ -171,6 +171,7 @@ jobs:
           # Process PCDN list
           curl -sSL https://thhbdd.github.io/Block-pcdn-domains/ban.txt > temp-pcdn-1.txt
           curl -sSL https://cdn.jsdelivr.net/gh/susetao/PCDNFilter-CHN-@main/PCDNFilter.txt > temp-pcdn-2.txt
+          curl -sSL https://raw.githubusercontent.com/privacy-protection-tools/anti-AD/refs/heads/master/discretion/pcdn.txt > temp-pcdn-3.txt
           cat temp-pcdn-*.txt | \
             grep -v '^#' | \
             grep -v '^$' | \
