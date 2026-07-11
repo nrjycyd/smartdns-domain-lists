@@ -60,7 +60,14 @@ def diff_badge(current: int, old: int | None) -> str:
     """生成 Shields.io 徽章"""
 
     if old is None:
-        return "![new](https://img.shields.io/badge/status-new-blue?style=flat-square)"
+        return (
+            "![new]"
+            "(https://img.shields.io/static/v1"
+            "?label="
+            "&message=NEW"
+            "&color=blue"
+            "&style=flat-square)"
+        )
 
     diff = current - old
 
@@ -77,8 +84,12 @@ def diff_badge(current: int, old: int | None) -> str:
     value = quote(value)
 
     return (
-        f"![diff]"
-        f"(https://img.shields.io/badge/change-{value}-{color}?style=flat-square)"
+        "![diff]"
+        "(https://img.shields.io/static/v1"
+        "?label="
+        f"&message={value}"
+        f"&color={color}"
+        "&style=flat-square)"
     )
 
 
