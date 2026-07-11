@@ -53,21 +53,22 @@ def read_old_stats(content):
     return stats
 
 
-def diff_text(current, old):
-    """生成变化标识"""
-
+def diff_text_elegant(current, old):
+    """生成优雅的 Markdown 徽章格式"""
     if old is None:
-        return "🔵 new"
-
+        return "![new](https://img.shields.io/badge/status-new-blue?style=flat-square)"
+    
     diff = current - old
-
-    if diff > 0:
-        return f"🟢 +{diff}"
-
-    if diff < 0:
-        return f"🔴 {diff}"
-
-    return "⚪ +0"
+    
+    # 定义颜色和前缀映射
+    config = {
+        diff > 0: ("brightgreen", f"+{diff}"),
+        diff < 0: ("red", str(diff)),
+        diff == 0: ("gray", "0")
+    }
+    
+    color, val = config[True]
+    return f"![diff](https://img.shields.io/badge/change-{val}-{color}?style=flat-square)"
 
 
 def update_readme(stats_text):
