@@ -329,7 +329,7 @@ jobs:
 
       - name: Execute README statistics script
         run: |
-          python3 .github/workflows/update_readme_stats.py
+          python3 .github/scripts/update_readme_stats.py
 
       - name: Commit and push updated domain lists to repository
         env:
