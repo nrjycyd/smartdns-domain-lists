@@ -29,7 +29,8 @@ def read_old_stats(content):
     """读取 README 历史统计"""
     stats = {}
     for key in TARGET_FILES:
-        match = re.search(rf"\|\s*{key}\s*\|\s*(?:\*\*)?(\d+)", content)
+        # 匹配标签内已存在的数字
+        match = re.search(rf"\|\s*{key}\s*\|\s*(\d+)", content)
         stats[key] = int(match.group(1)) if match else None
     return stats
 
@@ -40,7 +41,6 @@ def diff_text_elegant(current, old):
     
     diff = current - old
     
-    # 定义颜色和前缀映射
     if diff > 0:
         color, val = "brightgreen", f"+{diff}"
     elif diff < 0:
@@ -51,24 +51,24 @@ def diff_text_elegant(current, old):
     return f"![diff](https://img.shields.io/badge/change-{val}-{color}?style=flat-square)"
 
 def update_readme(stats_text):
-    """替换 README 统计区域"""
-    if os.path.exists(README_FILE):
-        with open(README_FILE, "r", encoding="utf-8") as f:
-            content = f.read()
-    else:
-        content = ""
+    """仅在 和 之间更新数据"""
+    if not os.path.exists(README_FILE):
+        return
 
-    new_block = (
-        "\n\n"
-        f"{stats_text.strip()}\n\n"
-        ""
-    )
+    with open(README_FILE, "r", encoding="utf-8") as f:
+        content = f.read()
 
+    # 构建带标签的新数据块
+    new_block = f"\n\n{stats_text.strip()}\n\n"
+
+    # 正则：匹配标签及其内部的所有内容 (flags=re.DOTALL 确保 . 能匹配换行符)
     pattern = r".*?"
 
     if re.search(pattern, content, flags=re.DOTALL):
+        # 替换标签之间的内容
         content = re.sub(pattern, new_block, content, flags=re.DOTALL)
     else:
+        # 如果未找到标签，追加到文件末尾 (建议手动添加标签)
         content += "\n\n" + new_block
 
     with open(README_FILE, "w", encoding="utf-8") as f:
@@ -99,12 +99,12 @@ def main():
     
     stats_rows_str = "\n".join(table_rows)
 
+    # 组装符合你要求的格式
     stats_text = f"""🔔 最后更新时间：{update_time}
 
 | 规则类型 | 数量 | 较上次更新 |
 |:---|---:|---:|
-{stats_rows_str}
-"""
+{stats_rows_str}"""
 
     update_readme(stats_text)
     print("✅ README 统计区域更新完成")
