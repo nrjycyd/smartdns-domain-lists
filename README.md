@@ -4,17 +4,17 @@
 
 <!-- STATS_START -->
 
-🔔 最后更新时间：2026-07-11 14:49:20
+🔔 最后更新时间：2026-07-11 14:50:27
 
 | 规则类型 | 数量 | 较上次更新 |
 |:---------|------:|:----------|
-| DIRECT | 111541 | ![new](https://img.shields.io/badge/status-new-blue?style=flat-square) |
-| PROXY | 26859 | ![new](https://img.shields.io/badge/status-new-blue?style=flat-square) |
-| REJECT | 165060 | ![new](https://img.shields.io/badge/status-new-blue?style=flat-square) |
-| APPLE_CN | 164 | ![new](https://img.shields.io/badge/status-new-blue?style=flat-square) |
-| GOOGLE_CN | 112 | ![new](https://img.shields.io/badge/status-new-blue?style=flat-square) |
-| PCDN | 35 | ![new](https://img.shields.io/badge/status-new-blue?style=flat-square) |
-| HTTPDNS | 101 | ![new](https://img.shields.io/badge/status-new-blue?style=flat-square) |
+| DIRECT | 111541 | ![diff](https://img.shields.io/badge/change-0-lightgrey?style=flat-square) |
+| PROXY | 26859 | ![diff](https://img.shields.io/badge/change-0-lightgrey?style=flat-square) |
+| REJECT | 165060 | ![diff](https://img.shields.io/badge/change-0-lightgrey?style=flat-square) |
+| APPLE_CN | 164 | ![diff](https://img.shields.io/badge/change-0-lightgrey?style=flat-square) |
+| GOOGLE_CN | 112 | ![diff](https://img.shields.io/badge/change-0-lightgrey?style=flat-square) |
+| PCDN | 35 | ![diff](https://img.shields.io/badge/change-0-lightgrey?style=flat-square) |
+| HTTPDNS | 101 | ![diff](https://img.shields.io/badge/change-0-lightgrey?style=flat-square) |
 
 <!-- STATS_END -->
 
