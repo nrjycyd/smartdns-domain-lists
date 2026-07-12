@@ -64,20 +64,22 @@ BEGIN {
     # Surge / Quantumult X
     # ==========================
     if (toupper($1) == "DOMAIN") {
-        domain = $2
-        gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
+    domain = $2
+    gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
 
-        print "-." domain
-        next
-    }
+    # SmartDNS full
+    print "-." domain
+    next
+}
 
-    if (toupper($1) == "DOMAIN-SUFFIX") {
-        domain = $2
-        gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
+if (toupper($1) == "DOMAIN-SUFFIX") {
+    domain = $2
+    gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
 
-        print "*" domain
-        next
-    }
+    # SmartDNS domain
+    print domain
+    next
+}
 
     # ==========================
     # Hosts
