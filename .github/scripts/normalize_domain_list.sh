@@ -10,15 +10,17 @@
 #   0.0.0.0 example.com
 #   127.0.0.1 example.com
 #   ::1 example.com
-#
-# 输入：
-#   stdin
+#   *.example.com
+#   *example.com
+#   -.example.com
 #
 # 输出：
-#   标准化后的纯域名列表
-#   - 小写
-#   - 去重
-#   - 过滤无效内容
+#   SmartDNS 标准格式
+#
+#   example.com     -> domain
+#   *.example.com   -> sub
+#   -.example.com   -> full
+#   *example.com    -> suffix
 #
 
 tr -d '\r' |
@@ -28,82 +30,78 @@ BEGIN {
 }
 
 # 跳过注释
-/^[[:space:]]*#/ {
-    next
-}
+/^[[:space:]]*#/ { next }
 
 # 跳过空行
-/^[[:space:]]*$/ {
-    next
-}
-
+/^[[:space:]]*$/ { next }
 
 {
-    line=$0
+    line = $0
 
     # 去除首尾空格
     gsub(/^[[:space:]]+|[[:space:]]+$/, "", line)
 
+    # ==========================
+    # 已经是 SmartDNS 格式
+    # ==========================
+    if (line ~ /^(\*\.|\*|-\.).+/) {
+        print line
+        next
+    }
 
     # ==========================
     # AdGuard Home
     # ||example.com^
     # ==========================
     if (line ~ /^\|\|/) {
-
         sub(/^\|\|/, "", line)
-
-        # 删除 ^ 后所有参数
         sub(/\^.*/, "", line)
-
         print line
         next
     }
 
-
     # ==========================
     # Surge / Quantumult X
-    # DOMAIN,example.com
-    # DOMAIN-SUFFIX,example.com
     # ==========================
-    if ($1 == "DOMAIN" || $1 == "DOMAIN-SUFFIX") {
-
-        domain=$2
-
+    if (toupper($1) == "DOMAIN") {
+        domain = $2
         gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
 
-        print domain
+        print "-." domain
         next
     }
 
+    if (toupper($1) == "DOMAIN-SUFFIX") {
+        domain = $2
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
+
+        print "*" domain
+        next
+    }
 
     # ==========================
     # Hosts
     # ==========================
     if (line ~ /^(0\.0\.0\.0|127\.0\.0\.1|::1)[[:space:]]+/) {
-
-        split(line,a,/[\t ]+/)
-
+        split(line, a, /[[:space:]]+/)
         print a[2]
         next
     }
 
-
     # ==========================
-    # 纯域名
+    # 普通域名
     # ==========================
     if (line ~ /^[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/) {
-
         print line
         next
     }
-
 }
 ' |
-sed -e 's/\.$//' \
+sed \
+    -e 's/\.$//' \
     -e 's/^[[:space:]]*//' \
     -e 's/[[:space:]]*$//' |
 tr '[:upper:]' '[:lower:]' |
-grep -E '^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$' |
-grep -vE '^[0-9.]+$' |
+grep -E '^(\*\.|\*|-\.|)?[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$' |
+grep -vE '^(\*\.|\*|-\.|)?[0-9.]+$' |
 sort -u
