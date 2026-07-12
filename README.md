@@ -4,7 +4,7 @@
 
 <!-- STATS_START -->
 
-🔔 最后更新时间：2026-07-12 08:40:40
+🔔 最后更新时间：2026-07-12 09:33:52
 
 | 规则类型 | 数量 | 较上次更新 |
 |:---------|------:|:----------|
@@ -14,7 +14,7 @@
 | APPLE_CN | 164 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
 | GOOGLE_CN | 112 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
 | PCDN | 35 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
-| HTTPDNS | 131 | ![diff](https://img.shields.io/static/v1?label=&message=%2B30&color=brightgreen&style=flat-square) |
+| HTTPDNS | 131 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
 
 <!-- STATS_END -->
 

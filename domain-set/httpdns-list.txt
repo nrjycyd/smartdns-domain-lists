@@ -1,4 +1,3 @@
-*httpdns.pro
 -.aedns.weixin.qq.com
 -.dns.jd.com
 -.dns.weibo.cn
@@ -81,6 +80,7 @@ httpdns.ocloud.heytapmobi.com
 httpdns.ocloud.oppomobile.com
 httpdns.platform.dbankcloud.cn
 httpdns.platform.dbankcloud.com
+httpdns.pro
 httpdns.push.heytapmobi.com
 httpdns.push.oppomobile.com
 httpdns.volcengineapi.com
