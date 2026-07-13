@@ -64,22 +64,22 @@ BEGIN {
     # Surge / Quantumult X
     # ==========================
     if (toupper($1) == "DOMAIN") {
-    domain = $2
-    gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
+        domain = $2
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
 
-    # SmartDNS full
-    print "-." domain
-    next
-}
+        # SmartDNS full
+        print "-." domain
+        next
+    }
 
-if (toupper($1) == "DOMAIN-SUFFIX") {
-    domain = $2
-    gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
+    if (toupper($1) == "DOMAIN-SUFFIX") {
+        domain = $2
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", domain)
 
-    # SmartDNS domain
-    print domain
-    next
-}
+        # SmartDNS domain
+        print domain
+        next
+    }
 
     # ==========================
     # Hosts
@@ -106,4 +106,23 @@ sed \
 tr '[:upper:]' '[:lower:]' |
 grep -E '^(\*\.|\*|-\.|)?[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$' |
 grep -vE '^(\*\.|\*|-\.|)?[0-9.]+$' |
-sort -u
+sort -u |
+awk '
+{
+    rules[$0] = 1
+}
+
+END {
+    # domain(example.com) 已覆盖 full(-.example.com) 和 sub(*.example.com)
+    for (r in rules) {
+        if (r !~ /^(\*\.|\*|-\.)/) {
+            delete rules["-." r]
+            delete rules["*." r]
+        }
+    }
+
+    for (r in rules)
+        print r
+}
+' |
+sort
