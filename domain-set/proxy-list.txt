@@ -529,7 +529,6 @@
 -.t21.nikkei.co.jp
 -.t21ipau.nikkei.co.jp
 -.teamviewer.com.cdn.cloudflare.net
--.tesla-cdn.thron.com
 -.thumbnail-hamivideo.cdn.hinet.net
 -.time-a-b.nist.gov
 -.time-a-g.nist.gov
@@ -3536,6 +3535,7 @@ azuredns-prd.info
 azuredns-prd.org
 azureedge-test.net
 azureedge.net
+azureedge.us
 azurefd.net
 azureiotcentral.com
 azureiotsolutions.com
@@ -6570,6 +6570,7 @@ coomer.su
 coova.com
 coova.net
 coova.org
+copilot-stg.com
 copilot.com
 copilot.microsoft.com
 copro.pw
@@ -15583,6 +15584,7 @@ mgstage.com
 mh4u.org
 mhcb.ru
 mhcbr.ru
+mhgui.com
 mhhanman.xyz
 mhqwe.xyz
 mhradio.org
@@ -21892,6 +21894,7 @@ starfieldtech.com
 starfox.com
 stargazer-games.com
 stark-verlag.ch
+starlink.com
 starott.com
 starp2p.com
 starplus.com
