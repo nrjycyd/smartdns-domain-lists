@@ -4,13 +4,13 @@
 
 <!-- STATS_START -->
 
-🔔 最后更新时间：2026-07-20 10:12:07
+🔔 最后更新时间：2026-07-21 08:02:45
 
 | 规则类型 | 数量 | 较上次更新 |
 |:---------|------:|:----------|
-| DIRECT | 111365 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
-| PROXY | 26910 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
-| REJECT | 167437 | ![diff](https://img.shields.io/static/v1?label=&message=%2B317&color=brightgreen&style=flat-square) |
+| DIRECT | 111421 | ![diff](https://img.shields.io/static/v1?label=&message=%2B56&color=brightgreen&style=flat-square) |
+| PROXY | 26921 | ![diff](https://img.shields.io/static/v1?label=&message=%2B11&color=brightgreen&style=flat-square) |
+| REJECT | 167746 | ![diff](https://img.shields.io/static/v1?label=&message=%2B309&color=brightgreen&style=flat-square) |
 | APPLE_CN | 164 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
 | GOOGLE_CN | 112 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
 | PCDN | 35 | ![diff](https://img.shields.io/static/v1?label=&message=0&color=lightgrey&style=flat-square) |
