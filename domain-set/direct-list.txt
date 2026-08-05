@@ -288,6 +288,8 @@
 -.time.amazonaws.cn
 -.time.izatcloud.net
 -.time.xtracloud.net
+-.tj-pod2-smp-device.apple.com
+-.tj-pod3-smp-device.apple.com
 -.tp.louisvuitton.com
 -.universal-activity-service.itunes.apple.com
 -.uplaypc-s-ubisoft.cdn.ubi.com
