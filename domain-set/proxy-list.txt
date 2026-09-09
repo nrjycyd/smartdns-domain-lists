@@ -5288,6 +5288,7 @@ brightcove.com
 brightcove.net
 brightcove.services
 brightcovecdn.com
+brightline.tv
 brill.com
 brilliant.org
 britsexcash.com
@@ -17564,6 +17565,7 @@ nodejs.org
 nodequality.com
 nodereal.io
 nodeseek.com
+nodeseek.org
 nodesource.com
 noisullifb.com
 nokiantyres.com
