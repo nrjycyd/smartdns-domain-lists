@@ -277,6 +277,7 @@
 -.www.support.apple.com
 -.xtratime.qcomgeo2.com
 -.xz.pphimalayanrt.com
+-.zh.okaapps.com
 0.zone
 00.net
 000.link
