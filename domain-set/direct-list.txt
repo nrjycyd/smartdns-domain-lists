@@ -244,6 +244,8 @@
 -.se2.itunes.apple.com
 -.search.itunes.apple.com
 -.sf-api-token-service.itunes.apple.com
+-.sh-pod1-smp-device.apple.com
+-.sh-pod3-smp-device.apple.com
 -.shell.cdn.office.net
 -.software.download.prss.microsoft.com
 -.sp.itunes.apple.com
