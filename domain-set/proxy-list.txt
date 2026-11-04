@@ -4133,6 +4133,7 @@ beget.app
 beget.cloud
 beget.com
 beget.de
+beget.email
 beget.hosting
 beget.pro
 beget.ru
@@ -4356,6 +4357,7 @@ bild.de
 bili2.cc
 bili888.com
 bili999.com
+bilibili.tv
 bilinovel.com
 biliplus.com
 biliworld.com
